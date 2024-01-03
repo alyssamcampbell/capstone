@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+<style>    #chart-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+svg {
+    overflow: visible;
+}
+</style>
+
+</head>
+<body>
+<div id="chart-container"></div>
+
+    <script>
+ let svg, xScale, yScale, chartGroup; 
+const margin = { top: 30, right: 30, bottom: 40, left: 60 };
+const emotions = ['anger', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust'];
+const emotionColors = {
+    anger: '#f05b62',
+    anticipation: '#f2923e',
+    disgust: '#8974b3',
+    fear: '#31954b',
+    joy: '#deb712',
+    sadness: '#3a7ab7',
+    surprise: '#4499cd',
+    trust: '#8ac651'
+};
+
+d3.csv('average_emotions_by_decade.csv', d => {
+    return {
+        decade: +d.decade,
+        anger: +d.anger,
+        trust: +d.trust,
+        fear: +d.fear,
+        surprise: +d.surprise,
+        sadness: +d.sadness,
+        disgust: +d.disgust,
+        joy: +d.joy,
+        anticipation: +d.anticipation
+    };
+}).then(data => {
+    data.forEach(d => {
+        const total = emotions.reduce((acc, emotion) => acc + d[emotion], 0);
+        emotions.forEach(emotion => {
+            d[emotion] = (d[emotion] / total) * 100; 
+        });
+    });
+
+    createChart(data);
+    window.addEventListener('resize', () => resizeChart(data));
+}).catch(error => {
+    console.error("Error loading the CSV file:", error);
+});
+
+function createChart(data) {
+    const container = d3.select('#chart-container');
+    let containerWidth = container.node().getBoundingClientRect().width - margin.left - margin.right;
+    let containerHeight = container.node().getBoundingClientRect().height - margin.top - margin.bottom;
+
+    xScale = d3.scaleLinear()
+        .domain(d3.extent(data, d => d.decade))
+        .range([0, containerWidth]);
+    yScale = d3.scaleLinear()
+        .domain([0, 100]) 
+        .range([containerHeight, 0]);
+
+    svg = container.append('svg')
+        .attr('width', containerWidth + margin.left + margin.right)
+        .attr('height', containerHeight + margin.top + margin.bottom);
+
+    chartGroup = svg.append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    const stack = d3.stack()
+        .keys(emotions)
+        .order(d3.stackOrderNone)
+        .offset(d3.stackOffsetNone);
+    const stackedData = stack(data);
+
+    chartGroup.selectAll('.area')
+        .data(stackedData)
+        .join('path')
+        .attr('class', 'area')
+        .attr('d', d3.area()
+            .x(d => xScale(d.data.decade))
+            .y0(d => yScale(d[0]))
+            .y1(d => yScale(d[1]))
+        )
+        .style('fill', d => emotionColors[d.key]);
+
+    chartGroup.append('g')
+        .attr('class', 'x-axis')
+        .attr('transform', `translate(0, ${containerHeight})`)
+        .call(d3.axisBottom(xScale).tickFormat(d => d.toString()));
+
+    chartGroup.append('g')
+        .attr('class', 'y-axis')
+        .call(d3.axisLeft(yScale).tickFormat(d => d + '%'));
+
+    addLegend(containerWidth);
+}
+
+function addLegend(width) {
+    chartGroup.select('.legend').remove(); 
+
+    const legend = chartGroup.append('g')
+        .attr('class', 'legend')
+        .attr('transform', `translate(${width - 100}, 0)`);
+
+    legend.selectAll('rect')
+        .data(emotions)
+        .join('rect')
+        .attr('x', 0)
+        .attr('y', (d, i) => i * 20)
+        .attr('width', 10)
+        .attr('height', 10)
+        .style('fill', d => emotionColors[d]);
+
+    legend.selectAll('text')
+        .data(emotions)
+        .join('text')
+        .attr('x', 20)
+        .attr('y', (d, i) => i * 20 + 10)
+        .text(d => d);
+}
+
+function resizeChart(data) {
+    let newWidth = document.getElementById('chart-container').clientWidth - margin.left - margin.right;
+    let newHeight = document.getElementById('chart-container').clientHeight - margin.top - margin.bottom;
+
+    xScale.range([0, newWidth]);
+    yScale.range([newHeight, 0]);
+
+    svg.attr('width', newWidth + margin.left + margin.right)
+       .attr('height', newHeight + margin.top + margin.bottom);
+
+    chartGroup.select('.x-axis')
+       .attr('transform', `translate(0, ${newHeight})`)
+       .call(d3.axisBottom(xScale).tickFormat(d => d.toString()));
+
+    chartGroup.select('.y-axis').call(d3.axisLeft(yScale).tickFormat(d => d + '%'));
+
+    chartGroup.selectAll('.area')
+       .attr('d', d3.area()
+           .x(d => xScale(d.data.decade))
+           .y0(d => yScale(d[0]))
+           .y1(d => yScale(d[1]))
+       );
+
+    addLegend(newWidth);
+}
+
+</script>
+
+    
+    
+</body>
+</html>
+

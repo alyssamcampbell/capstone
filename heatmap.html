@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comparative Heatmap</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+    <style>
+            #chart {
+            width: 100vw;
+            height: 100vh;
+            margin: 0 auto;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+        svg {
+            overflow: visible; 
+        }
+        </style>
+
+</head>
+
+
+<body>
+    <div id="chart"></div>
+    <div id="tooltip" style="opacity:0; position: absolute; pointer-events: none; background-color: lightgrey; padding: 5px; border-radius: 5px;"></div>
+
+
+    <script>
+     let svg, x, y; 
+     let margin = { top: 30, right: 30, bottom: 70, left: 60 }; 
+
+
+const data = [
+    { country: "United States", emotion: "anger", value: 0.0263 },
+    { country: "United States", emotion: "anticipation", value: 0.171 },
+    { country: "United States", emotion: "disgust", value: 0.0 },
+    { country: "United States", emotion: "fear", value: 0.080 },
+    { country: "United States", emotion: "joy", value: 0.070 },
+    { country: "United States", emotion: "sadness", value: 0.077 },
+    { country: "United States", emotion: "surprise", value: 0.034},
+    { country: "United States", emotion: "trust", value: 0.163 },
+
+    { country: "Lebanon", emotion: "anger", value: 0.0258 },
+    { country: "Lebanon", emotion: "anticipation", value: 0.142075 },
+    { country: "Lebanon", emotion: "disgust", value: 0.0207834 },
+    { country: "Lebanon", emotion: "fear", value: 0.0722 },
+    { country: "Lebanon", emotion: "joy", value: 0.1078 },
+    { country: "Lebanon", emotion: "sadness", value: 0.0532 },
+    { country: "Lebanon", emotion: "surprise", value: 0.0393},
+    { country: "Lebanon", emotion: "trust", value: 0.175 },
+
+    { country: "Turkey", emotion: "anger", value: 0.045 },
+    { country: "Turkey", emotion: "anticipation", value: 0.161 },
+    { country: "Turkey", emotion: "disgust", value: 0.031 },
+    { country: "Turkey", emotion: "fear", value: 0.0843 },
+    { country: "Turkey", emotion: "joy", value: 0.078 },
+    { country: "Turkey", emotion: "sadness", value: 0.065 },
+    { country: "Turkey", emotion: "surprise", value: 0.0268 },
+    { country: "Turkey", emotion: "trust", value: 0.1556 },
+
+    { country: "Syria", emotion: "anger", value: 0.035378 },
+    { country: "Syria", emotion: "anticipation", value: 0.160455 },
+    { country: "Syria", emotion: "disgust", value: 0.01164 },
+    { country: "Syria", emotion: "fear", value: 0.0871 },
+    { country: "Syria", emotion: "joy", value: 0.10218 },
+    { country: "Syria", emotion: "sadness", value: 0.0534 },
+    { country: "Syria", emotion: "surprise", value: 0.0566 },
+    { country: "Syria", emotion: "trust", value: 0.1965 },
+
+];
+
+
+
+function createChart() {
+            let width = document.getElementById('chart').clientWidth - margin.left - margin.right;
+            let height = document.getElementById('chart').clientHeight - margin.top - margin.bottom;
+
+            x = d3.scaleBand()
+                .range([0, width])
+                .domain(data.map(d => d.emotion))
+                .padding(0.05);
+            y = d3.scaleBand()
+                .range([height, 0])
+                .domain(data.map(d => d.country))
+                .padding(0.05);
+
+            svg = d3.select("#chart").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            svg.append("g")
+                .attr("transform", `translate(0, ${height})`)
+                .attr("class", "x-axis")
+                .call(d3.axisBottom(x));
+            svg.append("g")
+                .attr("class", "y-axis")
+                .call(d3.axisLeft(y));
+
+
+        const emotions = [...new Set(data.map(d => d.emotion))];
+        const countries = [...new Set(data.map(d => d.country))];
+
+        const colorScales = {
+            "anger": d3.scaleLinear().domain([0.025, 0.045]).range(["#fbfbff", "#f05b62"]),
+            "anticipation": d3.scaleLinear().domain([0.14, 0.171]).range(["#fbfbff", "#f2923e"]),
+            "disgust": d3.scaleLinear().domain([0, 0.03]).range(["#fbfbff", "#8974b3"]),
+            "fear": d3.scaleLinear().domain([0.07, 0.087]).range(["#ffffff", "#31954b"]),
+            "joy": d3.scaleLinear().domain([0.069, 0.1078]).range(["#ffffff", "#deb712"]),
+            "sadness": d3.scaleLinear().domain([0.05, 0.077]).range(["#ffffff", "#3a7ab7"]),
+            "surprise": d3.scaleLinear().domain([0.02, 0.0566]).range(["#ffffff", "#4499cd"]),
+            "trust": d3.scaleLinear().domain([0.15, 0.1965]).range(["#ffffff", "#8ac651"])
+        };
+
+const tooltip = d3.select("#tooltip");
+
+svg.selectAll()
+    .data(data, function(d) { return d.emotion + ':' + d.country; })
+    .join("rect")
+    .attr("x", d => x(d.emotion))
+    .attr("y", d => y(d.country))
+    .attr("width", x.bandwidth())
+    .attr("height", y.bandwidth())
+    .style("fill", d => colorScales[d.emotion](d.value))
+    .on("mouseover", function(event, d) {
+
+        d3.select(this).style("opacity", 0.7);
+
+        tooltip.transition()
+            .duration(200)
+            .style("opacity", .9);
+        tooltip.html(`The ${d.emotion} score for ${d.country} is ${d.value}`)
+            .style("left", (event.pageX) + "px")
+            .style("top", (event.pageY - 28) + "px");
+    })
+    .on("mouseout", function(d) {
+        d3.select(this).style("opacity", 1);
+        tooltip.transition()
+            .duration(500)
+            .style("opacity", 0);
+    });
+    }
+
+    function resizeChart() {
+    let newWidth = document.getElementById('chart').clientWidth - margin.left - margin.right;
+    let newHeight = document.getElementById('chart').clientHeight - margin.top - margin.bottom;
+
+    x.range([0, newWidth]);
+    y.range([newHeight, 0]);
+
+    d3.select("#chart svg")
+       .attr("width", newWidth + margin.left + margin.right)
+       .attr("height", newHeight + margin.top + margin.bottom);
+
+    svg.select(".x-axis")
+       .attr("transform", `translate(0, ${newHeight})`)
+       .call(d3.axisBottom(x));
+    svg.select(".y-axis")
+       .call(d3.axisLeft(y));
+
+    svg.selectAll("rect")
+       .attr("x", d => x(d.emotion))
+       .attr("y", d => y(d.country))
+       .attr("width", x.bandwidth())
+       .attr("height", y.bandwidth());
+}
+
+  createChart();
+
+window.addEventListener('resize', resizeChart);
+
+
+    </script>
+</body>
+</html>

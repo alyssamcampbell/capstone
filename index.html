@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>Visualizing the oral history of my Armenian great-grandfather, Hovsep Yeni-komshian</title>
+    <meta name='viewport' content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/scrollama"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"> <!-- Typewriter font -->
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+  
+</head>
+
+<body>
+    <div id="desktop">
+    <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="map"></div>
+    <div id="map2" ></div>
+    <div id="map3" ></div>
+    <div id="map4" ></div>
+    <div id="map5" ></div>
+    <div id="map7" ></div>
+
+
+    
+    <!-- NAVIGATION -->
+    <div id="navbar" class="nav-closed">
+        <button id="toggleNav">☰</button>
+        <nav>
+          <ul>
+            <b>Introduction and Overview</b>
+            <li><a href="#0" data-step="0">A life, uprooted</a></li>
+            <li><a href="#1" data-step="1">An introduction</a></li>
+            <li><a href="#2" data-step="2">Sentiment over time</a></li>
+            <li><a href="#3" data-step="3">Emotion classification, by decade and country</a></li>
+            <li><a href="#4" data-step="4">Life by parts of speech</a></li><br>
+             <b>Abridged Oral History</b><br>
+             <i>Ottoman Empire</i>
+            <li><a href="#5" data-step="5">Decline of Ottoman Empire</a></li>
+            <li><a href="#6" data-step="6">Kilis</a></li>
+            <li><a href="#7" data-step="7">Massacres</a></li>
+            <li><a href="#8" data-step="8">Childhood home</a></li>
+            <li><a href="#9" data-step="9">Deportation</a></li>
+            <br>
+            <i>Lebanon</i>
+            <li><a href="#10" data-step="10">Map: Last train from Aleppo</a></li>
+            <li><a href="#11" data-step="11">Hiding from persecution</a></li>
+            <li><a href="#12" data-step="12">Sweet sensation of freedom</a></li>
+            <li><a href="#13" data-step="13">Settling in Beirut</a></li>
+            <li><a href="#14" data-step="14">Finding love & family</a></li>
+            <li><a href="#15" data-step="15">A life in medicine</a></li>
+            <li><a href="#16" data-step="16">Instability in Lebanon</a></li>
+            <li><a href="#17" data-step="17">Top words associated with Lebanon</a></li>
+            <br>
+            <i>United States</i>
+            <li><a href="#18" data-step="18">The promise of America</a></li>
+            <li><a href="#19" data-step="19">Interdependence</a></li>
+
+          </ul>
+        </nav>
+      </div>
+    
+    
+    <!-- TITLE SLIDE  -->
+    <div class="scrolly-full">
+        <div class="responsive-background-image-title"></div>
+        <div class="step title-slide" data-step="0">
+            <div id="typewriter-title-green"></div><br>
+            <h2 class="subtitle">Visualizing the oral history of my Armenian great-grandfather,<br> Hovsep Yeni-Komshian</h2>
+        </div></div>
+        <div id="button-container"><button id="upButton">←</button> <button id="downButton">→</button></div>
+    
+    <!-- INTRO TO PROJECT // HOVSEP WAS BORN IN ETC.-->
+    <div class="scrolly-full">
+    
+    <div class="step green" data-step="1"><br>
+        <h2 class="h2style1">An introduction</h2>
+        <div class="content-container-intro">
+            <div class="typewriter-container-intro">
+                <div id="typewriter-title"></div><br>
+                <div id="caption" style="display: none;">-Hovsep Yeni-Komshian, 1983</div>
+            </div>
+            <div class="static-text-container-intro">
+
+        <p style="font-size: 0.6em; font-family: Arial; margin-left: 2%; column-count: 2;">
+            <b><u>About this project:</b></u> Hovsep Aghek Yeni-Komshian was born April 2, 1895 in Kilis, Anatolia, Ottoman Empire to an Armenian family. Before WWI, 2.5 million Armenians lived in Anatolia, their historic homeland for thousands of years <i>(now Eastern-Turkey)</i>.
+        After the Armenian Genocide, 98% of those Armenians had either been killed or deported, with an estimated 1.5 million murdered. Those who did survive escaped to Syria, Lebanon, and beyond,
+                 creating a scattered diaspora. After escaping Ottoman Turkey, Hovsep spent the majority of his adult life in Beirut, Lebanon, where he met his wife Helen, raised five children, and practiced medicine for 42 years until the outbreak of the Lebanese Civil War, which forced him to re-locate, once again, to the United States at the age of 84.    
+            <br>
+            In 1983, shortly after arriving in the US, Hovsep, with the support of his daughters, recorded an account of his life resulting in 50+ pages of a transcribed oral history.
+        This project attempts to visualize Hovep's oral history, alongside photos from family albums and recent travels to Lebanon and Eastern Turkey to visit some of the places mentioned. In doing so, this project aims to explore Hovsep's life through his learnings, loves and losses. In the first part, data visualization and analysis with the support of Python's NLTK library are used to understand the top themes and sentiments of Hovsep's life. In the second part, an abridged version Hovsep's oral history is presented through a visual narrative, in his own words.  
+                </p> 
+                
+               
+            </div>
+        </div></div>
+        
+
+    <!-- TIMELINE VISUALIZATIONS --> 
+    <div class="scrolly-full">
+        <div class="step" data-step="2">
+            <h2 class="h2style1">Sentiment over time</h2>
+            <p style="font-size: 0.5em; font-family: Arial; margin-left: 10%; margin-right: 10%">
+            To analyze Hovsep's thoughts and emotions by time and place, the oral history transcript was converted into a tabular data set with each thought associated with a time and place. This was then analyzed in Python using the The NRCLexicon library for emotion classification, which predicts the sentiments and emotion of a given text based on a library of 27,000 words. The resultant sentiment score represents the 'intensity' or 'frequency' of an emotion in the text, with a polarity scale of 0-1. For example, if a text contains many words associated with 'joy', its joy score will be higher. For overall sentiment, the average between positive and negative sentiment was calculated for each year, with a higher score indicating more positive sentiment.              
+            </p>
+          
+        <!-- First row for the timeline visualization -->
+        <div style="display: flex; height: 75vh; margin-bottom: 0vh;">
+            <iframe src="timeline.html" 
+                style="width:100%; height:100%; border:none;">
+            </iframe>
+        </div>
+    </div>
+</div>
+
+
+<div class="scrolly-full">
+    <div class="step" data-step="3">
+        <h2 class="h2style1">Life in technicolor: emotions, by decade and country</h2>
+        <p style="font-size: 0.5em; font-family: Arial; margin-left: 2%; margin-right: 2%; column-count: 2;">
+         The stacked area chart on the left shows both the predominant emotions detected from Hovsep's oral history overall, and how those changed throughout his life. For example, trust, anticipation, and joy had the strongest intensity in their scores, whereas emotions like anger and disgust remained relatively low throughout Hovsep's life.<br><br><br>
+        The categorical heat map on the right visualizes how Hovsep's felt about each of the countries where he spent significant time. The intensity of the scores overall are low, so the visualization creates a relative comparison of the intensity of emotion for each country, with brighter colors signifying a stronger score for that emotion compared to the other countries on the list. For example, there is the highest anger and fear associated with Turkey relative to other countries. Trust was relatively higher for Syria, where Hovsep's family initially fled to for safety in Aleppo.  </p>
+    <div style="display: flex; height: 75vh;">
+       
+        <iframe src="stacked_area_chart.html" 
+            style="width:50%; height:100%; margin-right: 2%; border:none; justify-content: center; justify-items: center;">
+        </iframe>
+        <iframe src="heatmap.html" 
+            style="width:50%; height:75%; border:none; margin-top: 5%; justify-content: center; justify-items: center;">
+        </iframe>
+    </div> 
+</div>
+</div>
+
+    
+    
+    <!-- INTRO QUOTE -->
+    <div class="scrolly-full">
+            <div class="step" data-step="4">
+                <h2 class="h2style1">Life by parts of speech</h2>
+               <iframe src="d3-lollipop.html" 
+                    style="width:100%; height:100%; margin-left:2%; border:none; padding-left:0%; padding-bottom: 0;">
+            </iframe>
+            </div>
+            </div>
+            </div></div>
+    
+    <!-- SETTING THE CONTEXT -->
+    <!-- <div class="scrolly-map"> -->
+        <div class="scrolly-map">
+            <div class="step" data-step="5">
+               <h2> Decline of Ottoman Empire, turn of 20th century</h2>
+               
+               <div id="typewriter-left"></div>
+            </div>
+            </div>
+    
+    <!-- KILIS PLATEAU -->
+    <div class="scrolly-full">
+                <div class="step text-slides-video" data-step="6">
+                    <div class="video-caption">(Overlooking the plains towards Syria from Kilis, Turkey. Filmed by author on trip in April 2022.)</div>
+                    <div id="typewriter-kilis-plateau-video"></div>
+                    <video id="kilis-plateau" loop muted playsinline preload="auto" autoplay>
+                        <source src="media/kilisplateau.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
+                </div>
+            </div>
+    
+     <div class="scrolly-full">
+        <div class="step text-slides-video" data-step="7">
+            <div class="video-caption">(Footage from 'The Armenian Genocide', PBS, 2007.)</div>
+            <div id="typewriter-hagop"></div>
+            <video id="kilis-plateau" loop muted playsinline preload="auto" autoplay>
+                <source src="media/massacre.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+        </div>
+    </div>
+    
+    <!-- The HOUSE -->
+        <div class="scrolly-full">
+        <div class="step text-slides-video" data-step="8">
+            <div class="video-caption">(Hovsep's childhood home in Kilis, Turkey. Filmed April 2022.)</div>
+            <div id="typewriter-kilis-house"></div>
+            <video id="kilis-house" loop muted playsinline preload="auto" autoplay>
+                <source src="media/kilishouse.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+    
+      
+        </div>
+    </div>
+
+        <div class="scrolly-full">
+            <div class="step" data-step="9">   
+                <div class="content-container">
+                    <div class="left-column-deportation">
+                    <h2>The beginning of deportation</h2>
+                        <p style="font-size: 0.6em;"> Until 1914 things remained peaceful, but WWI began and that era came to an end. When Turkey became the ally of the Central Powers, periodic massacres and persecutions culminated in an organized plan for mass deportation and extermination of the Armenians living in Asia Minor.  
+                            <br><br>
+                                        One day an order came that all Christian landowners were to be deprived of their lands and made refugees. At the time orders were received to deport the Armenian community from Kilis, my father’s house and storerooms were brim full of wheat, olives, olive oil, preserves of all kind and fruits of the harvest. Fortunately, my father had the foresight to retain part of his assets in gold. 
+<br><br>
+                            The lands were taken and the sons were also taken. My uncle was inconsolably grief-stricken when three of his sons were murdered by the Turks in one day. My father had no alternative but to hand over the keys to his home, store rooms and properties to the local authorities. 
+                            My parents were forced to leave their home in Kilis and were deported to Aleppo. 
+                            <br><br>
+                            One million two hundred thousand Armenians were lost in the genocide.<br><br>
+</p>
+
+
+<img src="media/gold.jpg" alt="" style="max-width: 70%; max-height: 50%; display: block; margin: 2% auto; border: solid 1px black"></img>
+<div id="caption-family">One of the remaining bullions<br>passed down to Hovsep's descendants</div>
+
+
+                                             </div>
+                    <div class="right-column-deportation">
+
+                        <img src="media/armenian-genocide-document-british-consulate.gif" alt="" style="max-width: 50%; max-height: 100%; display: block; margin: 0 auto; margin-bottom: 3%; border: solid 1px black;">
+                        <div id="caption-family">1922 British Consulate Report on the forced exile of the remaining Armenians<br>from the area of Aintab and Marash (including Kilis).<br><br>Source: Armenian National Institute.</div>
+                  
+
+
+                    </div>
+</div></div></div> 
+
+        
+    
+    
+    <div class="scrolly-full">
+        <div class="step" data-step="10">
+            <div id="kilis-beirut-container"><div id="typewriter-kilis-beirut"></div></div>
+
+
+        </div>
+    
+        </div></div>
+    
+
+
+        <div class="scrolly-full">
+            <div class="step text-slides-video" data-step="11">
+                <div class="video-caption">('Lebanon-Beirut', Foreign Affairs collection, INA (FR), 1921.)</div>
+                <div id="typewriter-beirut-1920s"></div>
+                <video id="kilis-plateau" loop muted playsinline preload="auto" autoplay>
+                    <source src="media/Beirut-1920s.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+        
+          
+            </div>
+        </div>
+
+    
+    
+            <div class="scrolly-full">
+                <div class="step" data-step="12">
+                    <div id="zahle-beirut-container"><div id="typewriter-zahle-beirut"></div></div>
+                    
+    
+                </div>
+            
+                </div></div>
+    
+                <div class="scrolly-full">
+                    <div class="step" data-step="13">
+                        <h2>Settling in Beirut, Lebanon</h2>
+                        <div class="beirut-house-content-container">
+                        <div class="beirut-house-container">
+                            <div class='img background-img'></div>
+                            <div class='img foreground-img'></div>
+                            <input type="range" min="1" max="100" value="50" class="slider" name='slider' id="slider">
+                            <div class='slider-button'></div>
+                          </div>
+                        <div class="caption-container">The Beirut house as it originally stood in the 1960s, and after it was torn down/replaced. The actual location is filled in green on the map.</div>
+                          <div class="beirut-house-text-container">
+                            <div class="beirut-house-text">
+                                By 1923 it was quite clear that there was no more hope for the Armenians to go back to their homes in Turkey. My father, mother and younger brothers came to see me in Beirut. 
+    <br><br>We rented a small house on Rue Jeanne D'Arc, in the middle of mulberry groves.  My father decided to move the family to Beirut.  He returned to Aleppo and sent for the other members of the family to come to Beirut by rail.  He accompanied the horse (who saved the family from deportation) to Alexandretta, which was part of Syria at that time. They both arrived in Beirut by sea.
+    <br><br>By this time, we had moved to a larger house on Rue Bliss which also had a garden and a small stable. And one of the gratifications that I have in life that my father and mother for this to the end of their days and they finished their days under their own roof.
+
+</div>  
+<img src="media/beiruthouse_pool.jpg" alt="" style="width: 100%; height: auto; max-width: 100%; display: block; border: solid 1px;">
+
+<div class="caption-container">My mom and her siblings in the backyard of the Beirut house, 1960s.</div>
+
+</div>
+                    </div> 
+</div>
+
+                </div>  
+    
+                    <div class="scrolly-full">
+                        <div class="step" data-step="14">   
+                            <div class="content-container">
+                                <div class="left-column-family">
+                                <h2>Finding love & family</h2>
+                                <img src="media/aleppo.jpg" alt="" style="max-width: 50%; max-height: 50%; display: block; margin: 1% auto; border: solid 1px black;">
+                               <div id="caption-family">Helen, her mother Zarman, and brother George, in Aleppo, 1929</div>
+
+                                <img src="media/weddingphoto.jpg" alt="" style="max-width: 50%; max-height: 100%; display: block; margin: 0 auto; border: solid 1px black">
+                                <div id="caption-family">Hovsep and Helen wedding photo, Beirut, 1930</div>
+
+                            </div>
+                            <div class="right-column-family">
+                                <p> 
+                                    I had my own difficulties, but I was looking around 1925-1926 <span class = "highlight">for a companion in life</span>, but years would go by and nothing would come that would in any way click. Certainly, I had made a few attempts, some of them almost to the conclusion, but it was not quite the right thing until one day in February of 1929.
+    <br><br>
+    I was called to see an Armenian patient from Aintab who was a friend of my father, and had come from London with his family en route to Aleppo. He needed care, he was gravely ill. When I entered the room, beside the sick man there was a beautiful woman with curly hair coming down to her dress, she was the daughter. 
+    
+    <br><br>When I saw Helen for the first time, <span class = "highlight">Ah! Ah! My heart jumped;</span> she was the person I was looking for years and years.<br><br> 
+                                   
+                              
+    Although I had been searching for a wife for 5-6 years, it did not take more than six days to be engaged to Helen and to put on her finger. At the time of our engagement, Helen and I pledged to each other that we would face the music together and we promised to face whatever life had in store for us through thick and thin.
+    <br><br> We were married on February 23, 1930 in Saint Nishan Church, Beirut. Thank God we have had a full life together and were blessed with five healthy children. Our married life has been based on mutual understanding, mutual trust, mutual confidence and mutual sharing.
+                                </p>
+                               </div>
+                            </div> 
+                              </div> </div>
+
+
+
+                    <div class="scrolly-full">
+                        <div class="step" data-step="15">   
+                            <div class="content-container">
+                                <div class="left-column-medicine-container">
+                                    <h2>A life in medicine, teaching & community work</h2>
+                                <div class="left-column-medicine">
+                                
+                                    <p><span class="highlight-2">From my earliest childhood, I wanted to become a physician</span>. I was granted a life of study and teaching. I started as a Professor of Medicine at the AUB Department for Internal Medicine – where I spent 42 years, alongside visiting professorships in New Orleans and London.
+    <br><br>
+    <span class="highlight-2">My relation with my students have been a great satisfaction in my life.</span> At first they are raw material, some of them seem to know almost everything that is known in medicine, but gradually, they realize that there are lots of problems in medicine even their teacher does not know.  So I have never looked on any of my students as someone in anyway inferior to me. A number of students, who have come in contact with me now, they are specialists and they call me “maalmi,” my teacher.  It is really a joy to meet them, to talk to them and feel that you have had a part in their growth.
+    <br><br>
+    Now I believe there are things in being a physician that brings a man close to his fellow man more than any other profession. Science and technology are very important but that is not all; with it there is an art of how to reach people in their distress and how to have compassion for people. I feel that <span class="highlight-2">mind and body are complementary; they are not two distinct things.</span> As a physician you have got to take into your consideration the personality of the patient and give your treatment accordingly.
+   <br><br> The Armenian population in Lebanon expanded when survivors of the Armenian Genocide arrived in the 1915 aftermath. They lived in makeshift camps by the Beirut River, enduring squalid conditions without proper sanitation, water, or electricity. Disease was rampant, especially tuberculosis. [But] the existing sanitoriums in Lebanon were full and couldn’t take any more patients. This experience ignited my determination to establish the Armenian National Sanatorium in Azounieh for tuberculosis patients. While tuberculosis is now less prevalent, the sanatorium serves various purposes, including care for the elderly and destitute, benefiting not just Armenians but all of Lebanon and surrounding Arab countries.
+</p>
+       </div></div>
+                                <div class="right-column-medicine">
+
+                                    <img src="media/hovsep.jpg" alt="" style="max-width: 50%; max-height: 50%; display: block; margin: 0 auto; border: solid 1px black;">
+                                    <div id="caption-family">Hovsep, 1925</div>
+                                    <img src="media/azouniehtrustees.jpeg" alt="" style="max-width: 70%; max-height: 50%; display: block; margin: 2% auto; border: solid 1px black">
+                                   <div id="caption-family">Hovsep (top middle) and other<br>members of the first board of trustees<br>of the Azounieh Sanatorium, 1923</div>
+
+
+                                                      
+                         
+                    </div> </div></div></div>
+    
+    
+    
+    
+    
+        <!-- LEBANON IMAGE GALLERY -->
+                    <div class="scrolly-full">
+                        <div class="step" data-step="16">   
+                            <h2>Instability in Lebanon (1960s/70s)</h2>
+                            <div id="typewriter-left-lebanon"> </div>
+
+                            <div class="gallery-container">
+                                <div class="top">
+                                  <ul>
+                                    <li>
+                                      <a href="#1"><img src="media/lebanon/lebanon.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#2"><img src="media/lebanon/lebanon2.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#3"><img src="media/lebanon/lebanon3.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#4"><img src="media/lebanon/lebanon4.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#5"><img src="media/lebanon/lebanon5.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#6"><img src="media/lebanon/lebanon6.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#7"><img src="media/lebanon/lebanon7.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#8"><img src="media/lebanon/lebanon8.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#9"><img src="media/lebanon/lebanon9.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#10"><img src="media/lebanon/lebanon10.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#11"><img src="media/lebanon/lebanon11.jpg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#12"><img src="media/lebanon/lebanon12.jpg"></a>
+                                    </li>
+    
+                                  </ul>
+                                  <a href="#_1" class="lightbox" id="1"><img src="media/lebanon/lebanon.jpg"></a>
+                                  <a href="#_2" class="lightbox" id="2"><img src="media/lebanon/lebanon2.jpg"></a>
+                                  <a href="#_3" class="lightbox" id="3"><img src="media/lebanon/lebanon3.jpg"></a>
+                                  <a href="#_4" class="lightbox" id="4"><img src="media/lebanon/lebanon4.jpg"></a>
+                                  <a href="#_5" class="lightbox" id="5"><img src="media/lebanon/lebanon5.jpg"></a>
+                                  <a href="#_6" class="lightbox" id="6"><img src="media/lebanon/lebanon6.jpg"></a>
+                                  <a href="#_7" class="lightbox" id="7"><img src="media/lebanon/lebanon7.jpg"></a>
+                                  <a href="#_8" class="lightbox" id="8"><img src="media/lebanon/lebanon8.jpg"></a>
+                                  <a href="#_9" class="lightbox" id="9"><img src="media/lebanon/lebanon9.jpg"></a>
+                                  <a href="#_10" class="lightbox" id="10"><img src="media/lebanon/lebanon10.jpg"></a>
+                                  <a href="#_11" class="lightbox" id="11"><img src="media/lebanon/lebanon11.jpg"></a>
+                                  <a href="#_12" class="lightbox" id="12"><img src="media/lebanon/lebanon12.jpg"></a> 
+    
+
+                                  </div>
+
+                                </div>
+                                
+
+                            </div>
+                
+                    </div> </div>
+    
+                    <div class="scrolly-map">
+                        <div class="step" data-step="17">
+                          
+                            <div id="map6" >
+                                <div id="slider-container">
+                                    <label for="decadeSlider"><span id="decadeSliderText"><br>Six decades in Lebanon, by the word</span></span> <span id="decadeLabel"></span></label>
+                                   <br>                                     <button id="playButton">Select a decade</button>
+
+                                   <input type="range" id="decadeSlider" min="1910" max="1980" step="10" value="1910" />
+</div><br>
+<div id="quote-container">
+                                    <div id="typewriter-lebanon-word-cloud"></div> </div>
+
+                               
+                            </div>
+                        <div id = "video-container">
+                            <div class="video-caption-mountain-house">
+                                Hovsep's old family house in Dhour el Choueir, outside Beirut, as of September 2023. Situated on the frontline during the Lebanese Civil War (1975-1990), it was abandoned and later ransacked by the Syrian army, retaining bullet holes on its exterior. It currently serves as informal housing for a refugee family.</div>
+
+                            <video id="mountain-house" loop muted playsinline preload="auto" autoplay>
+                                <source src="media/dhourelchouier.MOV" type="video/mp4">
+                                Your browser does not support the video tag.
+                              </video></div>
+
+        </div>
+                        </div>
+                    
+                 
+    
+    
+                        <div class="scrolly-full">
+                            <div class="step" data-step="18">
+                                <div id="typewriter-lebanon-usa"> 
+                        </div>  <br><br><br>
+                            </div></div>
+    
+    
+                        <div class="scrolly-full">
+                            <div class="step" data-step="19">
+                                <div class="responsive-background-image-end"></div>
+                                <br><br>
+                                <div id="typewriter-end"></div><br>
+                                <div id="caption-2" style="display: none;">-Hovsep Yeni-Komshian, 1983</div>
+
+                            </div>  
+                            </div>
+                
+    
+    
+    
+    
+    
+   
+<script src="script.js"></script>
+   
+</div>
+
+<div id="mobile-message" style="display: none;">
+    <p>This website is not available for mobile devices, please view it on a desktop.</p>
+</div>
+</body>
+
+</html>
