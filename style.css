@@ -84,13 +84,6 @@ body, html {
   height: 100vh; 
   object-fit: cover; 
 }
-
-
-  @media (max-width: 768px) {
-    body, html {
-      font-size: 90%; 
-    }
-  }
   
    #map2, #map3, #map4, #map5, #map7 {
     position: fixed;
@@ -169,13 +162,6 @@ span#decadeLabel {
 }
 
 
-
-/* Adjustments for tablets */
-@media (max-width: 768px) {
-    #map, #map2, #map3, #map4, #map5, #map6 {
-      height: 75vh; 
-    }
-  }
  
   
   .step {
@@ -185,13 +171,7 @@ span#decadeLabel {
   }
 
 
-/* Adjustments for tablets */
-@media (max-width: 768px) {
-    .step {
-      font-size: 5vw; 
-      padding: 1em; 
-    }
-  }
+
   
  
 
@@ -240,23 +220,6 @@ span#decadeLabel {
 #downButton:hover, #upButton:hover {
   color: white;
 }
-
-@media only screen and (max-width: 768px) {
-  #downButton, #upButton {
-    width: 2em;
-    height: 2em;
-    font-size: 1.2em;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  #downButton, #upButton {
-    width: 1.75em;
-    height: 1.75em;
-    font-size: 1em;
-  }
-}
-
 
 
 
@@ -1464,17 +1427,4 @@ text-align: justify;
 }
 
 
-@media (max-width: 768px) {
-    .content-container {
-        flex-direction: column; 
-    }
-    .left-column,
-    .right-column {
-        max-width: 100%; 
-        padding: 0;
-    }
-    img {
-        max-width: 100%; 
-    }
-}
 
