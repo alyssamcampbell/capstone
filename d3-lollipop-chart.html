@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"> <!-- Typewriter font -->
+
+
+    <style>
+         html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+        
+         svg {
+        width: 100%;
+        height: 100%;
+        margin-left: 0%;
+    }
+        #chart-container {
+            text-align: left;
+            width: 80vw; 
+            height: 80vh; 
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 1.25em;
+            display: block;
+            padding: 0;
+            align-items: center;
+            margin-left: 10%; 
+        }
+        .lollipop-stick {
+            stroke: grey;
+            stroke-width: 2px;
+        }
+        .lollipop-head {
+            fill: #00a651;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: 60px;
+            height: 28px;
+            padding: 2px;
+            font: 12px sans-serif;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        #category-select {
+            font-size: 1.25em; /* Adjust the size as needed */
+            font-family: 'Special Elite', cursive; /* You can choose a different font here */
+        }
+
+    </style>
+</head>
+<body>
+    <div id="chart-container">
+       The top <select id="category-select"></select> Hovsep mentioned in his oral history:<!-- Dropdown menu -->
+       <br><br>
+        <svg id="chart"></svg> 
+    </div>
+    </body>
+
+
+    <script>
+ 
+
+      
+   var family = [
+        { 'Word': 'father', 'Value': 98 },
+        { 'Word': 'Hagop (his brother)', 'Value': 68 },
+        { 'Word': 'mother', 'Value': 34 },
+        { 'Word': 'son', 'Value': 21 },
+        { 'Word': 'wife (Helen)', 'Value': 31 },
+        { 'Word': 'daughter', 'Value': 29 },
+        { 'Word': 'Hamdaniyeh (childhood horse)', 'Value': 21 },
+        { 'Word': 'grandfather', 'Value': 14 },
+        { 'Word': 'Sarkis (father of Helen)', 'Value': 5 }
+    ]; 
+
+    var places = [
+        { 'Word': 'Kilis', 'Value': 67 },
+        { 'Word': 'Beirut', 'Value': 59 },
+        { 'Word': 'Aleppo', 'Value': 40 },
+        { 'Word': 'Istanbul', 'Value': 11 },
+        { 'Word': 'Aintab', 'Value': 8 },
+        { 'Word': 'New York', 'Value': 11 },
+        { 'Word': 'Turkey', 'Value': 18 },
+        { 'Word': 'Lebanon', 'Value': 36 },
+        { 'Word': 'Armenia', 'Value': 7 },
+        { 'Word': 'camps', 'Value': 9 },
+        { 'Word': 'house', 'Value': 45 },
+        { 'Word': 'school', 'Value': 40 },
+        { 'Word': 'university', 'Value': 38 },
+        { 'Word': 'hospital', 'Value': 14 },
+        { 'Word': 'mountains', 'Value': 7 },
+        { 'Word': 'sanatorium', 'Value': 9 },
+        { 'Word': 'train', 'Value': 9 },
+        { 'Word': 'olive (grove)', 'Value': 11 }
+
+    ];
+
+    var concepts = [
+    { 'Word': 'time', 'Value': 98 },
+    { 'Word': 'family', 'Value': 84 },
+    { 'Word': 'war', 'Value': 51 },
+    { 'Word': 'home', 'Value': 85 },
+    { 'Word': 'life', 'Value': 49 },
+    { 'Word': 'world', 'Value': 30 },
+    { 'Word': 'medicine', 'Value': 46 },
+    { 'Word': 'work', 'Value': 29 },
+    { 'Word': 'money', 'Value': 20 },
+    { 'Word': 'community', 'Value': 15 },
+    { 'Word': 'god', 'Value': 6 },
+    { 'Word': 'death', 'Value': 8 },
+    { 'Word': 'joy', 'Value': 10 },
+    { 'Word': 'marriage', 'Value': 6 },
+    { 'Word': 'health', 'Value': 6 },
+    { 'Word': 'youth', 'Value': 6 },
+    { 'Word': 'business', 'Value': 11 },
+    { 'Word': 'relief/help', 'Value': 22 },
+    { 'Word': 'property', 'Value': 9 }
+    ];
+
+var people = [
+{ 'Word': 'children', 'Value': 27 },
+{ 'Word': 'doctor/physician', 'Value': 44 },
+{ 'Word': 'patients', 'Value': 34 },
+{ 'Word': 'guest', 'Value': 2 },
+{ 'Word': 'friends', 'Value': 32 },
+{ 'Word': 'professor/teacher', 'Value': 32 },
+{ 'Word': 'student', 'Value': 9 }
+];
+
+
+    var historical_cultural = [
+   
+    { 'Word': 'church/catholicos', 'Value': 33 },
+    { 'Word': 'massacres', 'Value': 26 },
+    { 'Word': 'diseases', 'Value': 14 },
+    { 'Word': 'empire', 'Value': 13 },
+    { 'Word': 'Ottoman', 'Value': 11 },
+    { 'Word': 'sultan', 'Value': 16 },
+    { 'Word': 'history', 'Value': 7 },
+    { 'Word': 'deportation', 'Value': 9 },
+    { 'Word': 'gold', 'Value': 11 },
+    { 'Word': 'tuberculosis', 'Value': 7 }
+    ];
+   
+
+
+    var temporal = [
+        { 'Word': 'february', 'Value': 11 },
+        { 'Word': 'january', 'Value': 3 },
+        { 'Word': 'april', 'Value': 6 },
+        { 'Word': 'august', 'Value': 2 },
+        { 'Word': 'summer', 'Value': 10 },
+        { 'Word': 'morning', 'Value': 7 }
+    ];
+
+    var descriptive_adjectives = [
+    { 'Word': 'beautiful', 'Value': 19 },
+    { 'Word': 'religious', 'Value': 3 },
+    { 'Word': 'afraid', 'Value': 3 },
+    { 'Word': 'fair', 'Value': 3 },
+    { 'Word': 'blue', 'Value': 3 },
+    { 'Word': 'hospitable', 'Value': 3 },
+    { 'Word': 'psychosomatic', 'Value': 3 },
+    { 'Word': 'golden', 'Value': 3 },
+    { 'Word': 'medical', 'Value': 23 },
+    { 'Word': 'happy', 'Value': 17 },
+    { 'Word': 'independent', 'Value': 8 },
+    { 'Word': 'dead', 'Value': 6 },
+    { 'Word': 'prosperous', 'Value': 5 },
+    { 'Word': 'outside', 'Value': 5 },
+    { 'Word': 'mixed', 'Value': 5 },
+    { 'Word': 'political', 'Value': 5 },
+    { 'Word': 'healthy', 'Value': 4 },
+    { 'Word': 'poor', 'Value': 8 },
+    { 'Word': 'human', 'Value': 4 },
+    { 'Word': 'intimate', 'Value': 2 },
+    { 'Word': 'commercial', 'Value': 2 },
+    { 'Word': 'welcome', 'Value': 2 },
+    { 'Word': 'loyal', 'Value': 2 },
+    { 'Word': 'punitive', 'Value': 2 },
+    { 'Word': 'commanding', 'Value': 2 },
+    { 'Word': 'dark', 'Value': 2 },
+    { 'Word': 'blind', 'Value': 2 },
+    { 'Word': 'painful', 'Value': 2 }
+];
+
+var nationality_religious_linguistic = [
+    { 'Word': 'Armenian(s)', 'Value': 142 },
+    { 'Word': 'Greek', 'Value': 3 },
+    { 'Word': 'British', 'Value': 6 },
+    { 'Word': 'Arab', 'Value': 4 },
+    { 'Word': 'Syrian', 'Value': 9 },
+    { 'Word': 'French', 'Value': 35 },
+    { 'Word': 'American', 'Value': 23 },
+    { 'Word': 'Turkish', 'Value': 21 },
+    { 'Word': 'Turks', 'Value': 21 },
+    { 'Word': 'Lebanese', 'Value': 8 },
+    { 'Word': 'Maronite', 'Value': 5 },
+    { 'Word': 'Soviet', 'Value': 2 },
+    { 'Word': 'Arabic', 'Value': 2 },
+    { 'Word': 'Muslims', 'Value': 42 },
+    { 'Word': 'Christians', 'Value': 16 },
+    { 'Word': 'Protestant', 'Value': 8 }
+];
+
+var verbs = [
+    { 'Word': 'died', 'Value': 35 },
+    { 'Word': 'married', 'Value': 26 },
+    { 'Word': 'believe', 'Value': 16 },
+    { 'Word': 'learned', 'Value': 12 },
+    { 'Word': 'became', 'Value': 12 },
+    { 'Word': 'remained', 'Value': 11 },
+    { 'Word': 'returned', 'Value': 11 },
+    { 'Word': 'left', 'Value': 10 },
+    { 'Word': 'giving', 'Value': 10 },
+    { 'Word': 'moved', 'Value': 9 },
+    { 'Word': 'established', 'Value': 9 },
+    { 'Word': 'suffered', 'Value': 8 },
+    { 'Word': 'helped', 'Value': 14 },
+    { 'Word': 'lost', 'Value': 7 },
+    { 'Word': 'protect', 'Value': 7 },
+    { 'Word': 'remember', 'Value': 7 },
+    { 'Word': 'killed', 'Value': 6 },
+    { 'Word': 'build', 'Value': 6 },
+    { 'Word': 'carried', 'Value': 10 },
+    { 'Word': 'living', 'Value': 6 },
+    { 'Word': 'stay', 'Value': 6 },
+    { 'Word': 'hope', 'Value': 6 },
+    { 'Word': 'learn', 'Value': 6 },
+    { 'Word': 'remain', 'Value': 6 },
+    { 'Word': 'raised', 'Value': 6 },
+    { 'Word': 'divided', 'Value': 5 },
+    { 'Word': 'deported', 'Value': 5 },
+    { 'Word': 'survived', 'Value': 5 },
+    { 'Word': 'buried', 'Value': 4 },
+    { 'Word': 'traveled', 'Value': 4 },
+    { 'Word': 'graduated', 'Value': 4 },
+    { 'Word': 'engaged', 'Value': 4 },
+    { 'Word': 'confined', 'Value': 4 },
+    { 'Word': 'reached', 'Value': 4 },
+    { 'Word': 'return', 'Value': 4 },
+    { 'Word': 'spared', 'Value': 4 },
+    { 'Word': 'befriended', 'Value': 4 },
+    { 'Word': 'study', 'Value': 4 },
+    { 'Word': 'entrusted', 'Value': 3 }
+];
+
+
+        var datasets = {
+            'descriptive adjectives': descriptive_adjectives,
+            'places': places,
+            'verbs': verbs,
+            'concepts': concepts,
+            'family members': family,
+            'non-specific people': people, 
+            'temporal words': temporal,
+            'nationality/linguistic/religious/ethnic groups': nationality_religious_linguistic,
+            'historical/cultural words': historical_cultural,
+        }
+
+       var currentCategory = 'descriptive adjectives';
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+    var container = document.getElementById('chart-container');
+    var width = container.clientWidth;
+    var height = container.clientHeight;
+
+    var margin = { top: 20, right: 100, bottom: 100, left: 40 },
+        svgWidth = width - margin.left - margin.right,
+        svgHeight = height - margin.top - margin.bottom;
+
+       var x = d3.scaleLinear().range([0, svgWidth]);
+        var y = d3.scaleBand().range([svgHeight, 0]).padding(0.1);
+
+    var svg = d3.select("#chart")
+                .attr("width", svgWidth)
+                .attr("height", svgHeight)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+            svg.append("g")
+           .attr("transform", "translate(0," + svgHeight + ")")
+           .attr("class", "x axis")
+           .call(d3.axisBottom(x));
+
+        svg.append("g")
+           .attr("class", "y axis")
+           .style("display", "none"); 
+
+        var tooltip = d3.select(".tooltip");
+
+        // Dropdown menu setup
+        var select = d3.select("#category-select")
+                       .on("change", function() {
+                           currentCategory = this.value;
+                           updateChart(datasets[currentCategory]);
+                       });
+
+        select.selectAll("option")
+              .data(Object.keys(datasets))
+              .enter().append("option")
+              .text(d => d)
+              .attr("value", d => d);
+
+        updateChart(datasets[currentCategory]);
+
+
+        function updateChart(data) {
+
+      data.forEach(function(d) {
+        d.Value = +d.Value; 
+    });
+
+
+
+       // Sort the data by Value in descending order and take the top 15
+       data.sort((a, b) => b.Value - a.Value);
+    data = data.slice(0, 15); // Get the top 15 items
+
+  console.log("Processed Data:", data);
+
+   data.sort((a, b) => a.Value - b.Value);
+
+    console.log("Data:", data);
+    console.log("Max Value in Data:", d3.max(data, d => d.Value));
+
+ x.domain([0, d3.max(data, function(d) { return d.Value; })]);
+            y.domain(data.map(function(d) { return d.Word; }));
+
+    
+
+    // Update the axes
+    svg.select(".x.axis").transition().duration(1000).call(d3.axisBottom(x));
+    svg.select(".y.axis").transition().duration(1000).call(d3.axisLeft(y));
+
+    // Bind data to lollipop sticks 
+    var lollipops = svg.selectAll(".lollipop-stick")
+                       .data(data, d => d.Word);
+
+    // Enter selection for sticks
+    lollipops.enter().append("line")
+             .attr("class", "lollipop-stick")
+             .attr("x1", d => x(d.Value))
+             .attr("y1", d => y(d.Word) + y.bandwidth() / 2)
+             .attr("x2", x(0))
+             .attr("y2", d => y(d.Word) + y.bandwidth() / 2)
+             .style("stroke", "#141c27")
+             .style("stroke-width", "0.05em");
+
+    // Update selection for sticks
+    lollipops.attr("x1", d => x(d.Value))
+             .attr("y1", d => y(d.Word) + y.bandwidth() / 2)
+             .attr("x2", x(0))
+             .attr("y2", d => y(d.Word) + y.bandwidth() / 2);
+
+    // Exit selection for sticks
+    lollipops.exit().remove();
+
+    // Bind data to lollipop heads 
+    var circles = svg.selectAll(".lollipop-head")
+                     .data(data, d => d.Word);
+
+    // Enter selection for circles
+    circles.enter().append("circle")
+           .attr("class", "lollipop-head")
+           .attr("cx", d => x(d.Value))
+           .attr("cy", d => y(d.Word) + y.bandwidth() / 2)
+           .attr("r", 5)
+           .style("fill", "#00a651");
+
+    // Update selection for circles
+    circles.attr("cx", d => x(d.Value))
+           .attr("cy", d => y(d.Word) + y.bandwidth() / 2)
+           .attr("r", 5);
+
+    // Exit selection for circles
+    circles.exit().remove();
+
+     // Enter selection for text
+     var texts = svg.selectAll(".bar-text")
+                .data(data, d => d.Word);
+
+
+            texts.enter().append("text")
+                .attr("class", "bar-text")
+                .style("font-family", "'Special Elite', cursive") 
+                .style("font-size", 20)
+                .attr("x", -5) // Adjust x position
+                .attr("y", d => y(d.Word) + y.bandwidth() / 2 - 10)  // Position above the stick
+                .text(d => d.Word);
+
+            // Update selection for text
+            texts.attr("x", -5)
+            .attr("y", d => y(d.Word) + y.bandwidth() / 2 - 10)  // Update y position
+                 .text(d => d.Word);
+
+            // Exit selection for text
+            texts.exit().remove();
+
+            // Hover effect for circles
+            svg.selectAll(".lollipop-head")
+               .on("mouseover", function(event, d) {
+                   tooltip.transition()
+                          .duration(200)
+                          .style("opacity", .9);
+                   tooltip.html("Value: " + d.Value)
+                          .style("left", (event.pageX) + "px")
+                          .style("top", (event.pageY - 28) + "px");
+               })
+               .on("mouseout", function(d) {
+                   tooltip.transition()
+                          .duration(500)
+                          .style("opacity", 0);
+              })
+
+            }  }); 
+
+
+    </script>
+</body>
+</html>
