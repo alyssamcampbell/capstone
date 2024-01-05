@@ -1,3 +1,66 @@
+// Global currentStepIndex
+let currentStepIndex = 0;
+let isButtonNavigation = false; // Flag to distinguish between button and scroll navigation
+
+const steps = document.querySelectorAll('.step');
+
+function updateProgressBar(currentStepIndex, totalSteps) {
+    const progress = (currentStepIndex / (totalSteps - 1)) * 100;
+
+    // Define color thresholds
+    const greyEnd = 100 / totalSteps * 5;   // End of intro section
+    const orangeEnd = 100 / totalSteps * 10;  // End of ottoman section
+    const greenEnd = 100 / totalSteps * 18;  // End of Lebanon section 
+
+    // Construct the linear gradient background
+    let gradient = `linear-gradient(to right, grey 0%, grey ${Math.min(progress, greyEnd)}%, `;
+    if (progress > greyEnd) {
+        gradient += `#F2A800 ${greyEnd}%, #F2A800 ${Math.min(progress, orangeEnd)}%, `;
+    }
+    if (progress > orangeEnd) {
+        gradient += `#00a651 ${orangeEnd}%, #00a651 ${Math.min(progress, greenEnd)}%, `;
+    }
+    if (progress > greenEnd) {
+        gradient += `#57b8c8 ${greenEnd}%, #57b8c8 ${progress}%, `;
+    }
+    gradient += `transparent ${progress}%, transparent 100%)`;
+
+    // Apply the gradient to the progress bar
+    document.getElementById('progress-bar').style.background = gradient;
+    document.getElementById('progress-bar').style.width = '100%';
+}
+
+// Function to update the step index
+function updateStepIndex(newIndex) {
+    currentStepIndex = newIndex;
+    updateButtonVisibility();
+    updateProgressBar(currentStepIndex, steps.length);
+}
+
+
+// Function to update the current step
+function updateCurrentStep(stepIndex) {
+    currentStepIndex = stepIndex;
+    console.log("Updated Step Index: ", currentStepIndex);
+    updateButtonVisibility();
+    updateProgressBar(currentStepIndex, steps.length);
+}
+
+// Function to change to a specific step
+function goToStep(stepIndex) {
+    if (stepIndex >= 0 && stepIndex < steps.length) {
+        console.log("Going to Step: ", stepIndex);
+        steps[stepIndex].scrollIntoView({ behavior: 'smooth' });
+        updateCurrentStep(stepIndex);
+    }
+}
+
+// Update visibility of navigation buttons
+function updateButtonVisibility() {
+    upButton.style.visibility = currentStepIndex === 0 ? 'hidden' : 'visible';
+    downButton.style.visibility = currentStepIndex === steps.length - 1 ? 'hidden' : 'visible';
+}
+
 window.onload = function() {
     var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobile) {
@@ -8,6 +71,25 @@ window.onload = function() {
     const downButton = document.getElementById('downButton');
     const upButton = document.getElementById('upButton');    
    
+ // Button Click Events
+downButton.addEventListener('click', function() {
+    if (currentStepIndex < steps.length - 1) {
+        isButtonNavigation = true; // Set the flag for button navigation
+        updateStepIndex(currentStepIndex + 1);
+        steps[currentStepIndex].scrollIntoView({ behavior: 'smooth' });
+        isButtonNavigation = false; // Reset the flag after navigation
+    }
+});
+
+upButton.addEventListener('click', function() {
+    if (currentStepIndex > 0) {
+        isButtonNavigation = true; // Set the flag for button navigation
+        updateStepIndex(currentStepIndex - 1);
+        steps[currentStepIndex].scrollIntoView({ behavior: 'smooth' });
+        isButtonNavigation = false; // Reset the flag after navigation
+    }
+});
+
  // Hide decadeSlider and decadeLabel initially
  const decadeSlider = document.getElementById('decadeSlider');
  const decadeLabel = document.getElementById('decadeLabel');
@@ -39,34 +121,7 @@ map.on('load', function() {
     // Set up Scrollama
     const scroller = scrollama();
     const steps = document.querySelectorAll('.step');
-
-    let currentStepIndex = 0;
-    function updateProgressBar(currentStepIndex, totalSteps) {
-        const progress = (currentStepIndex / (totalSteps - 1)) * 100;
     
-        // Define color thresholds
-        const greyEnd = 100 / totalSteps * 5;   // End of intro section
-        const orangeEnd = 100 / totalSteps * 10;  // End of ottoman section
-        const greenEnd = 100 / totalSteps * 18;  // End of Lebanon section 
-    
-        // Construct the linear gradient background
-        let gradient = `linear-gradient(to right, grey 0%, grey ${Math.min(progress, greyEnd)}%, `;
-        if (progress > greyEnd) {
-            gradient += `#F2A800 ${greyEnd}%, #F2A800 ${Math.min(progress, orangeEnd)}%, `;
-        }
-        if (progress > orangeEnd) {
-            gradient += `#00a651 ${orangeEnd}%, #00a651 ${Math.min(progress, greenEnd)}%, `;
-        }
-        if (progress > greenEnd) {
-            gradient += `#57b8c8 ${greenEnd}%, #57b8c8 ${progress}%, `;
-        }
-        gradient += `transparent ${progress}%, transparent 100%)`;
-    
-        // Apply the gradient to the progress bar
-        document.getElementById('progress-bar').style.background = gradient;
-        document.getElementById('progress-bar').style.width = '100%';
-    }
-
 
     scroller.setup({
         step: '.step',
@@ -75,7 +130,14 @@ map.on('load', function() {
 
 
     .onStepEnter(response => {
-        // hideAllMaps();
+
+        if (!isButtonNavigation) { // Check if the navigation is not triggered by a button
+            console.log("Scrollama Update: Going to step", response.index);
+            updateStepIndex(response.index);
+        }
+        // Update the current step index
+    let stepIndex = Array.from(steps).indexOf(response.element);
+    updateCurrentStep(stepIndex);
         let step = response.element.dataset.step;
 
     // Hide the elements by default
@@ -95,18 +157,7 @@ document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'hidden';
 
 
-        const steps = document.querySelectorAll('.step');
-        let currentStepIndex = Array.from(steps).indexOf(response.element);
-
-
-        // Update the visibility of the up and down arrows
-        upButton.style.visibility = currentStepIndex === 0 ? 'hidden' : 'visible';
-        downButton.style.visibility = currentStepIndex === steps.length - 1 ? 'hidden' : 'visible';
     
-
-    
-    
-
 // TITLE PAGE 
 
     if (step == "0") {
@@ -134,7 +185,7 @@ document.getElementById("map7").style.visibility = 'hidden';
                     n++;
                     setTimeout(function() {
                         typeWriter(text, n);
-                    }, 100);
+                    }, 60);
                 } else {
                     isTyping = false;
                 }
@@ -143,18 +194,7 @@ document.getElementById("map7").style.visibility = 'hidden';
             const text = "A life, uprooted.";
             typeWriter(text, 0);
             
-            downButton.addEventListener('click', function() {
-                if (isTyping) {
-                    // Complete the typewriter effect
-                    document.getElementById("typewriter-title-green").innerHTML = text;
-                    isTyping = false;
-                }
-                if (currentStepIndex < steps.length - 1) {
-                    // Move to the next step
-                    currentStepIndex++;
-                    steps[currentStepIndex].scrollIntoView({ behavior: 'smooth' });
-                }
-            });
+        
             
 
 } 
@@ -188,7 +228,7 @@ else if (step == "1") {
                 n++;
                 typewriterTimeout = setTimeout(function() {
                     typeWriter(text, n);
-                }, 70);
+                }, 60);
             } else {
                 isTyping = false;
                 document.getElementById("caption").style.display = 'block'; // Show the caption
@@ -213,17 +253,6 @@ else if (step == "1") {
             );
         }
         
-
-downButton.addEventListener('click', function() {
-    if (isTyping && !downButtonClickedToCompleteTyping) {
-        downButtonClickedToCompleteTyping = true;
-        typeWriter(text, text.length);
-    } else if (!isTyping && currentStepIndex < steps.length - 1) {
-        currentStepIndex++;
-        steps[currentStepIndex].scrollIntoView({ behavior: 'smooth' });
-        downButtonClickedToCompleteTyping = false; // Reset for next step
-    }
-});
 
         function checkVisibility() {
             const typewriterElement = document.getElementById('typewriter-title');
@@ -314,7 +343,7 @@ downButton.addEventListener('click', function() {
                 n++;
                 typewriterTimeout = setTimeout(function() {
                     typeWriter(text, n);
-                }, 80);
+                }, 55);
             } 
         }
         
@@ -454,7 +483,7 @@ if (!map.getSource('kilis-point')) {
                 n++;
                 typewriterTimeout = setTimeout(function() {
                     typeWriter(text, n);
-                }, 80);
+                }, 55);
             } 
         }
         
@@ -520,7 +549,7 @@ else if (step == "7") {
                 n++;
                 typewriterTimeout = setTimeout(function() {
                     typeWriter(text, n);
-                }, 80);
+                }, 55);
             } 
         }
         
@@ -579,7 +608,7 @@ else if (step == "7") {
                 n++;
                 typewriterTimeout = setTimeout(function() {
                     typeWriter(text, n);
-                }, 80);
+                }, 55);
             } 
         }
         
@@ -659,7 +688,7 @@ else if (step == "10") {
             n++;
             typewriterTimeout = setTimeout(function() {
                 typeWriter(text, n);
-            }, 75);
+            }, 55);
         } else {
             isTyping = false;
         }
@@ -831,7 +860,7 @@ function typeWriter(text, n) {
         n++;
         typewriterTimeout = setTimeout(function() {
             typeWriter(text, n);
-        }, 70);
+        }, 55);
     } 
 }
 
@@ -891,7 +920,7 @@ function typeWriter(text, n) {
         n++;
         typewriterTimeout = setTimeout(function() {
             typeWriter(text, n);
-        }, 65);
+        }, 45);
     } 
 }
 
@@ -1240,7 +1269,7 @@ function typeWriter(text, n) {
         n++;
         typewriterTimeout = setTimeout(function() {
             typeWriter(text, n);
-        }, 80);
+        }, 55);
     } 
 }
 
@@ -1312,7 +1341,7 @@ function typeWriter(text, n) {
         n++;
         typewriterTimeout = setTimeout(function() {
             typeWriter(text, n);
-        }, 60);
+        }, 55);
     } 
 }
 
@@ -1566,7 +1595,7 @@ function typeWriter(text, n) {
         n++;
         typewriterTimeout = setTimeout(function() {
             typeWriter(text, n);
-        }, 80);
+        }, 55);
     } 
 }
 
@@ -1679,7 +1708,7 @@ function typeWriter(text, n) {
         n++;
         typewriterTimeout = setTimeout(function() {
             typeWriter(text, n);
-        }, 80);
+        }, 55);
     } else {
         isTyping = false;
         document.getElementById("caption-2").style.display = 'block'; 
@@ -1763,23 +1792,6 @@ document.querySelectorAll('#navbar nav ul li a').forEach(link => {
     });
 });
 
-// Event listener for the down button
-downButton.addEventListener('click', function() {
-    if (currentStepIndex < steps.length - 1) {
-        currentStepIndex++;
-        steps[currentStepIndex].scrollIntoView({ behavior: 'smooth' });
-        updateButtonVisibility();
-    }
-});
-
-// Event listener for the up button
-upButton.addEventListener('click', function() {
-    if (currentStepIndex > 0) {
-        currentStepIndex--;
-        steps[currentStepIndex].scrollIntoView({ behavior: 'smooth' });
-        updateButtonVisibility();
-    }
-});
 
 function updateButtonVisibility() {
     upButton.style.visibility = currentStepIndex === 0 ? 'hidden' : 'visible';
