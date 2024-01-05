@@ -47,6 +47,12 @@
             pointer-events: none;
             opacity: 0;
         }
+
+        #category-select {
+            font-size: 1.25em; /* Adjust the size as needed */
+            font-family: 'Special Elite', cursive; /* You can choose a different font here */
+        }
+
     </style>
 </head>
 <body>
@@ -62,7 +68,7 @@
  
 
       
-   var people = [
+   var family = [
         { 'Word': 'father', 'Value': 98 },
         { 'Word': 'Hagop (his brother)', 'Value': 68 },
         { 'Word': 'mother', 'Value': 34 },
@@ -81,76 +87,77 @@
         { 'Word': 'Istanbul', 'Value': 11 },
         { 'Word': 'Aintab', 'Value': 8 },
         { 'Word': 'New York', 'Value': 11 },
+        { 'Word': 'Turkey', 'Value': 18 },
+        { 'Word': 'Lebanon', 'Value': 36 },
+        { 'Word': 'Armenia', 'Value': 7 },
+        { 'Word': 'camps', 'Value': 9 },
+        { 'Word': 'house', 'Value': 45 },
+        { 'Word': 'school', 'Value': 40 },
+        { 'Word': 'university', 'Value': 38 },
+        { 'Word': 'hospital', 'Value': 14 },
+        { 'Word': 'mountains', 'Value': 7 },
+        { 'Word': 'sanatorium', 'Value': 9 },
+        { 'Word': 'train', 'Value': 9 },
+        { 'Word': 'olive (grove)', 'Value': 11 }
+
     ];
 
-    var things = [
+    var concepts = [
     { 'Word': 'time', 'Value': 98 },
-    { 'Word': 'Arabic', 'Value': 2 },
     { 'Word': 'family', 'Value': 84 },
-    { 'Word': 'home', 'Value': 85 },
-    { 'Word': 'armenians', 'Value': 72 },
     { 'Word': 'war', 'Value': 51 },
+    { 'Word': 'home', 'Value': 85 },
     { 'Word': 'life', 'Value': 49 },
-    { 'Word': 'medicine', 'Value': 46 },
-    { 'Word': 'house', 'Value': 45 },
-    { 'Word': 'school', 'Value': 40 },
-    { 'Word': 'lebanon', 'Value': 36 },
     { 'Word': 'world', 'Value': 30 },
+    { 'Word': 'medicine', 'Value': 46 },
     { 'Word': 'work', 'Value': 29 },
-    { 'Word': 'children', 'Value': 27 },
-    { 'Word': 'doctor/physician', 'Value': 44 },
-    { 'Word': 'university', 'Value': 38 },
-    { 'Word': 'Turks', 'Value': 21 },
-    { 'Word': 'Muslims', 'Value': 42 },
     { 'Word': 'money', 'Value': 20 },
-    { 'Word': 'patients', 'Value': 34 },
-    { 'Word': 'guest', 'Value': 2 },
-    { 'Word': 'Turkey', 'Value': 18 },
-    { 'Word': 'friends', 'Value': 32 },
-    { 'Word': 'church/catholicos', 'Value': 33 },
-    { 'Word': 'professor/teacher', 'Value': 32 },
     { 'Word': 'community', 'Value': 15 },
-    { 'Word': 'hospital', 'Value': 14 },
-    { 'Word': 'massacres', 'Value': 26 },
-    { 'Word': 'diseases', 'Value': 14 },
-    { 'Word': 'empire', 'Value': 13 },
+    { 'Word': 'god', 'Value': 6 },
+    { 'Word': 'death', 'Value': 8 },
+    { 'Word': 'joy', 'Value': 10 },
+    { 'Word': 'marriage', 'Value': 6 },
+    { 'Word': 'health', 'Value': 6 },
+    { 'Word': 'youth', 'Value': 6 },
     { 'Word': 'business', 'Value': 11 },
     { 'Word': 'relief/help', 'Value': 22 },
-    { 'Word': 'ottoman', 'Value': 11 },
-    { 'Word': 'gold', 'Value': 11 },
-    { 'Word': 'summer', 'Value': 10 },
-    { 'Word': 'joy', 'Value': 10 },
-    { 'Word': 'sanatorium', 'Value': 9 },
-    { 'Word': 'christians', 'Value': 16 },
-    { 'Word': 'deportation', 'Value': 9 },
-    { 'Word': 'property', 'Value': 9 },
-    { 'Word': 'train', 'Value': 9 },
-    { 'Word': 'camps', 'Value': 9 },
-    { 'Word': 'student', 'Value': 9 },
-    { 'Word': 'Armenia', 'Value': 7 },
-    { 'Word': 'morning', 'Value': 7 },
-    { 'Word': 'mountains', 'Value': 7 },
-    { 'Word': 'youth', 'Value': 6 },
-    { 'Word': 'god', 'Value': 6 },
-    { 'Word': 'health', 'Value': 6 },
-    { 'Word': 'marriage', 'Value': 6 },
-    { 'Word': 'death', 'Value': 8 },
-    { 'Word': 'protestant', 'Value': 8 },
-    { 'Word': 'sultan', 'Value': 16 },
-    { 'Word': 'history', 'Value': 7 },
-    { 'Word': 'Armenia', 'Value': 7 },
-    { 'Word': 'treatment', 'Value': 7 },
-    { 'Word': 'tuberculosis', 'Value': 7 },
-    { 'Word': 'olive', 'Value': 11 }
+    { 'Word': 'property', 'Value': 9 }
+    ];
+
+var people = [
+{ 'Word': 'children', 'Value': 27 },
+{ 'Word': 'doctor/physician', 'Value': 44 },
+{ 'Word': 'patients', 'Value': 34 },
+{ 'Word': 'guest', 'Value': 2 },
+{ 'Word': 'friends', 'Value': 32 },
+{ 'Word': 'professor/teacher', 'Value': 32 },
+{ 'Word': 'student', 'Value': 9 }
 ];
 
 
-    var months = [
+    var historical_cultural = [
+   
+    { 'Word': 'church/catholicos', 'Value': 33 },
+    { 'Word': 'massacres', 'Value': 26 },
+    { 'Word': 'diseases', 'Value': 14 },
+    { 'Word': 'empire', 'Value': 13 },
+    { 'Word': 'Ottoman', 'Value': 11 },
+    { 'Word': 'sultan', 'Value': 16 },
+    { 'Word': 'history', 'Value': 7 },
+    { 'Word': 'deportation', 'Value': 9 },
+    { 'Word': 'gold', 'Value': 11 },
+    { 'Word': 'tuberculosis', 'Value': 7 }
+    ];
+   
+
+
+    var temporal = [
         { 'Word': 'february', 'Value': 11 },
         { 'Word': 'january', 'Value': 3 },
         { 'Word': 'april', 'Value': 6 },
         { 'Word': 'august', 'Value': 2 },
-        { 'Word': 'summer', 'Value': 10 }
+        { 'Word': 'summer', 'Value': 10 },
+        { 'Word': 'morning', 'Value': 7 }
     ];
 
     var descriptive_adjectives = [
@@ -184,8 +191,8 @@
     { 'Word': 'painful', 'Value': 2 }
 ];
 
-var proper = [
-    { 'Word': 'Armenian', 'Value': 76 },
+var nationality_religious_linguistic = [
+    { 'Word': 'Armenian(s)', 'Value': 142 },
     { 'Word': 'Greek', 'Value': 3 },
     { 'Word': 'British', 'Value': 6 },
     { 'Word': 'Arab', 'Value': 4 },
@@ -193,9 +200,14 @@ var proper = [
     { 'Word': 'French', 'Value': 35 },
     { 'Word': 'American', 'Value': 23 },
     { 'Word': 'Turkish', 'Value': 21 },
+    { 'Word': 'Turks', 'Value': 21 },
     { 'Word': 'Lebanese', 'Value': 8 },
     { 'Word': 'Maronite', 'Value': 5 },
-    { 'Word': 'Soviet', 'Value': 2 }
+    { 'Word': 'Soviet', 'Value': 2 },
+    { 'Word': 'Arabic', 'Value': 2 },
+    { 'Word': 'Muslims', 'Value': 42 },
+    { 'Word': 'Christians', 'Value': 16 },
+    { 'Word': 'Protestant', 'Value': 8 }
 ];
 
 var verbs = [
@@ -245,10 +257,12 @@ var verbs = [
             'descriptive adjectives': descriptive_adjectives,
             'places': places,
             'verbs': verbs,
-            'things': things,
-            'people': people,
-            'months or season': months,
-            'proper adjectives': proper
+            'concepts': concepts,
+            'family members': family,
+            'non-specific people': people, 
+            'temporal words': temporal,
+            'nationality/linguistic/religious/ethnic groups': nationality_religious_linguistic,
+            'historical/cultural words': historical_cultural,
         }
 
        var currentCategory = 'descriptive adjectives';
