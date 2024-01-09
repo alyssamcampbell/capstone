@@ -191,7 +191,7 @@ document.getElementById("map7").style.visibility = 'hidden';
                 }
             }
             
-            const text = "Visualizing a life,<br>uprooted.";
+            const text = "A life, uprooted.";
             typeWriter(text, 0);
             
         
