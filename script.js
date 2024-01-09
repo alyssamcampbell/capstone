@@ -131,7 +131,7 @@ map.on('load', function() {
 
     .onStepEnter(response => {
 
-        if (!isButtonNavigation) { // Check if the navigation is not triggered by a button
+        if (!isButtonNavigation) { 
             console.log("Scrollama Update: Going to step", response.index);
             updateStepIndex(response.index);
         }
@@ -191,7 +191,7 @@ document.getElementById("map7").style.visibility = 'hidden';
                 }
             }
             
-            const text = "A life, uprooted.";
+            const text = "Visualizing a life,<br>uprooted.";
             typeWriter(text, 0);
             
         
@@ -1309,8 +1309,7 @@ checkVisibility();
 
 else if (step == "17") {
 
- 
-    document.getElementById("map").style.visibility = 'hidden';
+document.getElementById("map").style.visibility = 'hidden';
 document.getElementById("map2").style.visibility = 'hidden';
 document.getElementById("map3").style.visibility = 'hidden';
 document.getElementById("map4").style.visibility = 'hidden';
@@ -1391,6 +1390,7 @@ const map6 = new mapboxgl.Map({
     function getFontSize(frequency) {
         return 10 + frequency * 2; 
     }
+    
 
     d3.csv('lebanon_wordcloud_final_filtered_new_coords.csv').then(function (data) {
         data.forEach(function (row) {
@@ -1422,6 +1422,8 @@ const map6 = new mapboxgl.Map({
             });
         });
 
+            // Ensure map6 is initialized and style is loaded
+        map6.on('load', function() {
         map6.addSource('labels-source', {
             type: 'geojson',
             data: {
@@ -1453,6 +1455,9 @@ const map6 = new mapboxgl.Map({
                 ]                
             }
         });
+    }).catch(function(error) {
+        console.error("Error loading CSV data: ", error);
+    });
 
 // Coordinates and titles for the locations
 const locations = [
