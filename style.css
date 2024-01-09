@@ -1320,7 +1320,7 @@ video {
 }
 
 
-.static-text-container-intro-2 {
+.static-text-container-intro {
   flex: 1; 
   overflow-y: auto;  
   max-height: 90%; 
