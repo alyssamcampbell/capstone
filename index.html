@@ -76,7 +76,7 @@
         <div class="responsive-background-image-title"></div>
         <div class="step title-slide" data-step="0">
             <div id="typewriter-title-green"></div><br>
-            <h2 class="subtitle">Visualizing the oral history of my Armenian great-grandfather,<br> Hovsep Yeni-Komshian</h2>
+            <h2 class="subtitle">an interactive exploration of the oral history of<br>my Armenian great-grandfather,<br> Hovsep Yeni-Komshian.</h2>
         </div></div>
         <div id="button-container"><button id="upButton">←</button> <button id="downButton">→</button></div>
     
@@ -92,7 +92,7 @@
             </div>
             <div class="static-text-container-intro">
 
-        <p style="font-size: 0.6em; font-family: Arial; margin-left: 2%; column-count: 2;">
+        <p style="font-size: 0.75em; color: #141c27; font-family: Arial; margin-left: 2%; column-count: 2;">
             <b><u>About this project:</b></u> Hovsep Aghek Yeni-Komshian was born April 2, 1895 in Kilis, Anatolia, Ottoman Empire to an Armenian family. Before WWI, 2.5 million Armenians lived in Anatolia, their historic homeland for thousands of years <i>(now Eastern-Turkey)</i>.
         After the Armenian Genocide, 98% of those Armenians had either been killed or deported, with an estimated 1.5 million murdered. Those who did survive escaped to Syria, Lebanon, and beyond,
                  creating a scattered diaspora. After escaping Ottoman Turkey, Hovsep spent the majority of his adult life in Beirut, Lebanon, where he met his wife Helen, raised five children, and practiced medicine for 42 years until the outbreak of the Lebanese Civil War, which forced him to re-locate, once again, to the United States at the age of 84.    
@@ -110,7 +110,7 @@
     <div class="scrolly-full">
         <div class="step" data-step="2">
             <h2 class="h2style1">Sentiment over time</h2>
-            <p style="font-size: 0.5em; font-family: Arial; margin-left: 10%; margin-right: 10%">
+            <p style="font-size: 0.5em; font-family: Arial; margin-left: 5%; margin-right: 5%">
             To analyze Hovsep's thoughts and emotions by time and place, the oral history transcript was converted into a tabular data set with each thought associated with a time and place. This was then analyzed in Python using the The NRCLexicon library for emotion classification, which predicts the sentiments and emotion of a given text based on a library of 27,000 words. The resultant sentiment score represents the 'intensity' or 'frequency' of an emotion in the text, with a polarity scale of 0-1. For example, if a text contains many words associated with 'joy', its joy score will be higher. For overall sentiment, the average between positive and negative sentiment was calculated for each year, with a higher score indicating more positive sentiment.              
             </p>
           
@@ -211,7 +211,7 @@
                             <br><br>
                                         One day an order came that all Christian landowners were to be deprived of their lands and made refugees. At the time orders were received to deport the Armenian community from Kilis, my father’s house and storerooms were brim full of wheat, olives, olive oil, preserves of all kind and fruits of the harvest. Fortunately, my father had the foresight to retain part of his assets in gold. 
 <br><br>
-                            The lands were taken and the sons were also taken. My uncle was inconsolably grief-stricken when three of his sons were murdered by the Turks in one day. My father had no alternative but to hand over the keys to his home, store rooms and properties to the local authorities. 
+                            The lands were taken and the sons were also taken. My brother was kidnapped. My uncle was inconsolably grief-stricken when three of his sons were murdered by the Turks in one day. My father had no alternative but to hand over the keys to his home, store rooms and properties to the local authorities. 
                             My parents were forced to leave their home in Kilis and were deported to Aleppo. 
                             <br><br>
                             One million two hundred thousand Armenians were lost in the genocide.<br><br>
@@ -363,9 +363,12 @@
         <!-- LEBANON IMAGE GALLERY -->
                     <div class="scrolly-full">
                         <div class="step" data-step="16">   
-                            <h2>Instability in Lebanon (1960s/70s)</h2>
+                            <h2>Instability in Lebanon</h2>
+                            <div class="content-container-intro">
+                                <div class="typewriter-container-intro-2">
                             <div id="typewriter-left-lebanon"> </div>
-
+</div>
+<div class="static-text-container-intro-2">
                             <div class="gallery-container">
                                 <div class="top">
                                   <ul>
@@ -423,7 +426,7 @@
 
                                   </div>
 
-                                </div>
+                                </div></div>
                                 
 
                             </div>
@@ -432,14 +435,14 @@
     
                     <div class="scrolly-map">
                         <div class="step" data-step="17">
-                          
                             <div id="map6" >
+                              
                                 <div id="slider-container">
-                                    <label for="decadeSlider"><span id="decadeSliderText"><br>Six decades in Lebanon, by the word</span></span> <span id="decadeLabel"></span></label>
-                                   <br>                                     <button id="playButton">Select a decade</button>
+                                    <label for="decadeSlider"><span id="decadeSliderText"><br><i>Top words, six decades in Lebanon:</i></span></span><br><span id="decadeLabel"></span></label>
+                                   <br>                                    <button id="playButton">Play by decade</button>
 
                                    <input type="range" id="decadeSlider" min="1910" max="1980" step="10" value="1910" />
-</div><br>
+</div><br><br>
 <div id="quote-container">
                                     <div id="typewriter-lebanon-word-cloud"></div> </div>
 
@@ -488,5 +491,3 @@
 </body>
 
 </html>
-
-
