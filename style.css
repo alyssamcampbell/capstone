@@ -44,8 +44,8 @@ body, html {
 
   #slider-container {
     position: absolute;
-    top: 3%; 
-    left: 1%; 
+    top: 1%; 
+    left: 15%; 
     z-index: 2;
     max-width: 100%;
 } 
@@ -65,8 +65,9 @@ body, html {
   pointer-events: auto;
   margin-top: 1%;
   margin-left: 40%;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  background: #00a651;
+  font-family: Arial;
+  background: #fff;
+  opacity: 0.5; 
 
 }
 
@@ -84,6 +85,13 @@ body, html {
   height: 100vh; 
   object-fit: cover; 
 }
+
+
+  @media (max-width: 768px) {
+    body, html {
+      font-size: 90%; 
+    }
+  }
   
    #map2, #map3, #map4, #map5, #map7 {
     position: fixed;
@@ -162,6 +170,13 @@ span#decadeLabel {
 }
 
 
+
+/* Adjustments for tablets */
+@media (max-width: 768px) {
+    #map, #map2, #map3, #map4, #map5, #map6 {
+      height: 75vh; 
+    }
+  }
  
   
   .step {
@@ -171,7 +186,13 @@ span#decadeLabel {
   }
 
 
-
+/* Adjustments for tablets */
+@media (max-width: 768px) {
+    .step {
+      font-size: 5vw; 
+      padding: 1em; 
+    }
+  }
   
  
 
@@ -220,6 +241,23 @@ span#decadeLabel {
 #downButton:hover, #upButton:hover {
   color: white;
 }
+
+@media only screen and (max-width: 768px) {
+  #downButton, #upButton {
+    width: 2em;
+    height: 2em;
+    font-size: 1.2em;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #downButton, #upButton {
+    width: 1.75em;
+    height: 1.75em;
+    font-size: 1em;
+  }
+}
+
 
 
 
@@ -635,15 +673,17 @@ span#decadeLabel {
           white-space: break-spaces;
           overflow: visible; 
           border-right: .15em solid black; 
-          color: #141c27; 
-          max-width: 95%; 
-          padding-left: 1%;
-          padding-top: 1%;
-          padding-right: 1%;
+          color: #00a651; 
+          max-width: 80%; 
+          padding-left: 0.5%;
+          padding-top: 0.5%;
+          padding-right: 0.5%;
           font-size: .75em; 
-          margin-left: 1%; 
+          padding-bottom: 0.5%; 
+          margin-left: 10%; 
+          margin-right: 10%;
           animation: blink-caret 1s step-end infinite;
-          background: #00a651;
+          background: #fff;
           z-index: 2;
 
       }
@@ -658,6 +698,7 @@ span#decadeLabel {
         max-width: 40%; 
         padding-left: 1%;
         padding-right: 0%;
+        margin-top: 2%;
         font-size: 1.6em; 
         margin-left: 1%; 
         animation: blink-caret 1s step-end infinite;
@@ -1269,11 +1310,29 @@ video {
   padding-top: 3%;  
 }
 
-.static-text-container-intro {
+.typewriter-container-intro-2 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;  
+  max-height: 10%;
+  align-items: center;  
+  overflow-y: auto;  
+}
+
+
+.static-text-container-intro-2 {
+  flex: 1; 
+  overflow-y: auto;  
+  max-height: 90%; 
+  margin-right: 1%; 
+  margin-bottom: 10%; 
+}
+
+.static-text-container-intro-2 {
   flex: 1; 
   overflow-y: auto;  
   margin-right: 1%; 
-  margin-bottom: 5%; 
+  margin-bottom: 1%; 
 }
 
 
@@ -1427,4 +1486,17 @@ text-align: justify;
 }
 
 
+@media (max-width: 768px) {
+    .content-container {
+        flex-direction: column; 
+    }
+    .left-column,
+    .right-column {
+        max-width: 100%; 
+        padding: 0;
+    }
+    img {
+        max-width: 100%; 
+    }
+}
 
