@@ -1785,6 +1785,19 @@ checkVisibility();
 
 
 }
+else if  (step == "20") {
+
+    document.getElementById("map").style.visibility = 'hidden';
+    document.getElementById("map2").style.visibility = 'hidden';
+    document.getElementById("map3").style.visibility = 'hidden';
+    document.getElementById("map4").style.visibility = 'hidden';
+    document.getElementById("map5").style.visibility = 'hidden';
+    document.getElementById("map6").style.visibility = 'hidden';
+    document.getElementById("map7").style.visibility = 'hidden';
+    document.getElementById("map8").style.visibility = 'visible';
+
+
+}
 
      currentStepIndex = Array.from(steps).indexOf(response.element);
      updateProgressBar(currentStepIndex, steps.length);
