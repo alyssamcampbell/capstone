@@ -168,6 +168,7 @@ document.getElementById("map7").style.visibility = 'hidden';
         document.getElementById("map5").style.visibility = 'hidden';
         document.getElementById("map6").style.visibility = 'hidden';
         document.getElementById("map7").style.visibility = 'hidden';
+        document.getElementById("map8").style.visibility = 'hidden';
 
         upButton.style.visibility = 'hidden'; // Hide the up button initially
 
@@ -207,11 +208,15 @@ else if (step == "1") {
     document.getElementById("map5").style.visibility = 'hidden';
     document.getElementById("map6").style.visibility = 'hidden';
     document.getElementById("map7").style.visibility = 'hidden';
+    document.getElementById("map8").style.visibility = 'hidden';
 
 
     if (map.getLayer('historicBoundaries')) {
             map.setLayoutProperty('historicBoundaries', 'visibility', 'none');
         }
+
+        
+
 
         let isTyping = false;
         let currentPosition = 0;
@@ -267,6 +272,7 @@ else if (step == "1") {
                 }
             }
         }
+
         
         window.addEventListener('scroll', checkVisibility);
         checkVisibility(); // Initial check when the page loads
@@ -274,7 +280,7 @@ else if (step == "1") {
         
 
 
-// 
+
 
 } else if (step == "2") {
             document.getElementById("map").style.visibility = 'hidden';
@@ -284,6 +290,7 @@ else if (step == "1") {
             document.getElementById("map5").style.visibility = 'hidden';
             document.getElementById("map6").style.visibility = 'hidden';
             document.getElementById("map7").style.visibility = 'hidden';
+            document.getElementById("map8").style.visibility = 'hidden';
 
 
         if (map.getLayer('historicBoundaries')) {
@@ -299,6 +306,8 @@ else if (step == "1") {
             document.getElementById("map5").style.visibility = 'hidden';
             document.getElementById("map6").style.visibility = 'hidden';
             document.getElementById("map7").style.visibility = 'hidden';
+            document.getElementById("map8").style.visibility = 'hidden';
+
 
 
         if (map.getLayer('historicBoundaries')) {
@@ -313,6 +322,8 @@ else if (step == "1") {
             document.getElementById("map5").style.visibility = 'hidden';
             document.getElementById("map6").style.visibility = 'hidden';
             document.getElementById("map7").style.visibility = 'hidden';
+            document.getElementById("map8").style.visibility = 'hidden';
+
 
 
         if (map.getLayer('historicBoundaries')) {
@@ -329,6 +340,8 @@ else if (step == "1") {
         document.getElementById("map5").style.visibility = 'hidden';
         document.getElementById("map6").style.visibility = 'hidden';
         document.getElementById("map7").style.visibility = 'hidden';
+        document.getElementById("map8").style.visibility = 'hidden';
+
 
 
         let isTyping = false;
@@ -468,7 +481,7 @@ if (!map.getSource('kilis-point')) {
         document.getElementById("map5").style.visibility = 'hidden';
         document.getElementById("map6").style.visibility = 'hidden';
         document.getElementById("map7").style.visibility = 'hidden';
-        document.getElementById("map").style.visibility = 'hidden';
+        document.getElementById("map8").style.visibility = 'hidden';
 
 
         let isTyping = false;
@@ -535,6 +548,8 @@ else if (step == "7") {
         document.getElementById("map5").style.visibility = 'hidden';
         document.getElementById("map6").style.visibility = 'hidden';
         document.getElementById("map7").style.visibility = 'hidden';
+        document.getElementById("map8").style.visibility = 'hidden';
+
 
 
         let isTyping = false;
@@ -595,6 +610,8 @@ else if (step == "7") {
         document.getElementById("map5").style.visibility = 'hidden';
         document.getElementById("map6").style.visibility = 'hidden';
         document.getElementById("map7").style.visibility = 'hidden';
+        document.getElementById("map8").style.visibility = 'hidden';
+
 
         let isTyping = false;
         let currentPosition = 0;
@@ -653,6 +670,8 @@ else if (step == "9") {
     document.getElementById("map5").style.visibility = 'hidden';
     document.getElementById("map6").style.visibility = 'hidden';
     document.getElementById("map7").style.visibility = 'hidden';
+    document.getElementById("map8").style.visibility = 'hidden';
+
 }  
 
 else if (step == "10") {
@@ -663,6 +682,8 @@ else if (step == "10") {
     document.getElementById("map5").style.visibility = 'hidden';
     document.getElementById("map6").style.visibility = 'hidden';
     document.getElementById("map7").style.visibility = 'hidden';
+    document.getElementById("map8").style.visibility = 'hidden';
+
 
     let isTyping = false;
     let currentPosition = 0;
@@ -738,7 +759,7 @@ hash: false
  
 const [pinRouteGeojson] = await Promise.all([
 fetch(
-'kilis_beirut.geojson'
+'a-a.geojson'
 ).then((response) => response.json()),
 map2.once('style.load')
 ]);
@@ -906,6 +927,8 @@ document.getElementById("map4").style.visibility = 'visible';
 document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'hidden';
+document.getElementById("map8").style.visibility = 'hidden';
+
 
 
 let isTyping = false;
@@ -1083,6 +1106,8 @@ document.getElementById("map4").style.visibility = 'hidden';
 document.getElementById("map5").style.visibility = 'visible';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'hidden';
+document.getElementById("map8").style.visibility = 'hidden';
+
 
 const slider = document.getElementById("slider");
 const foregroundImg = document.querySelector(".foreground-img");
@@ -1227,6 +1252,7 @@ document.getElementById("map4").style.visibility = 'hidden';
 document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'hidden';
+document.getElementById("map8").style.visibility = 'hidden';
 
 
     
@@ -1241,6 +1267,8 @@ document.getElementById("map4").style.visibility = 'hidden';
 document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'hidden';
+document.getElementById("map8").style.visibility = 'hidden';
+
 
 
     
@@ -1255,6 +1283,8 @@ document.getElementById("map4").style.visibility = 'hidden';
 document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'hidden';
+document.getElementById("map8").style.visibility = 'hidden';
+
 
 
 let isTyping = false;
@@ -1316,6 +1346,8 @@ document.getElementById("map4").style.visibility = 'hidden';
 document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'visible';
 document.getElementById("map7").style.visibility = 'hidden';
+document.getElementById("map8").style.visibility = 'hidden';
+
 
 document.getElementById("decadeSliderText").style.display = 'block';
 document.getElementById("decadeLabel").style.display = 'block';
@@ -1586,6 +1618,8 @@ document.getElementById("map4").style.visibility = 'hidden';
 document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'visible';
+document.getElementById("map8").style.visibility = 'hidden';
+
 
 
 let isTyping = false;
@@ -1700,6 +1734,8 @@ document.getElementById("map4").style.visibility = 'hidden';
 document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'hidden';
+document.getElementById("map8").style.visibility = 'hidden';
+
 
 let isTyping = false;
 let currentPosition = 0;
@@ -1749,6 +1785,7 @@ checkVisibility();
 
 
 }
+
      currentStepIndex = Array.from(steps).indexOf(response.element);
      updateProgressBar(currentStepIndex, steps.length);
 
