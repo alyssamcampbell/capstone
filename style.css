@@ -1390,7 +1390,7 @@ video {
 .left-column-deportation {
   padding-right: 0px; 
   flex: 1;
-  max-width: 50%;
+  max-width: 40%;
   box-sizing: border-box;
   overflow:scroll;
   max-height: 100%; 
@@ -1447,7 +1447,7 @@ text-align: justify;
 .right-column-deportation {
   padding-left: 0px; 
   flex: 1;
-  max-width: 50%;
+  max-width: 60%;
   height: auto; 
   box-sizing: border-box;
   margin-right: 2%; 
