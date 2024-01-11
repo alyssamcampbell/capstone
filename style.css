@@ -1265,7 +1265,7 @@ video {
   
   #navbar nav ul li a {
     display: block;
-    padding: 10px;
+    padding: 1.5%;
     color: white;
     text-decoration: none;
     transition: background 0.3s;
