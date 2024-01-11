@@ -1796,6 +1796,174 @@ else if  (step == "20") {
     document.getElementById("map7").style.visibility = 'hidden';
     document.getElementById("map8").style.visibility = 'visible';
 
+    // const destinations = [
+    //     { center: [37.115, 36.7161], zoom: 16, pitch: 50, bearing: 0 },  // Kilis
+    //     { center: [37.14814181410333, 36.215354676764974], zoom: 16, pitch: 50, bearing: 0 },  // Aleppo Railway station
+    //     { center: [36.192238650788795, 36.59894611320733], zoom: 13, pitch: 0, bearing: 0 },  // Alexandretta
+    //     { center: [35.5131, 33.8869], zoom: 12, pitch: 100, bearing: 130 }, // Beirut, Lebanon
+    // ];
+    
+    // const map8 = new mapboxgl.Map({
+    //     container: 'map8', 
+    //     style: 'mapbox://styles/amcam33/clr71nq2l011701ql73ragy9j', 
+    //     center: destinations[0].center, 
+    //     zoom: destinations[0].zoom,
+    //     pitch: destinations[0].pitch,
+    //     bearing: destinations[0].bearing
+    // });
+    
+    // map8.on('load', () => {
+    //     // Custom atmosphere styling
+    //     map8.setFog({
+    //         // 'high-color': '#F2A800', // Lower atmosphere color
+    //         // 'color': '#F2A800', // Upper atmosphere color
+    //         'horizon-blend': 0 // Exaggerate atmosphere
+    //     });
+    
+    //     // Add the terrain source
+    //     map8.addSource('mapbox-dem', {
+    //         'type': 'raster-dem',
+    //         'url': 'mapbox://mapbox.terrain-rgb'
+    //     });
+    
+    //     // Set the terrain with exaggeration
+    //     map8.setTerrain({
+    //         'source': 'mapbox-dem',
+    //         'exaggeration': 2
+    //     });
+    
+    //     flyToDestination(1); // Start with the second destination
+    // });
+    
+    // // Function to fly to a destination
+    // function flyToDestination(index) {
+    //     if (index >= destinations.length) return; // Stop if no more destinations
+    
+    //     map8.flyTo({
+    //         ...destinations[index],
+    //         essential: true,
+    //         duration: 20000 // Duration of the flight in milliseconds
+    //     });
+    
+    //     // Schedule the next flight after the current one finishes
+    //     setTimeout(() => flyToDestination(index + 1), 20000); // 20s flyTo + 1s buffer
+    // }
+
+
+//     mapboxgl.accessToken = 'pk.eyJ1IjoiYW1jYW0zMyIsImEiOiJjbG52NjJ0OWswanA4MmtueGk0cWxjNGN2In0.9unlp_ocI7GFYNdPbgUdsw';
+// (async () => {
+// const map8 = new mapboxgl.Map({
+// container: 'map8',
+// zoom: 13,
+// center: [37.11930352127317, 36.71539178642357],
+// pitch: 76,
+// bearing: 150,
+// style: 'mapbox://styles/mapbox/satellite-v9',
+// interactive: false,
+// hash: false
+// });
+ 
+// const [pinRouteGeojson] = await Promise.all([
+// fetch(
+// 'a-a.geojson'
+// ).then((response) => response.json()),
+// map8.once('style.load')
+// ]);
+ 
+// map8.addSource('mapbox-dem', {
+// 'type': 'raster-dem',
+// 'url': 'mapbox://mapbox.terrain-rgb',
+// 'tileSize': 512,
+// 'maxzoom': 14
+// });
+// map8.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 4 });
+ 
+// const pinRoute = pinRouteGeojson.features[0].geometry.coordinates;
+
+// const popup = new mapboxgl.Popup({ closeButton: false });
+
+// const el = document.createElement('div');
+// el.className = 'custom-marker';
+// el.style.backgroundImage = 'url(media/horse.png)'; 
+// el.style.width = '4%'; 
+// el.style.height = '8%';
+// el.style.backgroundSize = '100%';
+// // Apply a filter to make the image white
+// el.style.filter = 'brightness(1) invert(0.75)';
+
+// const marker = new mapboxgl.Marker(el, {
+//   draggable: false,
+//   pitchAlignment: 'auto',
+//   rotationAlignment: 'auto'
+// })
+// .setLngLat(pinRoute[0])
+// .setPopup(popup)
+// .addTo(map8)
+// .togglePopup();
+ 
+// map8.addSource('line', {
+// type: 'geojson',
+// lineMetrics: true,
+// data: pinRouteGeojson
+// });
+// // map8.addLayer({
+// // type: 'line',
+// // source: 'line',
+// // id: 'line',
+// // paint: {
+// // 'line-color': 'transparent',
+// // 'line-width': 5
+// // },
+// // layout: {
+// // 'line-cap': 'round',
+// // 'line-join': 'round'
+// // }
+// // });
+ 
+// await map8.once('idle');
+// const animationDuration = 80000;
+// const path = turf.lineString(pinRoute);
+// const pathDistance = turf.lineDistance(path);
+// let start;
+// function frame(time) {
+// if (!start) start = time;
+// const animationPhase = (time - start) / animationDuration;
+// if (animationPhase > 1) {
+// return;
+// }
+ 
+// const alongPath = turf.along(path, pathDistance * animationPhase)
+// .geometry.coordinates;
+// const lngLat = {
+// lng: alongPath[0],
+// lat: alongPath[1]
+// };
+
+// const elevation = Math.floor(
+// map8.queryTerrainElevation(lngLat, { exaggerated: false })
+// );
+// marker.setLngLat(lngLat);
+
+// map8.setCenter(lngLat);
+
+// map8.setPaintProperty('line', 'line-gradient', [
+// 'step',
+// ['line-progress'],
+// '#F2A800',
+// animationPhase,
+// 'rgba(255, 0, 0, 0)'
+// ]);
+ 
+// const rotation = 150 - animationPhase * 100.0;
+// map8.setBearing(rotation % 360);
+ 
+// window.requestAnimationFrame(frame);
+// }
+ 
+// window.requestAnimationFrame(frame);
+// })();
+
+
 
 }
 
