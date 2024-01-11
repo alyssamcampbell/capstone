@@ -171,6 +171,8 @@ document.getElementById("map8").style.visibility = 'hidden';
         document.getElementById("map6").style.visibility = 'hidden';
         document.getElementById("map7").style.visibility = 'hidden';
         document.getElementById("map8").style.visibility = 'hidden';
+        document.getElementById("completeTypingButton").style.visibility = 'hidden';
+
 
         upButton.style.visibility = 'hidden'; // Hide the up button initially
 
@@ -179,23 +181,38 @@ document.getElementById("map8").style.visibility = 'hidden';
 
             }
 
-            let isTyping = true;
-            let downButtonClicked = false;
+      
+//             let isTyping = true;
+//             let currentPosition = 0;
+//             let typewriterTimeout;
             
-            function typeWriter(text, n) {
-                if (n < text.length && isTyping) {
-                    document.getElementById("typewriter-title-green").innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
-                    n++;
-                    setTimeout(function() {
-                        typeWriter(text, n);
-                    }, 60);
-                } else {
-                    isTyping = false;
-                }
-            }
+//             function typeWriter(text, elementId, n) {
+//                 if (n < text.length && isTyping) {
+//                     document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
+//                     n++;
+//                     typewriterTimeout = setTimeout(function() {
+//                         typeWriter(text, elementId, n);
+//                     }, 60);
+//                 } else {
+//                     isTyping = false;
+//                     document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
+//                 }
+//             }
             
-            const text = "A life, uprooted.";
-            typeWriter(text, 0);
+// const text = "A life, uprooted."; 
+//                 typeWriter(text, "typewriter-title", 0);
+            
+//             const completeTypingButton = document.getElementById('completeTypingButton');
+//             completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
+            
+//             completeTypingButton.addEventListener('click', function() {
+//                 // Complete the typewriter effect immediately
+//                 clearTimeout(typewriterTimeout);
+//                 document.getElementById("typewriter-title-green").innerHTML = text;
+//                 isTyping = false;
+//                 this.style.display = "none"; // Hide the button
+//             });
+            
             
         
             
@@ -211,73 +228,107 @@ else if (step == "1") {
     document.getElementById("map6").style.visibility = 'hidden';
     document.getElementById("map7").style.visibility = 'hidden';
     document.getElementById("map8").style.visibility = 'hidden';
+    document.getElementById("completeTypingButton").style.visibility = 'visible';
+
 
 
     if (map.getLayer('historicBoundaries')) {
             map.setLayoutProperty('historicBoundaries', 'visibility', 'none');
         }
 
-        
-
-
-        let isTyping = false;
+        let isTyping = true;
         let currentPosition = 0;
         let typewriterTimeout;
-        let downButtonClickedToCompleteTyping = false;
         
-
-
-        function typeWriter(text, n) {
-            if (n < text.length) {
-                isTyping = true;
-                currentPosition = n;
-                document.getElementById("typewriter-title").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+        function typeWriter(text, elementId, n) {
+            if (n < text.length && isTyping) {
+                document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
                 n++;
                 typewriterTimeout = setTimeout(function() {
-                    typeWriter(text, n);
+                    typeWriter(text, elementId, n);
                 }, 60);
             } else {
                 isTyping = false;
-                document.getElementById("caption").style.display = 'block'; // Show the caption
-            }
-        
-            if (downButtonClickedToCompleteTyping) {
-                clearTimeout(typewriterTimeout);
-                document.getElementById("typewriter-title").innerHTML = text;
-                isTyping = false;
+                document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
             }
         }
         
         const text = '"It is my hope to organize this accumulated recorded information\ninto a comprehensive account of my life and thoughts\n for the benefit of the younger generation who,\n never having experienced life outside these United States,\n have little conception of the lives and times of their forebears."';
-        typeWriter(text, 0);
-
-
-        function isElementInView(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-            );
-        }
+        typeWriter(text, "typewriter-title", 0);
+        
+        const completeTypingButton = document.getElementById('completeTypingButton');
+        completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
+        
+        completeTypingButton.addEventListener('click', function() {
+            // Complete the typewriter effect immediately
+            clearTimeout(typewriterTimeout);
+            document.getElementById("typewriter-title").innerHTML = text;
+            isTyping = false;
+            this.style.display = "none"; // Hide the button
+        });
+        
+        
         
 
-        function checkVisibility() {
-            const typewriterElement = document.getElementById('typewriter-title');
-            if (isElementInView(typewriterElement)) {
-                if (!isTyping) {
-                    typeWriter(text, currentPosition); // Continue typing from the current position
-                }
-            } else {
-                if (isTyping) {
-                    clearTimeout(typewriterTimeout); // Stop typing
-                    isTyping = false;
-                }
-            }
-        }
+
+        // let isTyping = false;
+        // let currentPosition = 0;
+        // let typewriterTimeout;
+        // let downButtonClickedToCompleteTyping = false;
+        
+
+
+        // function typeWriter(text, n) {
+        //     if (n < text.length) {
+        //         isTyping = true;
+        //         currentPosition = n;
+        //         document.getElementById("typewriter-title").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+        //         n++;
+        //         typewriterTimeout = setTimeout(function() {
+        //             typeWriter(text, n);
+        //         }, 60);
+        //     } else {
+        //         isTyping = false;
+        //         document.getElementById("caption").style.display = 'block'; // Show the caption
+        //     }
+        
+        //     if (downButtonClickedToCompleteTyping) {
+        //         clearTimeout(typewriterTimeout);
+        //         document.getElementById("typewriter-title").innerHTML = text;
+        //         isTyping = false;
+        //     }
+        // }
+        
+        // const text = '"It is my hope to organize this accumulated recorded information\ninto a comprehensive account of my life and thoughts\n for the benefit of the younger generation who,\n never having experienced life outside these United States,\n have little conception of the lives and times of their forebears."';
+        // typeWriter(text, 0);
+
+
+        // function isElementInView(element) {
+        //     const rect = element.getBoundingClientRect();
+        //     return (
+        //         rect.top >= 0 &&
+        //         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+        //     );
+        // }
+        
+
+        // function checkVisibility() {
+        //     const typewriterElement = document.getElementById('typewriter-title');
+        //     if (isElementInView(typewriterElement)) {
+        //         if (!isTyping) {
+        //             typeWriter(text, currentPosition); // Continue typing from the current position
+        //         }
+        //     } else {
+        //         if (isTyping) {
+        //             clearTimeout(typewriterTimeout); // Stop typing
+        //             isTyping = false;
+        //         }
+        //     }
+        // }
 
         
-        window.addEventListener('scroll', checkVisibility);
-        checkVisibility(); // Initial check when the page loads
+        // window.addEventListener('scroll', checkVisibility);
+        // checkVisibility(); // Initial check when the page loads
         
         
 
@@ -293,6 +344,8 @@ else if (step == "1") {
             document.getElementById("map6").style.visibility = 'hidden';
             document.getElementById("map7").style.visibility = 'hidden';
             document.getElementById("map8").style.visibility = 'hidden';
+            document.getElementById("completeTypingButton").style.visibility = 'hidden';
+
 
 
         if (map.getLayer('historicBoundaries')) {
@@ -309,6 +362,8 @@ else if (step == "1") {
             document.getElementById("map6").style.visibility = 'hidden';
             document.getElementById("map7").style.visibility = 'hidden';
             document.getElementById("map8").style.visibility = 'hidden';
+            document.getElementById("completeTypingButton").style.visibility = 'hidden';
+
 
 
 
@@ -325,6 +380,8 @@ else if (step == "1") {
             document.getElementById("map6").style.visibility = 'hidden';
             document.getElementById("map7").style.visibility = 'hidden';
             document.getElementById("map8").style.visibility = 'hidden';
+            document.getElementById("completeTypingButton").style.visibility = 'hidden';
+
 
 
 
@@ -343,51 +400,82 @@ else if (step == "1") {
         document.getElementById("map6").style.visibility = 'hidden';
         document.getElementById("map7").style.visibility = 'hidden';
         document.getElementById("map8").style.visibility = 'hidden';
+        document.getElementById("completeTypingButton").style.visibility = 'visible';
 
 
-
-        let isTyping = false;
+        let isTyping = true;
         let currentPosition = 0;
         let typewriterTimeout;
-        
-        function typeWriter(text, n) {
-            if (n < text.length) {
-                isTyping = true;
-                currentPosition = n;
-                document.getElementById("typewriter-left").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+
+        function typeWriter(text, elementId, n) {
+            if (n < text.length && isTyping) {
+                document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
                 n++;
                 typewriterTimeout = setTimeout(function() {
-                    typeWriter(text, n);
-                }, 55);
-            } 
-        }
-        
-        const text = "My parents lived in troubled times. During the second half of the 19th century and the beginning of the 20th century, hostile discrimination and persecutions of Armenians intensified throughout the Ottoman Empire. Originally, Armenians flourished and held important positions.<br><br>However, after Sultan Abdul-Hamid I ascended the throne, Kurds and Muslim tribesmen were recruited to form regiments that were allowed to attack, kill, and plunder Armenian communities, generally during periods of economic depression.";
-        
-        function isElementInView(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-            );
-        }
-        
-        function checkVisibility() {
-            const typewriterElement = document.getElementById('typewriter-left');
-            if (isElementInView(typewriterElement)) {
-                if (!isTyping) {
-                    typeWriter(text, currentPosition); // Continue typing from the current position
-                }
+                    typeWriter(text, elementId, n);
+                }, 60);
             } else {
-                if (isTyping) {
-                    clearTimeout(typewriterTimeout); // Stop typing
-                    isTyping = false;
-                }
+                isTyping = false;
+                document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
             }
         }
         
-        window.addEventListener('scroll', checkVisibility);
-        checkVisibility(); // Initial check when the page loads
+        const text = "My parents lived in troubled times. During the second half of the 19th century and the beginning of the 20th century, hostile discrimination and persecutions of Armenians intensified throughout the Ottoman Empire. Originally, Armenians flourished and held important positions.<br><br>However, after Sultan Abdul-Hamid I ascended the throne, Kurds and Muslim tribesmen were recruited to form regiments that were allowed to attack, kill, and plunder Armenian communities, generally during periods of economic depression.";
+        typeWriter(text, "typewriter-left", 0);
+        
+        const completeTypingButton = document.getElementById('completeTypingButton');
+        completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
+        
+        completeTypingButton.addEventListener('click', function() {
+            // Complete the typewriter effect immediately
+            clearTimeout(typewriterTimeout);
+            document.getElementById("typewriter-left").innerHTML = text;
+            isTyping = false;
+            this.style.display = "none"; // Hide the button
+        });
+
+        // let isTyping = false;
+        // let currentPosition = 0;
+        // let typewriterTimeout;
+        
+        // function typeWriter(text, n) {
+        //     if (n < text.length) {
+        //         isTyping = true;
+        //         currentPosition = n;
+        //         document.getElementById("typewriter-left").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+        //         n++;
+        //         typewriterTimeout = setTimeout(function() {
+        //             typeWriter(text, n);
+        //         }, 55);
+        //     } 
+        // }
+        
+        // const text = "My parents lived in troubled times. During the second half of the 19th century and the beginning of the 20th century, hostile discrimination and persecutions of Armenians intensified throughout the Ottoman Empire. Originally, Armenians flourished and held important positions.<br><br>However, after Sultan Abdul-Hamid I ascended the throne, Kurds and Muslim tribesmen were recruited to form regiments that were allowed to attack, kill, and plunder Armenian communities, generally during periods of economic depression.";
+        
+        // function isElementInView(element) {
+        //     const rect = element.getBoundingClientRect();
+        //     return (
+        //         rect.top >= 0 &&
+        //         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+        //     );
+        // }
+        
+        // function checkVisibility() {
+        //     const typewriterElement = document.getElementById('typewriter-left');
+        //     if (isElementInView(typewriterElement)) {
+        //         if (!isTyping) {
+        //             typeWriter(text, currentPosition); // Continue typing from the current position
+        //         }
+        //     } else {
+        //         if (isTyping) {
+        //             clearTimeout(typewriterTimeout); // Stop typing
+        //             isTyping = false;
+        //         }
+        //     }
+        // }
+        
+        // window.addEventListener('scroll', checkVisibility);
+        // checkVisibility(); // Initial check when the page loads
         
 
  // add historic Ottoman boundaries geoJson
@@ -486,48 +574,80 @@ if (!map.getSource('kilis-point')) {
         document.getElementById("map8").style.visibility = 'hidden';
 
 
-        let isTyping = false;
+        let isTyping = true;
         let currentPosition = 0;
         let typewriterTimeout;
-        
-        function typeWriter(text, n) {
-            if (n < text.length) {
-                isTyping = true;
-                currentPosition = n;
-                document.getElementById("typewriter-kilis-plateau-video").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+
+        function typeWriter(text, elementId, n) {
+            if (n < text.length && isTyping) {
+                document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
                 n++;
                 typewriterTimeout = setTimeout(function() {
-                    typeWriter(text, n);
-                }, 55);
-            } 
-        }
-        
-        const text = "Kilis, where I was born, is a small town on a plateau about 30 miles to the north of Aleppo with a population of about 30,000 people of which two-thirds were Muslims and about one-third were Christians, the homes of which were mostly segregated.<br><br> The King would order that on a certain day of a certain year every Muslim had the right to kill or rob the house of any Christian. Not all Muslims obeyed these orders, in fact some protected Christians, such as my father’s Turkish friend, Haji Mohammed, who provided us shelter in his palace during massacres.";
-        
-        function isElementInView(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-            );
-        }
-        
-        function checkVisibility() {
-            const typewriterElement = document.getElementById('typewriter-kilis-plateau-video');
-            if (isElementInView(typewriterElement)) {
-                if (!isTyping) {
-                    typeWriter(text, currentPosition); 
-                }
+                    typeWriter(text, elementId, n);
+                }, 60);
             } else {
-                if (isTyping) {
-                    clearTimeout(typewriterTimeout); 
-                    isTyping = false;
-                }
+                isTyping = false;
+                document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
             }
         }
         
-        window.addEventListener('scroll', checkVisibility);
-        checkVisibility();
+     const text = "Kilis, where I was born, is a small town on a plateau about 30 miles to the north of Aleppo with a population of about 30,000 people of which two-thirds were Muslims and about one-third were Christians, the homes of which were mostly segregated.<br><br> The King would order that on a certain day of a certain year every Muslim had the right to kill or rob the house of any Christian. Not all Muslims obeyed these orders, in fact some protected Christians, such as my father’s Turkish friend, Haji Mohammed, who provided us shelter in his palace during massacres.";
+
+        typeWriter(text, "typewriter-kilis-plateau-video", 0);
+        
+        const completeTypingButton = document.getElementById('completeTypingButton');
+        completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
+        
+        completeTypingButton.addEventListener('click', function() {
+            // Complete the typewriter effect immediately
+            clearTimeout(typewriterTimeout);
+            document.getElementById("typewriter-kilis-plateau-video").innerHTML = text;
+            isTyping = false;
+            this.style.display = "none"; // Hide the button
+        });
+
+        // let isTyping = false;
+        // let currentPosition = 0;
+        // let typewriterTimeout;
+        
+        // function typeWriter(text, n) {
+        //     if (n < text.length) {
+        //         isTyping = true;
+        //         currentPosition = n;
+        //         document.getElementById("typewriter-kilis-plateau-video").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+        //         n++;
+        //         typewriterTimeout = setTimeout(function() {
+        //             typeWriter(text, n);
+        //         }, 55);
+        //     } 
+        // }
+        
+        // const text = "Kilis, where I was born, is a small town on a plateau about 30 miles to the north of Aleppo with a population of about 30,000 people of which two-thirds were Muslims and about one-third were Christians, the homes of which were mostly segregated.<br><br> The King would order that on a certain day of a certain year every Muslim had the right to kill or rob the house of any Christian. Not all Muslims obeyed these orders, in fact some protected Christians, such as my father’s Turkish friend, Haji Mohammed, who provided us shelter in his palace during massacres.";
+        
+        // function isElementInView(element) {
+        //     const rect = element.getBoundingClientRect();
+        //     return (
+        //         rect.top >= 0 &&
+        //         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+        //     );
+        // }
+        
+        // function checkVisibility() {
+        //     const typewriterElement = document.getElementById('typewriter-kilis-plateau-video');
+        //     if (isElementInView(typewriterElement)) {
+        //         if (!isTyping) {
+        //             typeWriter(text, currentPosition); 
+        //         }
+        //     } else {
+        //         if (isTyping) {
+        //             clearTimeout(typewriterTimeout); 
+        //             isTyping = false;
+        //         }
+        //     }
+        // }
+        
+        // window.addEventListener('scroll', checkVisibility);
+        // checkVisibility();
         
 
         var plateauvideo = document.getElementById('kilis-plateau');
@@ -552,50 +672,80 @@ else if (step == "7") {
         document.getElementById("map7").style.visibility = 'hidden';
         document.getElementById("map8").style.visibility = 'hidden';
 
-
-
-        let isTyping = false;
+        let isTyping = true;
         let currentPosition = 0;
         let typewriterTimeout;
-        
-        function typeWriter(text, n) {
-            if (n < text.length) {
-                isTyping = true;
-                currentPosition = n;
-                document.getElementById("typewriter-hagop").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+
+        function typeWriter(text, elementId, n) {
+            if (n < text.length && isTyping) {
+                document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
                 n++;
                 typewriterTimeout = setTimeout(function() {
-                    typeWriter(text, n);
-                }, 55);
-            } 
-        }
-        
-        const text = "I was born in 1895, the year of <b>great massacre in Kilis</b>.<br><br>In that year three of my cousins were slaughtered.<br><br> Perhaps I owe my life to my brother Hagop. When my family members (5 brothers, 3 sisters, my father and mother) were running to take shelter in Haji Mohammed’s quarters during the massacre, I was ill and in my mother's desperation to protect her older children and perhaps because she had little hope that I would survive, she expressed a thought of leaving me behind.<br><br> My brother Hagop protested and insisted that I be taken along to share whatever fate was in store for the rest of the family.";
-        
-        function isElementInView(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-            );
-        }
-        
-        function checkVisibility() {
-            const typewriterElement = document.getElementById('typewriter-hagop');
-            if (isElementInView(typewriterElement)) {
-                if (!isTyping) {
-                    typeWriter(text, currentPosition); 
-                }
+                    typeWriter(text, elementId, n);
+                }, 60);
             } else {
-                if (isTyping) {
-                    clearTimeout(typewriterTimeout);
-                    isTyping = false;
-                }
+                isTyping = false;
+                document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
             }
         }
         
-        window.addEventListener('scroll', checkVisibility);
-        checkVisibility();
+        const text = "I was born in 1895, the year of <b>great massacre in Kilis</b>.<br><br>In that year three of my cousins were slaughtered.<br><br> Perhaps I owe my life to my brother Hagop. When my family members (5 brothers, 3 sisters, my father and mother) were running to take shelter in Haji Mohammed’s quarters during the massacre, I was ill and in my mother's desperation to protect her older children and perhaps because she had little hope that I would survive, she expressed a thought of leaving me behind.<br><br> My brother Hagop protested and insisted that I be taken along to share whatever fate was in store for the rest of the family.";
+
+        typeWriter(text, "typewriter-hagop", 0);
+        
+        const completeTypingButton = document.getElementById('completeTypingButton');
+        completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
+        
+        completeTypingButton.addEventListener('click', function() {
+            // Complete the typewriter effect immediately
+            clearTimeout(typewriterTimeout);
+            document.getElementById("typewriter-hagop").innerHTML = text;
+            isTyping = false;
+            this.style.display = "none"; // Hide the button
+        });
+
+
+        // let isTyping = false;
+        // let currentPosition = 0;
+        // let typewriterTimeout;
+        
+        // function typeWriter(text, n) {
+        //     if (n < text.length) {
+        //         isTyping = true;
+        //         currentPosition = n;
+        //         document.getElementById("typewriter-hagop").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+        //         n++;
+        //         typewriterTimeout = setTimeout(function() {
+        //             typeWriter(text, n);
+        //         }, 55);
+        //     } 
+        // }
+        
+        
+        // function isElementInView(element) {
+        //     const rect = element.getBoundingClientRect();
+        //     return (
+        //         rect.top >= 0 &&
+        //         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+        //     );
+        // }
+        
+        // function checkVisibility() {
+        //     const typewriterElement = document.getElementById('typewriter-hagop');
+        //     if (isElementInView(typewriterElement)) {
+        //         if (!isTyping) {
+        //             typeWriter(text, currentPosition); 
+        //         }
+        //     } else {
+        //         if (isTyping) {
+        //             clearTimeout(typewriterTimeout);
+        //             isTyping = false;
+        //         }
+        //     }
+        // }
+        
+        // window.addEventListener('scroll', checkVisibility);
+        // checkVisibility();
         
 
        
@@ -615,48 +765,81 @@ else if (step == "7") {
         document.getElementById("map8").style.visibility = 'hidden';
 
 
-        let isTyping = false;
+        let isTyping = true;
         let currentPosition = 0;
         let typewriterTimeout;
-        
-        function typeWriter(text, n) {
-            if (n < text.length) {
-                isTyping = true;
-                currentPosition = n;
-                document.getElementById("typewriter-kilis-house").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+
+        function typeWriter(text, elementId, n) {
+            if (n < text.length && isTyping) {
+                document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
                 n++;
                 typewriterTimeout = setTimeout(function() {
-                    typeWriter(text, n);
-                }, 55);
-            } 
-        }
-        
-        const text = "Our home was in a mixed quarter of Muslims and Armenians. As soon as you entered from the big entrance there were twenty steps which took you to an oda outside where people would come and sleep in the open air.<br><br> Outside was a big door, one could take out animals, horses. The outside courtyard was at least twenty meters in extension. At one end there was a place where we used to bring our horses and mules during the summer. One of my jobs was to get the sheep and goats out to the shepherd's place before I went to school.";
-        
-        function isElementInView(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-            );
-        }
-        
-        function checkVisibility() {
-            const typewriterElement = document.getElementById('typewriter-kilis-house');
-            if (isElementInView(typewriterElement)) {
-                if (!isTyping) {
-                    typeWriter(text, currentPosition); 
-                }
+                    typeWriter(text, elementId, n);
+                }, 60);
             } else {
-                if (isTyping) {
-                    clearTimeout(typewriterTimeout); 
-                    isTyping = false;
-                }
+                isTyping = false;
+                document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
             }
         }
         
-        window.addEventListener('scroll', checkVisibility);
-        checkVisibility(); 
+        const text = "Our home was in a mixed quarter of Muslims and Armenians. As soon as you entered from the big entrance there were twenty steps which took you to an oda outside where people would come and sleep in the open air.<br><br> Outside was a big door, one could take out animals, horses. The outside courtyard was at least twenty meters in extension. At one end there was a place where we used to bring our horses and mules during the summer. One of my jobs was to get the sheep and goats out to the shepherd's place before I went to school.";
+
+        typeWriter(text, "typewriter-kilis-house", 0);
+        
+        const completeTypingButton = document.getElementById('completeTypingButton');
+        completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
+        
+        completeTypingButton.addEventListener('click', function() {
+            // Complete the typewriter effect immediately
+            clearTimeout(typewriterTimeout);
+            document.getElementById("typewriter-kilis-house").innerHTML = text;
+            isTyping = false;
+            this.style.display = "none"; // Hide the button
+        });
+ 
+
+        // let isTyping = false;
+        // let currentPosition = 0;
+        // let typewriterTimeout;
+        
+        // function typeWriter(text, n) {
+        //     if (n < text.length) {
+        //         isTyping = true;
+        //         currentPosition = n;
+        //         document.getElementById("typewriter-kilis-house").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+        //         n++;
+        //         typewriterTimeout = setTimeout(function() {
+        //             typeWriter(text, n);
+        //         }, 55);
+        //     } 
+        // }
+        
+        // const text = "Our home was in a mixed quarter of Muslims and Armenians. As soon as you entered from the big entrance there were twenty steps which took you to an oda outside where people would come and sleep in the open air.<br><br> Outside was a big door, one could take out animals, horses. The outside courtyard was at least twenty meters in extension. At one end there was a place where we used to bring our horses and mules during the summer. One of my jobs was to get the sheep and goats out to the shepherd's place before I went to school.";
+        
+        // function isElementInView(element) {
+        //     const rect = element.getBoundingClientRect();
+        //     return (
+        //         rect.top >= 0 &&
+        //         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+        //     );
+        // }
+        
+        // function checkVisibility() {
+        //     const typewriterElement = document.getElementById('typewriter-kilis-house');
+        //     if (isElementInView(typewriterElement)) {
+        //         if (!isTyping) {
+        //             typeWriter(text, currentPosition); 
+        //         }
+        //     } else {
+        //         if (isTyping) {
+        //             clearTimeout(typewriterTimeout); 
+        //             isTyping = false;
+        //         }
+        //     }
+        // }
+        
+        // window.addEventListener('scroll', checkVisibility);
+        // checkVisibility(); 
         
         
         var video = document.getElementById('kilis-house');
@@ -673,6 +856,8 @@ else if (step == "9") {
     document.getElementById("map6").style.visibility = 'hidden';
     document.getElementById("map7").style.visibility = 'hidden';
     document.getElementById("map8").style.visibility = 'hidden';
+    document.getElementById("completeTypingButton").style.visibility = 'hidden';
+
 
 }  
 
@@ -687,62 +872,95 @@ else if (step == "10") {
     document.getElementById("map8").style.visibility = 'hidden';
 
 
-    let isTyping = false;
+    let isTyping = true;
     let currentPosition = 0;
     let typewriterTimeout;
-    
-    function typeWriter(text, n) {
-        if (n < text.length) {
-            isTyping = true;
-            currentPosition = n;
-    
-            let currentContent = text.substring(0, n + 1);
-            document.getElementById("typewriter-kilis-beirut").innerHTML = currentContent + (text[n] === '\n' ? '<br/>' : '');
-    
-            if (text.substring(n).startsWith('<img')) {
 
-                let imgTagEnd = text.indexOf('>', n);
-                if (imgTagEnd !== -1) {
-                    document.getElementById("typewriter-kilis-beirut").innerHTML = text.substring(0, imgTagEnd + 1);
-                    n = imgTagEnd;
-                }
-            }
-    
+    function typeWriter(text, elementId, n) {
+        if (n < text.length && isTyping) {
+            document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
             n++;
             typewriterTimeout = setTimeout(function() {
-                typeWriter(text, n);
-            }, 55);
+                typeWriter(text, elementId, n);
+            }, 60);
         } else {
             isTyping = false;
+            document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
         }
     }
-    
     
     const text = "The entire Yeni-Komshian family left with what they could carry with them. My lucky star (family horse) guided me to take the last train from Aleppo to Beirut (just before Turkey entered the first World War), which was the last train one could travel in without having to take a special permit. Since at that time I was of military age, I would not have gotten the special permit to leave. In preparation for my medical school fees, board and room, I stitched 27 Turkish gold pounds to the belt of my undershirt.<br><br><div style='text-align: center;'><img src='media/goldcoins.png' style='max-height: 8%; max-width: 8%; display: inline-block; vertical-align: middle;'/>";  
-    function isElementInView(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-        );
-    }
+
+    typeWriter(text, "typewriter-kilis-beirut", 0);
     
-    function checkVisibility() {
-        const typewriterElement = document.getElementById('typewriter-kilis-beirut');
-        if (isElementInView(typewriterElement)) {
-            if (!isTyping) {
-                typeWriter(text, currentPosition); 
-            }
-        } else {
-            if (isTyping) {
-                clearTimeout(typewriterTimeout); 
-                isTyping = false;
-            }
-        }
-    }
+    const completeTypingButton = document.getElementById('completeTypingButton');
+    completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
     
-    window.addEventListener('scroll', checkVisibility);
-    checkVisibility(); 
+    completeTypingButton.addEventListener('click', function() {
+        // Complete the typewriter effect immediately
+        clearTimeout(typewriterTimeout);
+        document.getElementById("typewriter-kilis-beirut").innerHTML = text;
+        isTyping = false;
+        this.style.display = "none"; // Hide the button
+    });
+
+
+    // let isTyping = false;
+    // let currentPosition = 0;
+    // let typewriterTimeout;
+    
+    // function typeWriter(text, n) {
+    //     if (n < text.length) {
+    //         isTyping = true;
+    //         currentPosition = n;
+    
+    //         let currentContent = text.substring(0, n + 1);
+    //         document.getElementById("typewriter-kilis-beirut").innerHTML = currentContent + (text[n] === '\n' ? '<br/>' : '');
+    
+    //         if (text.substring(n).startsWith('<img')) {
+
+    //             let imgTagEnd = text.indexOf('>', n);
+    //             if (imgTagEnd !== -1) {
+    //                 document.getElementById("typewriter-kilis-beirut").innerHTML = text.substring(0, imgTagEnd + 1);
+    //                 n = imgTagEnd;
+    //             }
+    //         }
+    
+    //         n++;
+    //         typewriterTimeout = setTimeout(function() {
+    //             typeWriter(text, n);
+    //         }, 55);
+    //     } else {
+    //         isTyping = false;
+    //     }
+    // }
+    
+    
+    // const text = "The entire Yeni-Komshian family left with what they could carry with them. My lucky star (family horse) guided me to take the last train from Aleppo to Beirut (just before Turkey entered the first World War), which was the last train one could travel in without having to take a special permit. Since at that time I was of military age, I would not have gotten the special permit to leave. In preparation for my medical school fees, board and room, I stitched 27 Turkish gold pounds to the belt of my undershirt.<br><br><div style='text-align: center;'><img src='media/goldcoins.png' style='max-height: 8%; max-width: 8%; display: inline-block; vertical-align: middle;'/>";  
+    // function isElementInView(element) {
+    //     const rect = element.getBoundingClientRect();
+    //     return (
+    //         rect.top >= 0 &&
+    //         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    //     );
+    // }
+    
+    // function checkVisibility() {
+    //     const typewriterElement = document.getElementById('typewriter-kilis-beirut');
+    //     if (isElementInView(typewriterElement)) {
+    //         if (!isTyping) {
+    //             typeWriter(text, currentPosition); 
+    //         }
+    //     } else {
+    //         if (isTyping) {
+    //             clearTimeout(typewriterTimeout); 
+    //             isTyping = false;
+    //         }
+    //     }
+    // }
+    
+    // window.addEventListener('scroll', checkVisibility);
+    // checkVisibility(); 
     
 
 
@@ -860,7 +1078,6 @@ window.requestAnimationFrame(frame);
 }
 
 
-// BEIRUT 3-D MAP
 
 else if (step == "11") {
 
@@ -870,49 +1087,84 @@ document.getElementById("map3").style.visibility = 'hidden';
 document.getElementById("map4").style.visibility = 'hidden';
 document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
+document.getElementById("map7").style.visibility = 'hidden';
+document.getElementById("completeTypingButton").style.visibility = 'visible';
 
-let isTyping = false;
+
+let isTyping = true;
 let currentPosition = 0;
 let typewriterTimeout;
 
-function typeWriter(text, n) {
-    if (n < text.length) {
-        isTyping = true;
-        currentPosition = n;
-        document.getElementById("typewriter-beirut-1920s").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+function typeWriter(text, elementId, n) {
+    if (n < text.length && isTyping) {
+        document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
         n++;
         typewriterTimeout = setTimeout(function() {
-            typeWriter(text, n);
-        }, 55);
-    } 
+            typeWriter(text, elementId, n);
+        }, 60);
+    } else {
+        isTyping = false;
+        document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
+    }
 }
 
 const text = "In October 1914, I entered the American University of Beirut (AUB), to which I am eternally grateful for giving me a safe refuge during the years of slaughter. I have roots in Beirut, and Lebanon has been good to me.  I came here as a young man when the first world war started. As an Armenian I had no money and our family was in deportation. I had to study, wait on tables, arrange the tennis courts and at the same time hide myself from Turkish persecution. I was an Armenian and according to the laws I ought to be either in exile or killed-- but I bought Persian Nationality with the 2 gold pounds. <br><br> In 1918, I was given the privilege of giving the customary valedictorian speech as the student who attained the highest grade. This was of great embarrassment for me because I was all the time hiding myself. To appear on the platform in the presence of Turkish Officials with an Armenian name, although quite unrecognizable in its Persian translation, I was apt to be caught and dealt with like other Armenians of my age. So, I went to my good friend and advisor and asked him how I could get out of this situation. He said to tell the University you have stage fright and that your delivery is rather slow and if you are trying to give an address and you cannot find your words, it will be a disgrace not only to yourself but also the University. I told that to the President, and I was excused from the speech.";
 
-function isElementInView(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-    );
-}
+typeWriter(text, "typewriter-beirut-1920s", 0);
 
-function checkVisibility() {
-    const typewriterElement = document.getElementById('typewriter-beirut-1920s');
-    if (isElementInView(typewriterElement)) {
-        if (!isTyping) {
-            typeWriter(text, currentPosition); 
-        }
-    } else {
-        if (isTyping) {
-            clearTimeout(typewriterTimeout);
-            isTyping = false;
-        }
-    }
-}
+const completeTypingButton = document.getElementById('completeTypingButton');
+completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
 
-window.addEventListener('scroll', checkVisibility);
-checkVisibility(); 
+completeTypingButton.addEventListener('click', function() {
+    // Complete the typewriter effect immediately
+    clearTimeout(typewriterTimeout);
+    document.getElementById("typewriter-beirut-1920s").innerHTML = text;
+    isTyping = false;
+    this.style.display = "none"; // Hide the button
+});
+
+// let isTyping = false;
+// let currentPosition = 0;
+// let typewriterTimeout;
+
+// function typeWriter(text, n) {
+//     if (n < text.length) {
+//         isTyping = true;
+//         currentPosition = n;
+//         document.getElementById("typewriter-beirut-1920s").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+//         n++;
+//         typewriterTimeout = setTimeout(function() {
+//             typeWriter(text, n);
+//         }, 55);
+//     } 
+// }
+
+// const text = "In October 1914, I entered the American University of Beirut (AUB), to which I am eternally grateful for giving me a safe refuge during the years of slaughter. I have roots in Beirut, and Lebanon has been good to me.  I came here as a young man when the first world war started. As an Armenian I had no money and our family was in deportation. I had to study, wait on tables, arrange the tennis courts and at the same time hide myself from Turkish persecution. I was an Armenian and according to the laws I ought to be either in exile or killed-- but I bought Persian Nationality with the 2 gold pounds. <br><br> In 1918, I was given the privilege of giving the customary valedictorian speech as the student who attained the highest grade. This was of great embarrassment for me because I was all the time hiding myself. To appear on the platform in the presence of Turkish Officials with an Armenian name, although quite unrecognizable in its Persian translation, I was apt to be caught and dealt with like other Armenians of my age. So, I went to my good friend and advisor and asked him how I could get out of this situation. He said to tell the University you have stage fright and that your delivery is rather slow and if you are trying to give an address and you cannot find your words, it will be a disgrace not only to yourself but also the University. I told that to the President, and I was excused from the speech.";
+
+// function isElementInView(element) {
+//     const rect = element.getBoundingClientRect();
+//     return (
+//         rect.top >= 0 &&
+//         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+//     );
+// }
+
+// function checkVisibility() {
+//     const typewriterElement = document.getElementById('typewriter-beirut-1920s');
+//     if (isElementInView(typewriterElement)) {
+//         if (!isTyping) {
+//             typeWriter(text, currentPosition); 
+//         }
+//     } else {
+//         if (isTyping) {
+//             clearTimeout(typewriterTimeout);
+//             isTyping = false;
+//         }
+//     }
+// }
+
+// window.addEventListener('scroll', checkVisibility);
+// checkVisibility(); 
 
     }
 
@@ -930,52 +1182,86 @@ document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'hidden';
 document.getElementById("map8").style.visibility = 'hidden';
+document.getElementById("completeTypingButton").style.visibility = 'visible';
 
 
 
-let isTyping = false;
+let isTyping = true;
 let currentPosition = 0;
 let typewriterTimeout;
 
-function typeWriter(text, n) {
-    if (n < text.length) {
-        isTyping = true;
-        currentPosition = n;
-        document.getElementById("typewriter-zahle-beirut").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+function typeWriter(text, elementId, n) {
+    if (n < text.length && isTyping) {
+        document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
         n++;
         typewriterTimeout = setTimeout(function() {
-            typeWriter(text, n);
-        }, 45);
-    } 
+            typeWriter(text, elementId, n);
+        }, 60);
+    } else {
+        isTyping = false;
+        document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
+    }
 }
 
 const text = "One of the happiest days of my life came on the 19th of November 1918, when we learned that the Turkish had left Beirut. For the first time in my life, I felt the sweet sensation of freedom. I was no more a fugitive, no more an outlaw. I could meet people and talk to them straight, look at their faces instead of looking at the ground. The sight of the retreat of Turkish army in their disorder all the way from Zahle to Beirut gave me great delight. After all, these people were our masters, now they had to flee for their lives.</span><br><br>On the day of armistice, people stopped killing each other. The victors sat around a table and negotiated, and our hopes were great; we were going to live in a better, more equitable, more just life. That is what we were being told, that so many people are dying but it is worth the sacrifice because this is to improve the world, to make it a better world to live in. In an effort, they kept on saying, to make democracy. I did not have the same understanding of human nature at that time, I believed them."; 
 
+typeWriter(text, "typewriter-zahle-beirut", 0);
 
-function isElementInView(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-    );
-}
+const completeTypingButton = document.getElementById('completeTypingButton');
+completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
 
-function checkVisibility() {
-    const typewriterElement = document.getElementById('typewriter-zahle-beirut');
-    if (isElementInView(typewriterElement)) {
-        if (!isTyping) {
-            typeWriter(text, currentPosition); 
-        }
-    } else {
-        if (isTyping) {
-            clearTimeout(typewriterTimeout); 
-            isTyping = false;
-        }
-    }
-}
+completeTypingButton.addEventListener('click', function() {
+    // Complete the typewriter effect immediately
+    clearTimeout(typewriterTimeout);
+    document.getElementById("typewriter-zahle-beirut").innerHTML = text;
+    isTyping = false;
+    this.style.display = "none"; // Hide the button
+});
 
-window.addEventListener('scroll', checkVisibility);
-checkVisibility(); 
+
+// let isTyping = false;
+// let currentPosition = 0;
+// let typewriterTimeout;
+
+// function typeWriter(text, n) {
+//     if (n < text.length) {
+//         isTyping = true;
+//         currentPosition = n;
+//         document.getElementById("typewriter-zahle-beirut").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+//         n++;
+//         typewriterTimeout = setTimeout(function() {
+//             typeWriter(text, n);
+//         }, 45);
+//     } 
+// }
+
+// const text = "One of the happiest days of my life came on the 19th of November 1918, when we learned that the Turkish had left Beirut. For the first time in my life, I felt the sweet sensation of freedom. I was no more a fugitive, no more an outlaw. I could meet people and talk to them straight, look at their faces instead of looking at the ground. The sight of the retreat of Turkish army in their disorder all the way from Zahle to Beirut gave me great delight. After all, these people were our masters, now they had to flee for their lives.</span><br><br>On the day of armistice, people stopped killing each other. The victors sat around a table and negotiated, and our hopes were great; we were going to live in a better, more equitable, more just life. That is what we were being told, that so many people are dying but it is worth the sacrifice because this is to improve the world, to make it a better world to live in. In an effort, they kept on saying, to make democracy. I did not have the same understanding of human nature at that time, I believed them."; 
+
+
+// function isElementInView(element) {
+//     const rect = element.getBoundingClientRect();
+//     return (
+//         rect.top >= 0 &&
+//         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+//     );
+// }
+
+// function checkVisibility() {
+//     const typewriterElement = document.getElementById('typewriter-zahle-beirut');
+//     if (isElementInView(typewriterElement)) {
+//         if (!isTyping) {
+//             typeWriter(text, currentPosition); 
+//         }
+//     } else {
+//         if (isTyping) {
+//             clearTimeout(typewriterTimeout); 
+//             isTyping = false;
+//         }
+//     }
+// }
+
+// window.addEventListener('scroll', checkVisibility);
+// checkVisibility(); 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW1jYW0zMyIsImEiOiJjbG52NjJ0OWswanA4MmtueGk0cWxjNGN2In0.9unlp_ocI7GFYNdPbgUdsw';
 
@@ -1288,49 +1574,80 @@ document.getElementById("map7").style.visibility = 'hidden';
 document.getElementById("map8").style.visibility = 'hidden';
 
 
-
-let isTyping = false;
+let isTyping = true;
 let currentPosition = 0;
 let typewriterTimeout;
 
-function typeWriter(text, n) {
-    if (n < text.length) {
-        isTyping = true;
-        currentPosition = n;
-        document.getElementById("typewriter-left-lebanon").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+function typeWriter(text, elementId, n) {
+    if (n < text.length && isTyping) {
+        document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
         n++;
         typewriterTimeout = setTimeout(function() {
-            typeWriter(text, n);
-        }, 55);
-    } 
+            typeWriter(text, elementId, n);
+        }, 60);
+    } else {
+        isTyping = false;
+        document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
+    }
 }
 
 const text = "Lebanon, with all its faults, was a beautiful country to live in. And it has been good to us, good to Armenians; they gave us a home, they gave us a nationality, they gave us an identity. We built homes, we got married, had children, and educated our children. I hope and pray that the things will improve.";
 
-function isElementInView(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-    );
-}
+typeWriter(text, "typewriter-left-lebanon", 0);
 
-function checkVisibility() {
-    const typewriterElement = document.getElementById('typewriter-left-lebanon');
-    if (isElementInView(typewriterElement)) {
-        if (!isTyping) {
-            typeWriter(text, currentPosition); 
-        }
-    } else {
-        if (isTyping) {
-            clearTimeout(typewriterTimeout);
-            isTyping = false;
-        }
-    }
-}
+const completeTypingButton = document.getElementById('completeTypingButton');
+completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
 
-window.addEventListener('scroll', checkVisibility);
-checkVisibility();
+completeTypingButton.addEventListener('click', function() {
+    // Complete the typewriter effect immediately
+    clearTimeout(typewriterTimeout);
+    document.getElementById("typewriter-left-lebanon").innerHTML = text;
+    isTyping = false;
+    this.style.display = "none"; // Hide the button
+});
+
+// let isTyping = false;
+// let currentPosition = 0;
+// let typewriterTimeout;
+
+// function typeWriter(text, n) {
+//     if (n < text.length) {
+//         isTyping = true;
+//         currentPosition = n;
+//         document.getElementById("typewriter-left-lebanon").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+//         n++;
+//         typewriterTimeout = setTimeout(function() {
+//             typeWriter(text, n);
+//         }, 55);
+//     } 
+// }
+
+// const text = "Lebanon, with all its faults, was a beautiful country to live in. And it has been good to us, good to Armenians; they gave us a home, they gave us a nationality, they gave us an identity. We built homes, we got married, had children, and educated our children. I hope and pray that the things will improve.";
+
+// function isElementInView(element) {
+//     const rect = element.getBoundingClientRect();
+//     return (
+//         rect.top >= 0 &&
+//         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+//     );
+// }
+
+// function checkVisibility() {
+//     const typewriterElement = document.getElementById('typewriter-left-lebanon');
+//     if (isElementInView(typewriterElement)) {
+//         if (!isTyping) {
+//             typeWriter(text, currentPosition); 
+//         }
+//     } else {
+//         if (isTyping) {
+//             clearTimeout(typewriterTimeout);
+//             isTyping = false;
+//         }
+//     }
+// }
+
+// window.addEventListener('scroll', checkVisibility);
+// checkVisibility();
 
 
     
@@ -1351,6 +1668,7 @@ document.getElementById("map7").style.visibility = 'hidden';
 document.getElementById("map8").style.visibility = 'hidden';
 
 
+
 document.getElementById("decadeSliderText").style.display = 'block';
 document.getElementById("decadeLabel").style.display = 'block';
 document.getElementById("decadeSlider").style.display = 'block';
@@ -1362,47 +1680,80 @@ var mountainhouse = document.getElementById('mountain-house');
        mountainhouse.play();
        mountainhouse.playbackRate = 0.5;
 
-let isTyping = false;
-let currentPosition = 0;
-let typewriterTimeout;
 
-function typeWriter(text, n) {
-    if (n < text.length) {
-        isTyping = true;
-        currentPosition = n;
-        document.getElementById("typewriter-lebanon-word-cloud").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
-        n++;
-        typewriterTimeout = setTimeout(function() {
-            typeWriter(text, n);
-        }, 55);
-    } 
-}
+       let isTyping = true;
+       let currentPosition = 0;
+       let typewriterTimeout;
+       
+       function typeWriter(text, elementId, n) {
+           if (n < text.length && isTyping) {
+               document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
+               n++;
+               typewriterTimeout = setTimeout(function() {
+                   typeWriter(text, elementId, n);
+               }, 60);
+           } else {
+               isTyping = false;
+               document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
+           }
+       }
+       
+ const text = "Life in beautiful Lebanon was most pleasant, but we have gone through quite a number of changes and revolts and factional fights, and lost a great deal during this current civil war. The turmoil which started in 1975 has exacerbated continuously and the worst of it has come on us since April 1975. <br><br> We stood firm as long as we could but suffered hardships we could not easily endure at our age. All our children living in the United States were burdened with increasing anxiety on our account, particularly when personal communication by letter or telephone became impossible.";
+       
+       typeWriter(text, "typewriter-lebanon-word-cloud", 0);
+       
+       const completeTypingButton = document.getElementById('completeTypingButton');
+       completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
+       
+       completeTypingButton.addEventListener('click', function() {
+           // Complete the typewriter effect immediately
+           clearTimeout(typewriterTimeout);
+           document.getElementById("typewriter-lebanon-word-cloud").innerHTML = text;
+           isTyping = false;
+           this.style.display = "none"; // Hide the button
+       });
 
-const text = "Life in beautiful Lebanon was most pleasant, but we have gone through quite a number of changes and revolts and factional fights, and lost a great deal during this current civil war. The turmoil which started in 1975 has exacerbated continuously and the worst of it has come on us since April 1975. <br><br> We stood firm as long as we could but suffered hardships we could not easily endure at our age. All our children living in the United States were burdened with increasing anxiety on our account, particularly when personal communication by letter or telephone became impossible.";
-function isElementInView(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-    );
-}
+// let isTyping = false;
+// let currentPosition = 0;
+// let typewriterTimeout;
 
-function checkVisibility() {
-    const typewriterElement = document.getElementById('typewriter-lebanon-word-cloud');
-    if (isElementInView(typewriterElement)) {
-        if (!isTyping) {
-            typeWriter(text, currentPosition); 
-        }
-    } else {
-        if (isTyping) {
-            clearTimeout(typewriterTimeout); 
-            isTyping = false;
-        }
-    }
-}
+// function typeWriter(text, n) {
+//     if (n < text.length) {
+//         isTyping = true;
+//         currentPosition = n;
+//         document.getElementById("typewriter-lebanon-word-cloud").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+//         n++;
+//         typewriterTimeout = setTimeout(function() {
+//             typeWriter(text, n);
+//         }, 55);
+//     } 
+// }
 
-window.addEventListener('scroll', checkVisibility);
-checkVisibility(); 
+// const text = "Life in beautiful Lebanon was most pleasant, but we have gone through quite a number of changes and revolts and factional fights, and lost a great deal during this current civil war. The turmoil which started in 1975 has exacerbated continuously and the worst of it has come on us since April 1975. <br><br> We stood firm as long as we could but suffered hardships we could not easily endure at our age. All our children living in the United States were burdened with increasing anxiety on our account, particularly when personal communication by letter or telephone became impossible.";
+// function isElementInView(element) {
+//     const rect = element.getBoundingClientRect();
+//     return (
+//         rect.top >= 0 &&
+//         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+//     );
+// }
+
+// function checkVisibility() {
+//     const typewriterElement = document.getElementById('typewriter-lebanon-word-cloud');
+//     if (isElementInView(typewriterElement)) {
+//         if (!isTyping) {
+//             typeWriter(text, currentPosition); 
+//         }
+//     } else {
+//         if (isTyping) {
+//             clearTimeout(typewriterTimeout); 
+//             isTyping = false;
+//         }
+//     }
+// }
+
+// window.addEventListener('scroll', checkVisibility);
+// checkVisibility(); 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW1jYW0zMyIsImEiOiJjbG52NjJ0OWswanA4MmtueGk0cWxjNGN2In0.9unlp_ocI7GFYNdPbgUdsw';
 
@@ -1621,51 +1972,85 @@ document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'visible';
 document.getElementById("map8").style.visibility = 'hidden';
+document.getElementById("completeTypingButton").style.visibility = 'visible';
 
 
 
-let isTyping = false;
+
+let isTyping = true;
 let currentPosition = 0;
 let typewriterTimeout;
 
-function typeWriter(text, n) {
-    if (n < text.length) {
-        isTyping = true;
-        currentPosition = n;
-        document.getElementById("typewriter-lebanon-usa").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+function typeWriter(text, elementId, n) {
+    if (n < text.length && isTyping) {
+        document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
         n++;
         typewriterTimeout = setTimeout(function() {
-            typeWriter(text, n);
-        }, 55);
-    } 
-}
-
-const text = "It was far from easy to leave our home of fifty years with all its associations, but we lived through it and arrived in the United States on August 23, 1979.<br><br> But the difficulty of Armenians is that they are not allowed to live for more than one generation in one place except in America. My father’s father was born in Agen in Turkey and died in Kilis; my father was born in Kilis, and died in Beirut, so were my mother and my two brothers that have died. My children are all born in Beirut and they are all American citizens now. I do not know where I am going to die and be buried.<br><br> Now, one great satisfaction of my life for which I am grateful to God is that all my children, everyone of the five, is settled in the United States of America which I believe, with all its defects, is still the best country in the world to make your home. This is because after a generation or two you are no longer foreigners; you are one of them.  They tried first to put everyone into an amalgam and to make a nation of this amalgam. Then they have changed their mind in the last few years, to live free to pursue their culture, their art, their identity"; 
-                         
-function isElementInView(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-    );
-}
-
-function checkVisibility() {
-    const typewriterElement = document.getElementById('typewriter-lebanon-usa');
-    if (isElementInView(typewriterElement)) {
-        if (!isTyping) {
-            typeWriter(text, currentPosition); 
-        }
+            typeWriter(text, elementId, n);
+        }, 60);
     } else {
-        if (isTyping) {
-            clearTimeout(typewriterTimeout); 
-            isTyping = false;
-        }
+        isTyping = false;
+        document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
     }
 }
 
-window.addEventListener('scroll', checkVisibility);
-checkVisibility(); 
+const text = "It was far from easy to leave our home of fifty years with all its associations, but we lived through it and arrived in the United States on August 23, 1979.<br><br> But the difficulty of Armenians is that they are not allowed to live for more than one generation in one place except in America. My father’s father was born in Agen in Turkey and died in Kilis; my father was born in Kilis, and died in Beirut, so were my mother and my two brothers that have died. My children are all born in Beirut and they are all American citizens now. I do not know where I am going to die and be buried.<br><br> Now, one great satisfaction of my life for which I am grateful to God is that all my children, everyone of the five, is settled in the United States of America which I believe, with all its defects, is still the best country in the world to make your home. This is because after a generation or two you are no longer foreigners; you are one of them.  They tried first to put everyone into an amalgam and to make a nation of this amalgam. Then they have changed their mind in the last few years, to live free to pursue their culture, their art, their identity"; 
+
+typeWriter(text, "typewriter-lebanon-usa", 0);
+
+const completeTypingButton = document.getElementById('completeTypingButton');
+completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
+
+completeTypingButton.addEventListener('click', function() {
+    // Complete the typewriter effect immediately
+    clearTimeout(typewriterTimeout);
+    document.getElementById("typewriter-lebanon-usa").innerHTML = text;
+    isTyping = false;
+    this.style.display = "none"; // Hide the button
+});
+
+// let isTyping = false;
+// let currentPosition = 0;
+// let typewriterTimeout;
+
+// function typeWriter(text, n) {
+//     if (n < text.length) {
+//         isTyping = true;
+//         currentPosition = n;
+//         document.getElementById("typewriter-lebanon-usa").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+//         n++;
+//         typewriterTimeout = setTimeout(function() {
+//             typeWriter(text, n);
+//         }, 55);
+//     } 
+// }
+
+// const text = "It was far from easy to leave our home of fifty years with all its associations, but we lived through it and arrived in the United States on August 23, 1979.<br><br> But the difficulty of Armenians is that they are not allowed to live for more than one generation in one place except in America. My father’s father was born in Agen in Turkey and died in Kilis; my father was born in Kilis, and died in Beirut, so were my mother and my two brothers that have died. My children are all born in Beirut and they are all American citizens now. I do not know where I am going to die and be buried.<br><br> Now, one great satisfaction of my life for which I am grateful to God is that all my children, everyone of the five, is settled in the United States of America which I believe, with all its defects, is still the best country in the world to make your home. This is because after a generation or two you are no longer foreigners; you are one of them.  They tried first to put everyone into an amalgam and to make a nation of this amalgam. Then they have changed their mind in the last few years, to live free to pursue their culture, their art, their identity"; 
+                         
+// function isElementInView(element) {
+//     const rect = element.getBoundingClientRect();
+//     return (
+//         rect.top >= 0 &&
+//         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+//     );
+// }
+
+// function checkVisibility() {
+//     const typewriterElement = document.getElementById('typewriter-lebanon-usa');
+//     if (isElementInView(typewriterElement)) {
+//         if (!isTyping) {
+//             typeWriter(text, currentPosition); 
+//         }
+//     } else {
+//         if (isTyping) {
+//             clearTimeout(typewriterTimeout); 
+//             isTyping = false;
+//         }
+//     }
+// }
+
+// window.addEventListener('scroll', checkVisibility);
+// checkVisibility(); 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW1jYW0zMyIsImEiOiJjbG52NjJ0OWswanA4MmtueGk0cWxjNGN2In0.9unlp_ocI7GFYNdPbgUdsw';
 
@@ -1737,53 +2122,91 @@ document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'hidden';
 document.getElementById("map8").style.visibility = 'hidden';
+document.getElementById("completeTypingButton").style.visibility = 'visible';
 
 
-let isTyping = false;
+
+let isTyping = true;
 let currentPosition = 0;
 let typewriterTimeout;
 
-function typeWriter(text, n) {
-    if (n < text.length) {
-        isTyping = true;
-        currentPosition = n;
-        document.getElementById("typewriter-end").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+function typeWriter(text, elementId, n) {
+    if (n < text.length && isTyping) {
+        document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
         n++;
         typewriterTimeout = setTimeout(function() {
-            typeWriter(text, n);
-        }, 55);
+            typeWriter(text, elementId, n);
+        }, 60);
     } else {
         isTyping = false;
-        document.getElementById("caption-2").style.display = 'block'; 
+        document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
     }
 }
 
 const text = "I must say it is unfortunate that I have seen too much of war,\n too much of persecution. I have helped people on many occasions\n because I believe that man must be humane,\nmust be compassionate, must feel concerned.\n<br>I also believe that life is too precious to be spent in hatred.\n Vengeance, I do not like that word.\n I think it is a poisonous word.\n<br>In this life we are interdependent.\n It is a question of give and take. If your neighbor is prosperous,\n it is good for you.<br>\nCertainly, we have our own ways,\nbut people in this world are dependent on each other.";
 
-function isElementInView(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-    );
-}
+typeWriter(text, "typewriter-end", 0);
 
-function checkVisibility() {
-    const typewriterElement = document.getElementById('typewriter-end');
-    if (isElementInView(typewriterElement)) {
-        if (!isTyping) {
-            typeWriter(text, currentPosition); 
-        }
-    } else {
-        if (isTyping) {
-            clearTimeout(typewriterTimeout); 
-            isTyping = false;
-        }
-    }
-}
+const completeTypingButton = document.getElementById('completeTypingButton');
+completeTypingButton.style.display = isTyping ? "block" : "none"; // Show the button if typing is in progress
 
-window.addEventListener('scroll', checkVisibility);
-checkVisibility(); 
+completeTypingButton.addEventListener('click', function() {
+    // Complete the typewriter effect immediately
+    clearTimeout(typewriterTimeout);
+    document.getElementById("typewriter-end").innerHTML = text;
+    isTyping = false;
+    this.style.display = "none"; // Hide the button
+});
+
+
+
+// let isTyping = false;
+// let currentPosition = 0;
+// let typewriterTimeout;
+
+// function typeWriter(text, n) {
+//     if (n < text.length) {
+//         isTyping = true;
+//         currentPosition = n;
+//         document.getElementById("typewriter-end").innerHTML = text.substring(0, n+1) + (text[n] === '\n' ? '<br/>' : '');
+//         n++;
+//         typewriterTimeout = setTimeout(function() {
+//             typeWriter(text, n);
+//         }, 55);
+//     } else {
+//         isTyping = false;
+//         document.getElementById("caption-2").style.display = 'block'; 
+//     }
+// }
+
+
+
+// const text = "I must say it is unfortunate that I have seen too much of war,\n too much of persecution. I have helped people on many occasions\n because I believe that man must be humane,\nmust be compassionate, must feel concerned.\n<br>I also believe that life is too precious to be spent in hatred.\n Vengeance, I do not like that word.\n I think it is a poisonous word.\n<br>In this life we are interdependent.\n It is a question of give and take. If your neighbor is prosperous,\n it is good for you.<br>\nCertainly, we have our own ways,\nbut people in this world are dependent on each other.";
+
+// function isElementInView(element) {
+//     const rect = element.getBoundingClientRect();
+//     return (
+//         rect.top >= 0 &&
+//         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+//     );
+// }
+
+// function checkVisibility() {
+//     const typewriterElement = document.getElementById('typewriter-end');
+//     if (isElementInView(typewriterElement)) {
+//         if (!isTyping) {
+//             typeWriter(text, currentPosition); 
+//         }
+//     } else {
+//         if (isTyping) {
+//             clearTimeout(typewriterTimeout); 
+//             isTyping = false;
+//         }
+//     }
+// }
+
+// window.addEventListener('scroll', checkVisibility);
+// checkVisibility(); 
 
 
 }
