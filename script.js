@@ -983,7 +983,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYW1jYW0zMyIsImEiOiJjbG52NjJ0OWswanA4MmtueGk0c
 const map4 = new mapboxgl.Map({
 container: 'map4',
 zoom: 11,
-center: [35.55467926251227, 33.896361537341704],
+// center: [35.55467926251227, 33.896361537341704],
 pitch: 40,
 bearing: 90,
 style: 'mapbox://styles/mapbox/satellite-v9',
