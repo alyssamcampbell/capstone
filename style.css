@@ -958,13 +958,16 @@ video {
     width: 25vw;
     margin-left: 5%; 
     margin-top: 1%;
+    text-shadow: 2px 2px 4px white; /* Shadow effect */
+
+
 }
 
   .beirut-house-text-container {
     position: absolute;
-    top: 15%; 
+    top: 10%; 
     right: 5%;
-    width: 25vw; 
+    width: 30vw; 
     height: auto;
     opacity: 1.0;
   }
@@ -975,7 +978,14 @@ video {
     margin-top: 2%;
     margin-bottom: 2%; 
     margin-left: 2%;
+    padding: 1%;
+    border: 1px solid black;
+    border-radius: 10px;
     margin-right: 2%;
+    color: #141c27;
+    font-weight: bold;
+    text-shadow:10.0px 10.0px 10.0px white; /* Shadow effect */
+
   }
 
   .beirut-house-container .img {
