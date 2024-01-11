@@ -64,7 +64,7 @@ body, html {
 
 #playButton {
   pointer-events: auto;
-  margin-top: 1%;
+  margin-top: 0%;
   margin-left: 40%;
   font-family: Arial;
   background: #fff;
@@ -238,6 +238,23 @@ span#decadeLabel {
   text-align: center;
   cursor: pointer;
   display: inline-block; 
+}
+
+#completeTypingButton
+{
+  background-color: #00A651;
+  border: 1px solid #141c27;
+  border-radius: 5%;
+  font-family: 'Special Elite', cursive;
+  width: 8vw; 
+  height: 4vh;
+  font-size: 0.75em;
+  padding: 1%;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block; 
+
+
 }
 
 #downButton:hover, #upButton:hover {
@@ -640,34 +657,34 @@ span#decadeLabel {
           overflow: visible; 
           border-right: .15em solid black; 
           color: #141c27;
-          max-width: 80%;
+          max-width: 25%;
           opacity: 0.9;
           padding: 1%;
-          font-size: 0.75em;
-          bottom: 10%; 
-          left: 50%; 
+          font-size: 0.5em;
+          bottom: 1%; 
+          top: 5px; 
+          margin-left: 15%; 
           transform: translateX(-50%); 
           animation: blink-caret 1s step-end infinite;
           background: #00a651;
       }
-
       #typewriter-zahle-beirut {
-        position: relative; 
+        position: absolute; 
+        top: 0;
+        left: 0; 
         font-family: 'Special Elite', cursive;
         white-space: break-spaces;
-        overflow: visible; 
-        border-right: .15em solid black; 
+        overflow: visible;
+        border-right: .15em solid black;
         color: #141c27;
-        max-width: 80%;
+        max-width: 25%;
         opacity: 0.9;
         padding: 1%;
-        font-size: 0.75em;
-        bottom: 10%;
-        left: 50%;
-        transform: translateX(-50%);
+        font-size: 0.5em;
         animation: blink-caret 1s step-end infinite;
         background: #00a651;
     }
+    
   
 
         #typewriter-left-lebanon {
@@ -701,7 +718,7 @@ span#decadeLabel {
         padding-left: 1%;
         padding-right: 0%;
         margin-top: 2%;
-        font-size: 1.6em; 
+        font-size: 1.5em; 
         margin-left: 1%; 
         animation: blink-caret 1s step-end infinite;
         z-index: 2;
@@ -721,7 +738,7 @@ span#decadeLabel {
         padding-left: 1%;
         padding-top: 1%;
         padding-right: 1%;
-        font-size: 1.5vw; 
+        font-size: 1.25vw; 
         animation: blink-caret 1s step-end infinite;
         background: #F2A800;
         opacity: 0.8;
