@@ -155,6 +155,8 @@ document.getElementById("map4").style.visibility = 'hidden';
 document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'hidden';
+document.getElementById("map8").style.visibility = 'hidden';
+
 
 
     
@@ -1794,7 +1796,7 @@ else if  (step == "20") {
     document.getElementById("map5").style.visibility = 'hidden';
     document.getElementById("map6").style.visibility = 'hidden';
     document.getElementById("map7").style.visibility = 'hidden';
-    document.getElementById("map8").style.visibility = 'visible';
+    document.getElementById("map8").style.visibility = 'hidden';
 
     // const destinations = [
     //     { center: [37.115, 36.7161], zoom: 16, pitch: 50, bearing: 0 },  // Kilis
