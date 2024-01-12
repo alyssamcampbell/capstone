@@ -870,6 +870,8 @@ else if (step == "10") {
     document.getElementById("map6").style.visibility = 'hidden';
     document.getElementById("map7").style.visibility = 'hidden';
     document.getElementById("map8").style.visibility = 'hidden';
+    document.getElementById("completeTypingButton").style.visibility = 'visible';
+
 
 
     let isTyping = true;
