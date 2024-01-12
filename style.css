@@ -203,7 +203,7 @@ span#decadeLabel {
     height: 100vh;  
     padding: 0;
     font-size: 2em;
-    background-color: #00A651;
+    background-color: rgba(0, 166, 81, 0.9); /* RGB for #00A651 with 0.7 opacity */
     width: 100%;
   }
   
@@ -242,12 +242,13 @@ span#decadeLabel {
 
 #completeTypingButton
 {
-  background-color: #00A651;
+  background-color: rgba(0, 166, 81, 0.5); ;
+
   border: 1px solid #141c27;
   border-radius: 5%;
   font-family: 'Special Elite', cursive;
-  width: 8vw; 
-  height: 4vh;
+  width: 6.5vw; 
+  height: 3vh;
   font-size: 0.75em;
   padding: 1%;
   text-align: center;
