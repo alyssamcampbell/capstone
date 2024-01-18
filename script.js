@@ -114,6 +114,23 @@ var map = new mapboxgl.Map({
         e.preventDefault();
     }, { passive: false });
 
+    // Hide the elements by default
+    document.getElementById("slider-container").style.display = 'none';
+    document.getElementById("decadeSliderText").style.display = 'none';
+    document.getElementById("decadeLabel").style.display = 'none';
+    document.getElementById("decadeSlider").style.display = 'none';
+    document.getElementById("playButton").style.display = 'none';
+
+     
+    document.getElementById("map").style.visibility = 'hidden';
+document.getElementById("map2").style.visibility = 'hidden';
+document.getElementById("map3").style.visibility = 'hidden';
+document.getElementById("map4").style.visibility = 'hidden';
+document.getElementById("map5").style.visibility = 'hidden';
+document.getElementById("map6").style.visibility = 'hidden';
+document.getElementById("map7").style.visibility = 'hidden';
+document.getElementById("map8").style.visibility = 'hidden';
+
 
 map.on('load', function() {
 
@@ -253,7 +270,7 @@ else if (step == "1") {
             } else {
                 isTyping = false;
                 // Show the caption once typing is complete
-                document.getElementById("caption").style.display = 'visible';
+                document.getElementById("caption").style.display = 'block';
                 document.getElementById("completeTypingButton").style.display = "none";
             }
         }
@@ -270,6 +287,8 @@ else if (step == "1") {
             document.getElementById("typewriter-title").innerHTML = text;
             isTyping = false;
             this.style.display = "none"; // Hide the button
+            document.getElementById("caption").style.display = 'block';
+
         });
         
         
@@ -2108,11 +2127,11 @@ function flyToDestination(index) {
     map7.flyTo({
         ...destinations[index],
         essential: true,
-        duration: 30000 // Duration of the flight in milliseconds
+        duration: 50000 // Duration of the flight in milliseconds
     });
 
     // Schedule the next flight after the current one finishes
-    setTimeout(() => flyToDestination(index + 1), 11000); // 20s flyTo + 1s buffer
+    setTimeout(() => flyToDestination(index + 1), 30000); // 20s flyTo + 1s buffer
 }
 
 
@@ -2147,6 +2166,8 @@ function typeWriter(text, elementId, n) {
     } else {
         isTyping = false;
         document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
+        document.getElementById("caption-2").style.display = 'block';
+
     }
 }
 
@@ -2163,7 +2184,9 @@ completeTypingButton.addEventListener('click', function() {
     document.getElementById("typewriter-end").innerHTML = text;
     isTyping = false;
     this.style.display = "none"; // Hide the button
+    document.getElementById("caption-2").style.display = 'block';
 });
+
 
 
 
