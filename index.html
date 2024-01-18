@@ -86,7 +86,7 @@
         </div></div>
         <div id="button-container">
             <button id="upButton">←</button>
-            <div style="position: relative; display: inline-block;"> <button id="completeTypingButton" style="display: none;">Complete Typing</button>
+            <div style="position: relative; display: inline-block;"> <button id="completeTypingButton" style="display: none;">Full text</button>
             </div>
 
             <div style="position: relative; display: inline-block;">
@@ -125,7 +125,7 @@
         <div class="step" data-step="2">
             <h2 class="h2style1">Sentiment over time</h2>
             <p style="font-size: 0.5em; font-family: Arial; margin-left: 5%; margin-right: 5%">
-            To analyze Hovsep's thoughts and emotions by time and place, the oral history transcript was converted into a tabular data set with each thought associated with a time and place. This was then analyzed in Python using the The NRCLexicon library for emotion classification, which predicts the sentiments and emotion of a given text based on a library of 27,000 words. The resultant sentiment score represents the 'intensity' or 'frequency' of an emotion in the text, with a polarity scale of 0-1. For example, if a text contains many words associated with 'joy', its joy score will be higher. For overall sentiment, the average between positive and negative sentiment was calculated for each year, with a higher score indicating more positive sentiment.              
+            To analyze Hovsep's thoughts and emotions by time and place, the oral history transcript was converted into a tabular data set with each thought associated with a time and place. This was then analyzed in Python using the NRCLexicon library for emotion classification, which predicts the sentiments and emotion of a given text based on a library of 27,000 words. The resultant sentiment score represents the 'intensity' or 'frequency' of an emotion in the text, with a polarity scale of 0-1. For example, if a text contains many words associated with 'joy', its joy score will be higher. For overall sentiment, the average between positive and negative sentiment was calculated for each year, with a higher score indicating more positive sentiment.              
             </p>
           
         <!-- First row for the timeline visualization -->
@@ -143,7 +143,7 @@
         <h2 class="h2style1">Life in technicolor: emotions, by decade and country</h2>
         <p style="font-size: 0.5em; font-family: Arial; margin-left: 2%; margin-right: 2%; column-count: 2;">
          The stacked area chart on the left shows both the predominant emotions detected from Hovsep's oral history overall, and how those changed throughout his life. For example, trust, anticipation, and joy had the strongest intensity in their scores, whereas emotions like anger and disgust remained relatively low throughout Hovsep's life.<br><br><br>
-        The categorical heat map on the right visualizes how Hovsep's felt about each of the countries where he spent significant time. The intensity of the scores overall are low, so the visualization creates a relative comparison of the intensity of emotion for each country, with brighter colors signifying a stronger score for that emotion compared to the other countries on the list. For example, there is the highest anger and fear associated with Turkey relative to other countries. Trust was relatively higher for Syria, where Hovsep's family initially fled to for safety in Aleppo.  </p>
+        The categorical heat map on the right visualizes how Hovsep's felt about each of the countries where he spent significant time. The intensity of the scores overall is low, so the visualization creates a relative comparison of the intensity of emotion for each country, with brighter colors signifying a stronger score for that emotion compared to the other countries on the list. For example, there is the highest anger and fear associated with Turkey relative to other countries. Trust was relatively higher for Syria, where Hovsep's family initially fled to for safety in Aleppo.  </p>
     <div style="display: flex; height: 75vh;">
        
         <iframe src="stacked_area_chart.html" 
@@ -220,7 +220,7 @@
             <div class="step" data-step="9">   
                 <div class="content-container">
                     <div class="left-column-deportation">
-                        <h2>The beginning of deportation</h2>
+                        <h2>Forced deportation</h2>
                         <p style="font-size: 0.5em;"> Until 1914 things remained peaceful, but WWI began and that era came to an end. When Turkey became the ally of the Central Powers, periodic massacres and persecutions culminated in an organized plan for  <span class = "highlight">mass deportation and extermination</span> of the Armenians living in Asia Minor.  
                             <br><br>
                                         One day an order came that <span class = "highlight">all Christian landowners were to be deprived of their lands and made refugees.</span> At the time orders were received to deport the Armenian community from Kilis, my father’s house and storerooms were brim full of wheat, olives, olive oil, preserves of all kind and fruits of the harvest. Fortunately, my father had the foresight to retain part of his assets in gold. 
@@ -252,13 +252,15 @@
 
                                              </div>
             <div class="right-column-deportation" style="width: 50%; float: right;">
-                        <p style="font-size: 0.5em; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif; color: #141c27;"><b>The story of the horse who saved<br> Hovsep's family from deportation:</b></p>
-                        <video width="100%" height="100%" controls style="max-width: 80%; margin-left: 10%; max-height: 100%; display: block; margin: 0 auto; margin-bottom: 0%; border: solid 1px black;">
+                        
+                <p style="font-size: 0.5em; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif; color: #141c27;"><b>The story of the horse who saved Hovsep's family from deportation:</b></p>
+                <img src="media/horse.jpeg" alt="" style="max-width: 30%; max-height: 20%; margin-left: 35%; margin-top: 0%; margin-bottom: 1%; border: solid 1px black;">     
+                <video width="100%" height="100%" controls style="max-width: 70%; margin-left: 15%; max-height: 100%; display: block; margin: 0 auto; margin-bottom: 0%; border: solid 1px black;">
                             <source src="media/horse.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                        <div id="caption-family">(Selected historical footage from various sources, see 'Sources' section)</div>
-
+                        <div id="caption-family">(Photo of Hovsep's watercolor painting of the horse and it's foal,<br>Video from selected historical footage and Mapbox, see 'Sources' section)</div><br>
+                      
                          
                        </div>
 
@@ -322,7 +324,7 @@
                             <div class="beirut-house-text">
                                 By 1923 it was quite clear that there was no more hope for the Armenians to go back to their homes in Turkey. My father, mother and younger brothers came to see me in Beirut. 
     <br><br>We rented a small house on Rue Jeanne D'Arc, in the middle of mulberry groves.  My father decided to move the family to Beirut.  He returned to Aleppo and sent for the other members of the family to come to Beirut by rail.  He accompanied the horse (who saved the family from deportation) to Alexandretta, which was part of Syria at that time. They both arrived in Beirut by sea.
-    <br><br>By this time, we had moved to a larger house on Rue Bliss which also had a garden and a small stable. And one of the gratifications that I have in life that my father and mother for this to the end of their days and they finished their days under their own roof.
+    <br><br>By this time, we had moved to a larger house on Rue Bliss which also had a garden and a small stable. And one of the gratifications that I have in life is that my father and mother finished their days under their own roof.
 
 </div>  
 
@@ -471,16 +473,17 @@
                             <div id="map6" >
                               
                                 <div id="slider-container">
-                                    <label for="decadeSlider"><span id="decadeSliderText"><br><i>Top words, six decades in Lebanon:</i></span></span><br>                                   <button id="playButton">Play</button>
+                                    <label for="decadeSlider"><span id="decadeSliderText"><br><i>Move the slider to see Hovsep's top words associated with Lebanon, by decade:</i></span></span><br>                                   
                                         <span id="decadeLabel"></span></label>
-
                                    <input type="range" id="decadeSlider" min="1910" max="1980" step="10" value="1910" />
-</div><br><br>
+                                   <button id="playButton">Play</button>
+</div><br><br><br>
 <div id="quote-container">
                                     <div id="typewriter-lebanon-word-cloud"></div> </div>
 
                                
                             </div>
+
                         <div id = "video-container">
                             <div class="video-caption-mountain-house">
                                 Hovsep's old family house in Dhour el Choueir, outside Beirut, as of September 2023. Situated on the frontline during the Lebanese Civil War (1975-1990), it was abandoned and later ransacked by the Syrian army, retaining bullet holes on its exterior. It currently serves as informal housing for a refugee family.</div>
@@ -515,7 +518,9 @@
                         </div>
 
                         <div class="scrolly-full">
-                            <div class="step" data-step="20">
+                            <div class="step" data-step="20" style="position: relative;">
+                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('media/horse.JPEG'); background-size: cover; background-repeat: no-repeat; background-position: center; opacity: 0.3; z-index: -1;"></div>                            
+
                                 <h2>Sources</h2>
                                 <p style="font-size: 0.75em; color: #141c27; font-family: Georgia, 'Times New Roman', Times, serif; margin-top: 5%; margin-left: 5%; margin-right: 5%; column-count: 2;">
                                 <u><b>Photos:</b></u>
