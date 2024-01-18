@@ -241,6 +241,9 @@ else if (step == "1") {
         let typewriterTimeout;
         
         function typeWriter(text, elementId, n) {
+            // Hide the caption at the start
+            document.getElementById("caption").style.display = 'none';
+        
             if (n < text.length && isTyping) {
                 document.getElementById(elementId).innerHTML = text.substring(0, n + 1) + (text[n] === '\n' ? '<br/>' : '');
                 n++;
@@ -249,11 +252,13 @@ else if (step == "1") {
                 }, 60);
             } else {
                 isTyping = false;
-                document.getElementById("completeTypingButton").style.display = "none"; // Hide the button when typing is complete
+                // Show the caption once typing is complete
+                document.getElementById("caption").style.display = 'visible';
+                document.getElementById("completeTypingButton").style.display = "none";
             }
         }
         
-        const text = '"It is my hope to organize this accumulated recorded information\ninto a comprehensive account of my life and thoughts\n for the benefit of the younger generation who,\n never having experienced life outside these United States,\n have little conception of the lives and times of their forebears."';
+        const text = '"It is my hope to organize this accumulated recorded information\ninto a comprehensive account of my life and thoughts\n for the benefit of the younger generation who,\n never having experienced life outside these United States,\n have little conception of the lives and times of their forebearers."';
         typeWriter(text, "typewriter-title", 0);
         
         const completeTypingButton = document.getElementById('completeTypingButton');
@@ -1205,7 +1210,7 @@ function typeWriter(text, elementId, n) {
     }
 }
 
-const text = "One of the happiest days of my life came on the 19th of November 1918, when we learned that the Turkish had left Beirut. For the first time in my life, I felt the sweet sensation of freedom. I was no more a fugitive, no more an outlaw. I could meet people and talk to them straight, look at their faces instead of looking at the ground. The sight of the retreat of Turkish army in their disorder all the way from Zahle to Beirut gave me great delight. After all, these people were our masters, now they had to flee for their lives.</span><br><br>On the day of armistice, people stopped killing each other. The victors sat around a table and negotiated, and our hopes were great; we were going to live in a better, more equitable, more just life. That is what we were being told, that so many people are dying but it is worth the sacrifice because this is to improve the world, to make it a better world to live in. In an effort, they kept on saying, to make democracy. I did not have the same understanding of human nature at that time, I believed them."; 
+const text = "One of the happiest days of my life came on the 19th of November 1918, when we learned that the Turkish had left Beirut. For the first time in my life, I felt the sweet sensation of freedom. I was no more a fugitive, no more an outlaw. I could meet people and talk to them straight, look at their faces instead of looking at the ground. The sight of the retreat of Turkish army in their disorder all the way from Beirut to Zahle gave me great delight. After all, these people were our masters, now they had to flee for their lives.</span><br><br>On the day of armistice, people stopped killing each other. The victors sat around a table and negotiated, and our hopes were great; we were going to live in a better, more equitable, more just life. That is what we were being told, that so many people are dying but it is worth the sacrifice because this is to improve the world, to make it a better world to live in. In an effort, they kept on saying, to make democracy. I did not have the same understanding of human nature at that time, I believed them."; 
 
 typeWriter(text, "typewriter-zahle-beirut", 0);
 
@@ -1700,7 +1705,7 @@ var mountainhouse = document.getElementById('mountain-house');
            }
        }
        
- const text = "Life in beautiful Lebanon was most pleasant, but we have gone through quite a number of changes and revolts and factional fights, and lost a great deal during this current civil war. The turmoil which started in 1975 has exacerbated continuously and the worst of it has come on us since April 1975. <br><br> We stood firm as long as we could but suffered hardships we could not easily endure at our age. All our children living in the United States were burdened with increasing anxiety on our account, particularly when personal communication by letter or telephone became impossible.";
+ const text = '"Life in beautiful Lebanon was most pleasant, but we have gone through quite a number of changes and revolts and factional fights, and lost a great deal during this current civil war. The turmoil which started in 1975 has exacerbated continuously and the worst of it has come on us since April 1975. <br><br> We stood firm as long as we could but suffered hardships we could not easily endure at our age. All our children living in the United States were burdened with increasing anxiety on our account, particularly when personal communication by letter or telephone became impossible."';
        
        typeWriter(text, "typewriter-lebanon-word-cloud", 0);
        
@@ -1996,7 +2001,7 @@ function typeWriter(text, elementId, n) {
     }
 }
 
-const text = "It was far from easy to leave our home of fifty years with all its associations, but we lived through it and arrived in the United States on August 23, 1979.<br><br> But the difficulty of Armenians is that they are not allowed to live for more than one generation in one place except in America. My father’s father was born in Agen in Turkey and died in Kilis; my father was born in Kilis, and died in Beirut, so were my mother and my two brothers that have died. My children are all born in Beirut and they are all American citizens now. I do not know where I am going to die and be buried.<br><br> Now, one great satisfaction of my life for which I am grateful to God is that all my children, everyone of the five, is settled in the United States of America which I believe, with all its defects, is still the best country in the world to make your home. This is because after a generation or two you are no longer foreigners; you are one of them.  They tried first to put everyone into an amalgam and to make a nation of this amalgam. Then they have changed their mind in the last few years, to live free to pursue their culture, their art, their identity"; 
+const text = "It was far from easy to leave our home of fifty years with all its associations, but we lived through it and arrived in the United States on August 23, 1979.<br><br> But the difficulty of Armenians is that they are not allowed to live for more than one generation in one place except in America. My father’s father was born in Agen in Turkey and died in Kilis; my father was born in Kilis, and died in Beirut, so were my mother and my two brothers that have died. My children are all born in Beirut and they are all American citizens now. I do not know where I am going to die and be buried.<br><br> Now, one great satisfaction of my life for which I am grateful to God is that all my children, everyone of the five, is settled in the United States of America which I believe, with all its defects, is still the best country in the world to make your home. This is because after a generation or two you are no longer foreigners; you are one of them.  They tried first to put everyone into an amalgam and to make a nation of this amalgam. Then they have changed their mind in the last few years, to live free to pursue their culture, their art, their identity."; 
 
 typeWriter(text, "typewriter-lebanon-usa", 0);
 
@@ -2057,7 +2062,7 @@ completeTypingButton.addEventListener('click', function() {
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW1jYW0zMyIsImEiOiJjbG52NjJ0OWswanA4MmtueGk0cWxjNGN2In0.9unlp_ocI7GFYNdPbgUdsw';
 
 const destinations = [
-    { center: [43.050925724784626, 39.718356549865014], zoom: 8, pitch: 50, bearing: 0 }, 
+    // { center: [43.050925724784626, 39.718356549865014], zoom: 8, pitch: 50, bearing: 0 }, 
     { center: [37.12028310825196, 36.716004740395555], zoom: 12, pitch: 0, bearing: 0 }, 
     { center: [37.148794702012246, 36.21505012752638], zoom: 9, pitch: 100, bearing: 0 }, 
     { center: [35.5131, 33.8869], zoom: 12, pitch: 100, bearing: 130 }, // Beirut, Lebanon
@@ -2066,7 +2071,7 @@ const destinations = [
 
 const map7 = new mapboxgl.Map({
     container: 'map7', 
-    style: 'mapbox://styles/amcam33/clo1pz3yy00bf01pd159y78ia', 
+    style: 'mapbox://styles/amcam33/clr71impj011a01pda97uflrs', 
     center: destinations[0].center, 
     zoom: destinations[0].zoom,
     pitch: destinations[0].pitch,
@@ -2075,11 +2080,11 @@ const map7 = new mapboxgl.Map({
 
 map7.on('load', () => {
     // Custom atmosphere styling
-    map7.setFog({
-        'high-color': '#F2A800', // Lower atmosphere color
-        'color': '#F2A800', // Upper atmosphere color
-        'horizon-blend': 0 // Exaggerate atmosphere
-    });
+    // map7.setFog({
+    //     // 'high-color': '#F2A800', // Lower atmosphere color
+    //     // 'color': '#F2A800', // Upper atmosphere color
+    //     'horizon-blend': 0 // Exaggerate atmosphere
+    // });
 
     // Add the terrain source
     map7.addSource('mapbox-dem', {
@@ -2103,7 +2108,7 @@ function flyToDestination(index) {
     map7.flyTo({
         ...destinations[index],
         essential: true,
-        duration: 20000 // Duration of the flight in milliseconds
+        duration: 30000 // Duration of the flight in milliseconds
     });
 
     // Schedule the next flight after the current one finishes
@@ -2222,6 +2227,8 @@ else if  (step == "20") {
     document.getElementById("map6").style.visibility = 'hidden';
     document.getElementById("map7").style.visibility = 'hidden';
     document.getElementById("map8").style.visibility = 'hidden';
+    document.getElementById("completeTypingButton").style.visibility = 'hidden';
+
 
     // const destinations = [
     //     { center: [37.115, 36.7161], zoom: 16, pitch: 50, bearing: 0 },  // Kilis
