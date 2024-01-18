@@ -130,6 +130,8 @@ document.getElementById("map5").style.visibility = 'hidden';
 document.getElementById("map6").style.visibility = 'hidden';
 document.getElementById("map7").style.visibility = 'hidden';
 document.getElementById("map8").style.visibility = 'hidden';
+document.getElementById("upButton").style.visibility = 'hidden';
+
 
 
 map.on('load', function() {
