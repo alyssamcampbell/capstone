@@ -46,9 +46,9 @@ body, html {
   #slider-container {
     position: absolute;
     top: 1%; 
-    left: 15%; 
+    left: 2%; 
     z-index: 2;
-    max-width: 100%;
+    max-width: 40%;
 } 
 
 #quote-container {
@@ -249,7 +249,7 @@ span#decadeLabel {
   font-family: 'Special Elite', cursive;
   width: 7vw; 
   height: 3vh;
-  font-size: 0.6em;
+  font-size: 1.0em;
   padding: 1%;
   text-align: center;
   cursor: pointer;
@@ -652,36 +652,39 @@ span#decadeLabel {
         }
 
         #typewriter-kilis-beirut {
-          position: relative; 
+          position: absolute; 
+          top: 1%;
+          bottom: auto; 
+          left: 1%;
+          right: 70%;
           font-family: 'Special Elite', cursive;
           white-space: break-spaces;
-          overflow: visible; 
-          border-right: .15em solid black; 
+          overflow: visible;
+          border-right: .15em solid black;
           color: #141c27;
-          max-width: 25%;
+          /* max-width: 100%; */
           opacity: 0.9;
           padding: 1%;
-          font-size: 0.5em;
-          bottom: 1%; 
-          top: 5px; 
-          margin-left: 15%; 
-          transform: translateX(-50%); 
+          font-size: 0.6em;
           animation: blink-caret 1s step-end infinite;
           background: #00a651;
       }
+
       #typewriter-zahle-beirut {
         position: absolute; 
-        top: 0;
-        left: 0; 
+        top: 20%;
+        bottom: auto; 
+        left: 70%;
+        right: 1%;
         font-family: 'Special Elite', cursive;
         white-space: break-spaces;
         overflow: visible;
         border-right: .15em solid black;
         color: #141c27;
-        max-width: 25%;
+        /* max-width: 100%; */
         opacity: 0.9;
         padding: 1%;
-        font-size: 0.5em;
+        font-size: 0.6em;
         animation: blink-caret 1s step-end infinite;
         background: #00a651;
     }
@@ -698,7 +701,7 @@ span#decadeLabel {
           padding-left: 0.5%;
           padding-top: 0.5%;
           padding-right: 0.5%;
-          font-size: .6em; 
+          font-size: .75em; 
           padding-bottom: 0.5%; 
           margin-left: 10%; 
           margin-right: 10%;
@@ -719,7 +722,7 @@ span#decadeLabel {
         padding-left: 1%;
         padding-right: 0%;
         margin-top: 2%;
-        font-size: 1.5em; 
+        font-size: 1.75em; 
         margin-left: 1%; 
         animation: blink-caret 1s step-end infinite;
         z-index: 2;
@@ -733,9 +736,9 @@ span#decadeLabel {
         overflow: visible; 
         border-right: .15em solid black; 
         color: #141c27; 
-        max-width: 80%; 
-        margin-left: 10%;
-        margin-right: 10%; 
+        max-width: 90%; 
+        margin-left: 5%;
+        margin-right: 5%; 
         padding-left: 1%;
         padding-top: 1%;
         padding-right: 1%;
@@ -860,6 +863,8 @@ video {
           z-index: 2; 
           max-width: 40%; 
           box-sizing: border-box; 
+          border-radius: 1em;
+          border: solid 1px black;
       }
 
 
@@ -1016,12 +1021,15 @@ video {
 
   .beirut-house-container .background-img {
     background-image: url('media/beiruthouse_new.jpg');
-    
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .beirut-house-container .foreground-img {
     background-image: url('media/beiruthouse_old.jpg');
     width: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .beirut-house-container .slider {
@@ -1116,7 +1124,7 @@ video {
     text-align: center;
     width: 100%; 
     margin-top: 1%; 
-    margin-bottom: 2%;
+    margin-bottom: 0%;
       font-style: italic; 
   }
   
@@ -1322,7 +1330,7 @@ video {
     padding: 0px;
     overflow: auto; 
     max-height: 100%;
-    background:rgba(242, 242, 242, 0.3);
+    /* background:rgba(242, 242, 242, 0.3); */
 }
 
 .content-container-intro {
