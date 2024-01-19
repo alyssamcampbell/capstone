@@ -680,7 +680,7 @@ if (!map.getSource('kilis-point')) {
         plateauvideo.play();
 
         // Set playback rate of video
-       plateauvideo.playbackRate = 0.75;
+       plateauvideo.playbackRate = 0.3;
 
     }
 
@@ -1706,7 +1706,7 @@ document.getElementById("slider-container").style.display = 'block';
 
 var mountainhouse = document.getElementById('mountain-house');
        mountainhouse.play();
-       mountainhouse.playbackRate = 0.5;
+       mountainhouse.playbackRate = 0.25;
 
 
        let isTyping = true;
