@@ -6,15 +6,16 @@
 
 /* Hide from mobile devices */
 @media screen and (max-width: 600px) {
-  #desktop {
-      display: none;
+  #desktop,
+  #main-content {
+    display: none;
   }
 
   #mobile-message {
-      display: block;
-      text-align: center;
-      margin-top: 20px;
-      font-size: 20px;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
   }
 }
 
