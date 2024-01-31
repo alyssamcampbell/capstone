@@ -758,7 +758,7 @@ span#decadeLabel {
         padding-left: 1%;
         padding-top: 1%;
         padding-right: 1%;
-        font-size: 1.4vw; 
+        font-size: 1.2vw; 
         animation: blink-caret 1s step-end infinite;
         background: #F2A800;
         opacity: 0.8;
