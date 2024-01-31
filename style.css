@@ -1,9 +1,21 @@
-
-
-
-
 /* Hide from mobile devices */
 @media screen and (max-width: 600px) {
+  #desktop,
+  #main-content {
+    display: none;
+  }
+
+  #mobile-message {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+}
+
+/* Hide from large devices (e.g., high-resolution iPads and large iPhones) */
+@media screen and (min-width: 1024px) and (min-height: 1366px), 
+       screen and (min-width: 1366px) and (min-height: 1024px) {
   #desktop,
   #main-content {
     display: none;
