@@ -164,51 +164,43 @@ map.on('load', function() {
     updateCurrentStep(stepIndex);
         let step = response.element.dataset.step;
 
-      // Helper function to clear any ongoing typewriter effect
 function clearTypewriterEffect(elementId) {
     const element = document.getElementById(elementId);
     if (element && element.typewriterTimeout) {
         clearTimeout(element.typewriterTimeout);
-        delete element.typewriterTimeout; // Remove the timeout reference
+        delete element.typewriterTimeout; 
     }
 }
 
-// Enhanced typewriter effect that ensures only one instance runs at a time
 function startTypewriterEffect(text, elementId) {
     const element = document.getElementById(elementId);
     const completeTypingButton = document.getElementById('completeTypingButton');
 
-    // Clear any previous typewriter effect to prevent overlaps
+
     clearTypewriterEffect(elementId);
 
-    // Reset the element's content and show the complete typing button
     element.innerHTML = "";
     completeTypingButton.style.display = "block";
 
     let currentIndex = 0;
 
-    // Local function to type the next character
     function typeNextCharacter() {
         if (currentIndex < text.length) {
             element.innerHTML += text[currentIndex] === '\n' ? '<br/>' : text[currentIndex];
             currentIndex++;
-            // Store the timeout ID using the element for easy access and cancellation
             element.typewriterTimeout = setTimeout(typeNextCharacter, 55);
         } else {
-            // Typing complete
             completeTypingButton.style.display = "none";
-            delete element.typewriterTimeout; // Clean up the timeout reference
+            delete element.typewriterTimeout; 
         }
     }
 
-    typeNextCharacter(); // Start the typewriter effect
+    typeNextCharacter(); 
 
-    // Enhance the "Complete Typing" button to allow skipping the effect
     completeTypingButton.onclick = function() {
-        clearTypewriterEffect(elementId); // Cancel the ongoing effect
-        element.innerHTML = text.replace(/\n/g, '<br/>'); // Show full text
+        clearTypewriterEffect(elementId); 
+        element.innerHTML = text.replace(/\n/g, '<br/>'); 
         this.style.display = "none";
-        // document.getElementById("caption").style.display = 'block';
     };
 }
 
@@ -1428,7 +1420,6 @@ else if  (step == "20") {
         clearTimeout(typewriterTimeout);
         document.getElementById("typewriter-title").innerHTML = ""; 
         isTyping = false; // Reset the typing state
-        // document.getElementById("caption").style.display = 'none';
     }
 
     
@@ -1487,45 +1478,44 @@ else if  (step == "20") {
 
     if (response.index == 10) {
         clearTimeout(typewriterTimeout);
-        document.getElementById("typewriter-kilis-beirut").innerHTML = ""; // Clear the existing text
-        isTyping = false; // Reset the typing state
+        document.getElementById("typewriter-kilis-beirut").innerHTML = ""; 
+        isTyping = false; 
     }
 
     if (response.index == 11) {
         clearTimeout(typewriterTimeout);
-        document.getElementById("typewriter-beirut-1920s").innerHTML = ""; // Clear the existing text
-        isTyping = false; // Reset the typing state
+        document.getElementById("typewriter-beirut-1920s").innerHTML = ""; 
+        isTyping = false; 
     }
 
     if (response.index == 12) {
         clearTimeout(typewriterTimeout);
-        document.getElementById("typewriter-zahle-beirut").innerHTML = ""; // Clear the existing text
-        isTyping = false; // Reset the typing state
+        document.getElementById("typewriter-zahle-beirut").innerHTML = ""; 
+        isTyping = false; 
     }
 
     if (response.index == 13) {
         clearTimeout(typewriterTimeout);
-        isTyping = false; // Reset the typing state
+        isTyping = false; 
 
     }
 
     if (response.index == 14) {
         clearTimeout(typewriterTimeout);
-        isTyping = false; // Reset the typing state
-
+        isTyping = false; 
     }
 
     if (response.index == 15) {
         clearTimeout(typewriterTimeout);
-        isTyping = false; // Reset the typing state
+        isTyping = false; 
 
     }
 
 
     if (response.index == 16) {
         clearTimeout(typewriterTimeout);
-        document.getElementById("typewriter-left-lebanon").innerHTML = ""; // Clear the existing text
-        isTyping = false; // Reset the typing state
+        document.getElementById("typewriter-left-lebanon").innerHTML = ""; 
+        isTyping = false; 
     }
 
     if (step == "17") {
@@ -1536,22 +1526,22 @@ else if  (step == "20") {
         document.getElementById("slider-container").style.display = 'none';
 
         clearTimeout(typewriterTimeout);
-        document.getElementById("mountain-house").innerHTML = ""; // Clear the existing text
-        isTyping = false; // Reset the typing state
+        document.getElementById("mountain-house").innerHTML = ""; 
+        isTyping = false; 
 
     }
 
 
     if (response.index == 18) {
         clearTimeout(typewriterTimeout);
-        document.getElementById("typewriter-lebanon-usa").innerHTML = ""; // Clear the existing text
-        isTyping = false; // Reset the typing state
+        document.getElementById("typewriter-lebanon-usa").innerHTML = ""; 
+        isTyping = false; 
     }
 
     if (response.index == 19) {
         clearTimeout(typewriterTimeout);
-        document.getElementById("typewriter-end").innerHTML = ""; // Clear the existing text
-        isTyping = false; // Reset the typing state
+        document.getElementById("typewriter-end").innerHTML = "";
+        isTyping = false; 
         document.getElementById("caption").style.display = 'visible';
 
     }
