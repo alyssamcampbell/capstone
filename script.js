@@ -486,7 +486,7 @@ else if (step == "7") {
 
        
  
-        const text = "I was born in 1895, the year of <b>great massacre in Kilis</b>.\n\nIn that year three of my cousins were slaughtered.\n\nPerhaps I owe my life to my brother Hagop. When my family members (5 brothers, 3 sisters, my father and mother) were running to take shelter in Haji Mohammed’s quarters during the massacre, I was ill and in my mother's desperation to protect her older children and perhaps because she had little hope that I would survive, she expressed a thought of leaving me behind.\n\nMy brother Hagop protested and insisted that I be taken along to share whatever fate was in store for the rest of the family.";
+        const text = "I was born in 1895, the year of great massacre in Kilis.\n\nIn that year three of my cousins were slaughtered.\n\nPerhaps I owe my life to my brother Hagop. When my family members (5 brothers, 3 sisters, my father and mother) were running to take shelter in Haji Mohammed’s quarters during the massacre, I was ill and in my mother's desperation to protect her older children and perhaps because she had little hope that I would survive, she expressed a thought of leaving me behind.\n\nMy brother Hagop protested and insisted that I be taken along to share whatever fate was in store for the rest of the family.";
         const elementId = "typewriter-hagop";
 
         startTypewriterEffect(text, elementId, 7); 
