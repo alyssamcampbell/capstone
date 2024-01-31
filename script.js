@@ -560,7 +560,7 @@ else if (step == "10") {
     document.getElementById("map8").style.visibility = 'hidden';
     document.getElementById("completeTypingButton").style.visibility = 'visible';
 
-    const text = "The entire Yeni-Komshian family left with what they could carry with them. My lucky star (family horse) guided me to take the last train from Aleppo to Beirut (just before Turkey entered the first World War), which was the last train one could travel in without having to take a special permit. Since at that time I was of military age, I would not have gotten the special permit to leave. In preparation for my medical school fees, board and room, I stitched 27 Turkish gold pounds to the belt of my undershirt.\n\n<div style='text-align: center;'><img src='media/goldcoins.png' style='max-height: 8%; max-width: 8%; display: inline-block; vertical-align: middle;'/>";  
+    const text = "The entire Yeni-Komshian family left with what they could carry with them. My lucky star (family horse) guided me to take the last train from Aleppo to Beirut (just before Turkey entered the first World War), which was the last train one could travel in without having to take a special permit. Since at that time I was of military age, I would not have gotten the special permit to leave. In preparation for my medical school fees, board and room, I stitched 27 Turkish gold pounds to the belt of my undershirt.";  
 
     const elementId = "typewriter-kilis-beirut";
 
