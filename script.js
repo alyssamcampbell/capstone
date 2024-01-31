@@ -66,11 +66,25 @@ function updateButtonVisibility() {
 }
 
 window.onload = function() {
-    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (isMobile) {
-        document.getElementById('desktop').style.display = 'none';
-        document.getElementById('mobile-message').style.display = 'block';
-    }
+   
+        var isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (isMobile) {
+            document.getElementById('desktop').style.display = 'none';
+            document.getElementById('mobile-message').style.display = 'block';
+            // Additional enforcement to ensure no other elements are visible
+            document.querySelectorAll('.step, #navbar, #button-container').forEach(function(element) {
+                element.style.display = 'none';
+            });
+        } else {
+            // Ensure mobile message is not displayed on non-mobile devices
+            document.getElementById('mobile-message').style.display = 'none';
+        }
+    
+    // var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    // if (isMobile) {
+    //     document.getElementById('desktop').style.display = 'none';
+    //     document.getElementById('mobile-message').style.display = 'block';
+    // }
 
     const downButton = document.getElementById('downButton');
     const upButton = document.getElementById('upButton');    
