@@ -1,6 +1,4 @@
-#decadeSliderText, #slider-container, #decadeLabel, #decadeSlider, #playButton {
-  display: none;
-}
+
 
 
 
@@ -17,6 +15,10 @@
     margin-top: 20px;
     font-size: 20px;
   }
+}
+
+#decadeSliderText, #slider-container, #decadeLabel, #decadeSlider, #playButton {
+  display: none;
 }
 
 /* Regular Desktop CSS */
