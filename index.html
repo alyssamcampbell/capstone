@@ -3,7 +3,7 @@
 
 <head>
     <meta charset='utf-8' />
-    <title>Visualizing the oral history of my Armenian great-grandfather, Hovsep Yeni-Komshian</title>
+    <title>Visualizing the oral history of my Armenian grandfather, Hovsep Yeni-Komshian</title>
     <meta name='viewport' content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/scrollama"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
@@ -81,9 +81,13 @@
     <div class="scrolly-full">
         <div class="responsive-background-image-title"></div>
         <div class="step title-slide" data-step="0">
-            <div id="typewriter-title-green">Visualizing a life,<br>uprooted.</div><br>
-            <h2 class="subtitle">an interactive exploration of the oral history of my great-grandfather,<br>Hovsep Yeni-Komshian</h2>
+            <div class="typewriter-title-container">
+            <div id="typewriter-title-green"></div></div>
+            <div class="subtitle-container">
+            <h2 class="subtitle">An interactive exploration of the oral history of Hovsep Yeni-Komshian.</h2></div>
         </div></div>
+
+
         <div id="button-container">
             <button id="upButton">←</button>
             <div style="position: relative; display: inline-block;"> <button id="completeTypingButton" style="display: none;">Full text</button>
@@ -95,16 +99,16 @@
          
         </div>
     
-    <!-- INTRO TO PROJECT // HOVSEP WAS BORN IN ETC.-->
+   
     <div class="scrolly-full">
     
     <div class="step green" data-step="1">
         <h2 class="h2style1">An introduction</h2>
         <div class="content-container-intro">
             <div class="typewriter-container-intro">
-                <div id="typewriter-title"></div><br>
-                <div id="caption" style="display: none;">-Hovsep Yeni-Komshian, 1983</div>
+                <div id="typewriter-title"></div>
             </div>
+            <div id="caption">- Hovsep Yeni-Komshian, 1983</div><br>
             <div class="static-text-container-intro">
 
         <p style="font-size: 1.25vw; color: #141c27; font-family: Arial; margin-left: 2%; column-count: 2;">
@@ -142,10 +146,9 @@
     <div class="step" data-step="3">
         <h2 class="h2style1">Life in technicolor: emotions, by decade and country</h2>
         <p style="font-size: 0.5em; font-family: Arial; margin-left: 2%; margin-right: 2%; column-count: 2;">
-         The stacked area chart on the left shows both the predominant emotions detected from Hovsep's oral history overall, and how those changed throughout his life. For example, trust, anticipation, and joy had the strongest intensity in their scores, whereas emotions like anger and disgust remained relatively low throughout Hovsep's life.<br><br><br>
+        The stacked area chart on the left shows both the predominant emotions detected from Hovsep's oral history overall, and how those changed throughout his life. For example, trust, anticipation, and joy had the strongest intensity in their scores, whereas emotions like anger and disgust remained relatively low throughout Hovsep's life. 
         The categorical heat map on the right visualizes how Hovsep's felt about each of the countries where he spent significant time. The intensity of the scores overall is low, so the visualization creates a relative comparison of the intensity of emotion for each country, with brighter colors signifying a stronger score for that emotion compared to the other countries on the list. For example, there is the highest anger and fear associated with Turkey relative to other countries. Trust was relatively higher for Syria, where Hovsep's family initially fled to for safety in Aleppo.  </p>
-    <div style="display: flex; height: 75vh;">
-       
+    <div style="display: flex; height: 70vh;">
         <iframe src="stacked_area_chart.html" 
             style="width:50%; height:100%; margin-right: 2%; border:none; justify-content: center; justify-items: center;">
         </iframe>
@@ -163,7 +166,7 @@
             <div class="step" data-step="4">
                 <h2 class="h2style1">Life by parts of speech</h2>
                <iframe src="d3-lollipop-chart.html" 
-                    style="width:100%; height:100%; margin-left:2%; border:none; padding-left:0%; padding-bottom: 0;">
+                    style="width:100%; height:100%; margin-left:0%; border:none; padding-left:0%; padding-bottom: 0;">
             </iframe>
             </div>
             </div>
@@ -182,7 +185,7 @@
     <!-- KILIS PLATEAU -->
     <div class="scrolly-full">
                 <div class="step text-slides-video" data-step="6">
-                    <div class="video-caption">(Overlooking the plains towards Syria from Kilis, Turkey. Filmed by author on trip in April 2022.)</div>
+                    <div class="video-caption">(Overlooking the plains towards Syria from Kilis, Turkey. Filmed by author in April 2022.)</div>
                     <div id="typewriter-kilis-plateau-video"></div>
                     <video id="kilis-plateau" loop muted playsinline preload="auto" autoplay>
                         <source src="media/kilisplateau.mp4" type="video/mp4">
@@ -239,27 +242,17 @@
                             <span class = "highlight">One million two hundred thousand Armenians were lost in the genocide.</span><br><br>
 </p>
 
-<!-- <div style="display: flex; align-items: center;">
-    <a href="media/armenian-genocide-document-british-consulate.gif" target="_blank">
-        <img src="media/armenian-genocide-document-british-consulate.gif" alt="" style="width: 100%; max-height: 100%; border: solid 1px black;">
-    </a>
-    <div id="caption-family" style="margin-left: 20px;">
-        1922 British Consulate Report on the forced exile of the remaining Armenians from the area of Aintab and Marash (including Kilis).<br><br>Source: Armenian National Institute.
-    </div>
-</div> -->
-
-
 
                                              </div>
             <div class="right-column-deportation" style="width: 50%; float: right;">
                         
                 <p style="font-size: 0.5em; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif; color: #141c27;"><b>The story of the horse who saved Hovsep's family from deportation:</b></p>
-                <img src="media/horse.JPEG" alt="" style="max-width: 30%; max-height: 20%; margin-left: 35%; margin-top: 0%; margin-bottom: 1%; border: solid 1px black;">     
-                <video width="100%" height="100%" controls style="max-width: 70%; margin-left: 15%; max-height: 100%; display: block; margin: 0 auto; margin-bottom: 0%; border: solid 1px black;">
+                <!-- <img src="media/horse.JPEG" alt="" style="max-width: 30%; max-height: 20%; margin-left: 35%; margin-top: 0%; margin-bottom: 1%; border: solid 1px black;">      -->
+                <video width="100%" height="100%" controls style="max-width: 75%; margin-left: 12.5%; max-height: 100%; display: block; margin: 0 auto; margin-bottom: 0%; border: solid 1px black;">
                             <source src="media/horse.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                        <div id="caption-family">(Photo of Hovsep's watercolor painting of the horse and it's foal,<br>Video from selected historical footage and Mapbox, see 'Sources' section)</div><br>
+                        <div id="caption-family">(Video from selected historical footage (see 'Sources') and Mapbox,<br>as well as Hovsep's own watercolor painting of horse and foal at end)</div><br>
                       
                          
                        </div>
@@ -341,7 +334,6 @@
                                 <h2>Finding love & family</h2>
                                 <img src="media/aleppo.jpg" alt="" style="max-width: 50%; max-height: 50%; display: block; margin: 1% auto; border: solid 1px black;">
                                <div id="caption-family">Helen, her mother Zarman, and brother George, in Aleppo, 1929</div>
-<br>
                                 <img src="media/weddingphoto.jpg" alt="" style="max-width: 50%; max-height: 100%; display: block; margin: 0 auto; border: solid 1px black">
                                 <div id="caption-family">Hovsep and Helen wedding photo, Beirut, 1930</div>
 
@@ -508,11 +500,21 @@
     
                         <div class="scrolly-full">
                             <div class="step" data-step="19">
-                                <div class="responsive-background-image-end"></div>
+                         <div class="responsive-background-image-end"></div>
+
+                                <div class="content-container-intro">
+                                    <div class="typewriter-container-intro">
+                                        <div id="typewriter-end"></div>
+                                    </div>
+                                    <div class="hovsep-container">
+                                    <div id="caption">-Hovsep Yeni-Komshian, 1983</div>
+                                    </div>
+                                   
+
+                                <!-- <div class="responsive-background-image-end"></div>
                                 <br><br>
                                 <div id="typewriter-end"></div><br>
-                                <div id="caption-2" style="display: none;">-Hovsep Yeni-Komshian, 1983</div>
-
+                                <div id="caption">-Hovsep Yeni-Komshian, 1983</div> -->
                             </div>  
                             
                         </div>
@@ -557,7 +559,7 @@
                             </div> 
 
                     </div>
-<script src="script.js"></script>
+<script src="script4.js"></script>
    
 </div>
 
